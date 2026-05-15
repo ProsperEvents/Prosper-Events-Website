@@ -49,9 +49,10 @@ export function GalleryGrid({ images }: { images: GalleryImage[] }) {
             whileHover={{ y: -5 }}
           >
             <img
-              src={image.src}
+              src={image.thumbnailSrc}
               alt={image.alt}
               loading="lazy"
+              decoding="async"
               className="h-auto w-full rounded-[1.4rem] object-cover transition duration-700 group-hover:scale-[1.02]"
             />
           </motion.button>

@@ -1,6 +1,7 @@
 export type GalleryImage = {
   id: string;
   src: string;
+  thumbnailSrc: string;
   alt: string;
 };
 
@@ -58,6 +59,7 @@ export const galleryImages: GalleryImage[] = marchFirstGalleryFilenames.map(
   (filename, index) => ({
     id: `march-1-${String(index + 1).padStart(2, "0")}`,
     src: `/assets/gallery/march-1/${filename}`,
+    thumbnailSrc: `/assets/gallery/march-1-web/${filename.replace(/\.jpg$/i, ".webp")}`,
     alt: `Prosper Events March 1 gallery photo ${index + 1}`,
   }),
 );
