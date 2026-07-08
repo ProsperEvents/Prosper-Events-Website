@@ -47,8 +47,12 @@ export const metadata: Metadata = {
     images: ["/assets/gallery/hero-cocktails.jpg"],
   },
   icons: {
-    icon: "/assets/logos/prosper-events-rounded-logo.png",
-    apple: "/assets/logos/prosper-events-rounded-logo.png",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon-512.png", type: "image/png", sizes: "512x512" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
   },
 };
 

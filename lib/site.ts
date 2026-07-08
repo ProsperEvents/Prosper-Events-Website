@@ -41,7 +41,7 @@ export const organizationSchema = {
       "@id": `${siteUrl}/#organization`,
       name: "Prosper Events",
       url: siteUrl,
-      logo: `${siteUrl}/assets/logos/prosper-events-square-logo.png`,
+      logo: `${siteUrl}/assets/logos/prosper-events-rounded-logo.png`,
       image: `${siteUrl}/assets/gallery/hero-cocktails.jpg`,
       description: siteDescription,
       email: contactDetails.email,
