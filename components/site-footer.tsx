@@ -59,6 +59,13 @@ export function SiteFooter() {
           </p>
           <div className="mt-4 flex items-center gap-3">
             <Link
+              href={`mailto:${contactDetails.email}`}
+              aria-label="Email Prosper Events"
+              className="rounded-full border border-navy/12 bg-white/70 p-3 text-navy transition hover:-translate-y-0.5 hover:bg-white"
+            >
+              <Mail className="h-4 w-4" />
+            </Link>
+            <Link
               href={contactDetails.instagram}
               target="_blank"
               rel="noreferrer"

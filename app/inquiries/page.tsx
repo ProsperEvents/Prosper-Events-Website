@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Facebook, Instagram, Mail, Phone } from "lucide-react";
-import { ButtonLink } from "@/components/button-link";
+import { InfoPacketPreview } from "@/components/info-packet-preview";
 import { Reveal } from "@/components/reveal";
 import { contactDetails } from "@/lib/site";
 
@@ -15,6 +15,12 @@ export const metadata: Metadata = {
 };
 
 export default function InquiriesPage() {
+  const infoPacketHref = "/assets/downloads/prosper-events-info-pack.pdf";
+  const infoPacketPages = Array.from({ length: 8 }, (_, index) => ({
+    src: `/assets/downloads/info-pack-preview/page-${String(index + 1).padStart(2, "0")}.jpg`,
+    alt: `Prosper Events information packet page ${index + 1}`,
+  }));
+
   return (
     <div className="pb-24 pt-32 sm:pt-36">
       <section className="px-4 sm:px-6 lg:px-8">
@@ -51,6 +57,13 @@ export default function InquiriesPage() {
             </div>
             <div className="mt-8 flex items-center gap-3">
               <Link
+                href={`mailto:${contactDetails.email}`}
+                aria-label="Email Prosper Events"
+                className="rounded-full border border-navy/12 bg-white/70 p-3 text-navy transition hover:-translate-y-0.5 hover:bg-white"
+              >
+                <Mail className="h-4 w-4" />
+              </Link>
+              <Link
                 href={contactDetails.instagram}
                 target="_blank"
                 rel="noreferrer"
@@ -69,11 +82,10 @@ export default function InquiriesPage() {
                 <Facebook className="h-4 w-4" />
               </Link>
             </div>
-            <div className="mt-10">
-              <ButtonLink href={`mailto:${contactDetails.email}`}>
-                Email Prosper Events
-              </ButtonLink>
-            </div>
+            <InfoPacketPreview
+              pages={infoPacketPages}
+              downloadHref={infoPacketHref}
+            />
           </Reveal>
         </div>
       </section>

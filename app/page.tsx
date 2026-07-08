@@ -230,12 +230,13 @@ export default function HomePage() {
             {galleryPreview.map((image, index) => (
               <Reveal key={image.id} delay={index * 0.05} className="mb-5 break-inside-avoid">
                 <img
-                  src={image.src}
+                  src={image.thumbnailSrc}
                   alt={image.alt}
                   loading="lazy"
-                className="h-auto w-full rounded-[1.4rem] object-cover transition duration-700 hover:scale-[1.02]"
-              />
-            </Reveal>
+                  decoding="async"
+                  className="h-auto w-full rounded-[1.4rem] object-cover transition duration-700 hover:scale-[1.02]"
+                />
+              </Reveal>
           ))}
           </div>
         </div>
