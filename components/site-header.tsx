@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { ProsperWordmark } from "@/components/prosper-wordmark";
-import { navigation } from "@/lib/site";
+import { contactDetails, navigation } from "@/lib/site";
 
 export function SiteHeader() {
   const pathname = usePathname();
@@ -47,22 +47,30 @@ export function SiteHeader() {
             />
           </Link>
 
-          <nav className="hidden items-center gap-8 md:flex">
-            {navigation.map((item) => {
-              const active = pathname === item.href;
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`nav-link text-xs uppercase tracking-[0.22em] ${
-                    active ? "text-ink" : "text-navy/85"
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
-          </nav>
+          <div className="hidden items-center gap-5 md:flex">
+            <nav className="flex items-center gap-8">
+              {navigation.map((item) => {
+                const active = pathname === item.href;
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`nav-link text-xs uppercase tracking-[0.22em] ${
+                      active ? "text-ink" : "text-navy/85"
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+            </nav>
+            <a
+              href={contactDetails.subscribeHref}
+              className="inline-flex items-center justify-center rounded-full border border-navy bg-navy px-5 py-2.5 text-[11px] font-medium uppercase tracking-[0.24em] text-cream transition duration-500 hover:-translate-y-0.5 hover:bg-ink hover:shadow-card"
+            >
+              Subscribe
+            </a>
+          </div>
 
           <button
             type="button"
@@ -134,6 +142,13 @@ export function SiteHeader() {
                     </Link>
                   );
                 })}
+                <a
+                  href={contactDetails.subscribeHref}
+                  className="flex items-center justify-between rounded-3xl border border-navy/10 bg-navy px-5 py-4 font-display text-2xl tracking-wide text-cream transition hover:bg-ink"
+                >
+                  <span>Subscribe</span>
+                  <span className="text-sm uppercase tracking-[0.24em]">05</span>
+                </a>
               </div>
             </motion.div>
           </motion.div>

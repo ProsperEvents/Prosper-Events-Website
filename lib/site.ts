@@ -31,6 +31,8 @@ export const contactDetails = {
   phoneHref: "tel:3434633333",
   instagram: "https://www.instagram.com/prosper.events/",
   facebook: "https://www.facebook.com/profile.php?id=61588175548605",
+  subscribeHref: "/subscribe",
+  subscribeFormAction: "https://formsubmit.co/theliau@prosperevents.ca",
 };
 
 export const organizationSchema = {

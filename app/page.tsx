@@ -5,6 +5,7 @@ import { ProsperWordmark } from "@/components/prosper-wordmark";
 import { Reveal, Stagger, StaggerItem } from "@/components/reveal";
 import { galleryImages } from "@/data/gallery";
 import { events } from "@/data/events";
+import { contactDetails } from "@/lib/site";
 
 const upcomingEvents = events.filter((event) => event.status === "upcoming").slice(0, 3);
 const galleryPreview = galleryImages.slice(0, 6);
@@ -35,9 +36,11 @@ export default function HomePage() {
               designed for real conversation.
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
-              <ButtonLink href="/events">View Upcoming Events</ButtonLink>
-              <ButtonLink href="/inquiries" variant="secondary">
-                Make an Inquiry
+              <ButtonLink href={contactDetails.subscribeHref}>
+                Subscribe
+              </ButtonLink>
+              <ButtonLink href="/events" variant="secondary">
+                View Upcoming Events
               </ButtonLink>
             </div>
           </Reveal>
