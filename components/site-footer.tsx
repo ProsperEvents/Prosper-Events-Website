@@ -10,7 +10,8 @@ export function SiteFooter() {
       <div className="section-floral opacity-70" />
       <div className="floral-corner floral-corner-top-right" />
       <div className="floral-corner floral-corner-bottom-left" />
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1.2fr_0.8fr_0.8fr] lg:px-8 lg:py-16">
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+        <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr_0.8fr]">
         <div>
           <div className="flex items-center gap-4">
             <Image
@@ -84,6 +85,13 @@ export function SiteFooter() {
               <Facebook className="h-4 w-4" />
             </Link>
           </div>
+        </div>
+        </div>
+        <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-navy/10 pt-6 text-[11px] uppercase tracking-[0.22em] text-navy/55">
+          <p>Prosper Events</p>
+          <Link href="/privacy-policy" className="hover:text-ink">
+            Privacy Policy
+          </Link>
         </div>
       </div>
     </footer>
