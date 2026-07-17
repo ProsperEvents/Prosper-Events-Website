@@ -119,7 +119,7 @@ export default function SubscribePage() {
                   type="submit"
                   className="inline-flex items-center justify-center rounded-full border border-navy bg-navy px-7 py-3 text-xs font-medium uppercase tracking-[0.22em] text-cream transition duration-500 hover:-translate-y-0.5 hover:bg-ink hover:shadow-card"
                 >
-                  Subscribe
+                  Sign Up
                 </button>
                 <p className="text-sm text-navy/62">
                   Submissions are sent directly to Prosper Events by email.

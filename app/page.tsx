@@ -37,7 +37,7 @@ export default function HomePage() {
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
               <ButtonLink href={contactDetails.subscribeHref}>
-                Subscribe
+                Sign Up
               </ButtonLink>
               <ButtonLink href="/events" variant="secondary">
                 View Upcoming Events
