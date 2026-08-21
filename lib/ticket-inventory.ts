@@ -47,6 +47,26 @@ export async function drinkInventory() {
   return { totals, byDate };
 }
 
+function csvCell(value: string | number | null | undefined) {
+  const text = String(value ?? "");
+  return `"${text.replace(/"/g, '""')}"`;
+}
+
+export async function ticketTrackerCsv() {
+  const sessions = await soldTickets();
+  const rows = [["Guest name", "Attending date", "Ticket reference", "Drink 1", "Drink 2", "Drink 3"]];
+  for (const session of sessions) {
+    const eventDate = session.metadata?.eventDate;
+    if (!eventDate || !isDate(eventDate)) continue;
+    const date = COCKTAIL_CLASSES.dates[eventDate].label;
+    const reference = session.id.slice(-8).toUpperCase();
+    for (const guest of parseSelections(session.metadata?.ticketSelections)) {
+      rows.push([guest.name, date, reference, ...guest.drinks]);
+    }
+  }
+  return `\ufeff${rows.map((row) => row.map(csvCell).join(",")).join("\r\n")}`;
+}
+
 function isDate(value: string): value is CocktailClassDate {
   return value in COCKTAIL_CLASSES.dates;
 }
