@@ -25,14 +25,14 @@ export async function POST(request: NextRequest) {
     if (process.env.RESEND_API_KEY) {
       const resend = new Resend(process.env.RESEND_API_KEY);
       if (customerEmail) await resend.emails.send({
-        from: process.env.TICKET_FROM_EMAIL || "Prosper Events <tickets@prosperevents.ca>",
+        from: process.env.TICKET_FROM_EMAIL || "Prosper Events <theliau@prosperevents.ca>",
         to: customerEmail,
         subject: "Cocktail Class ticket cancelled — no refund issued",
         html: `<p>Your Cocktail Class ticket has been cancelled. As stated at checkout, ticket sales are final and no refund has been issued.</p><p>Prosper Events has been notified.</p>`,
       });
       const trackerCsv = await ticketTrackerCsv();
       await resend.emails.send({
-        from: process.env.TICKET_FROM_EMAIL || "Prosper Events <tickets@prosperevents.ca>",
+        from: process.env.TICKET_FROM_EMAIL || "Prosper Events <theliau@prosperevents.ca>",
         to: "prosperevents032@gmail.com",
         subject: "Cocktail Class tracker updated — ticket cancelled",
         html: `<p>A Cocktail Class ticket was cancelled. The attached tracker reflects the current active guest list and drink selections.</p><p>No refund was issued.</p>`,
