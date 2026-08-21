@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LoaderCircle } from "lucide-react";
 import { cocktailMenu } from "@/lib/cocktail-classes";
 import type { GuestSelection } from "@/lib/ticket-selections";
@@ -16,6 +16,14 @@ export function TicketPurchase() {
   const [guests, setGuests] = useState<GuestSelection[]>([blankGuest()]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [discountedRemaining, setDiscountedRemaining] = useState<number | null>(null);
+
+  useEffect(() => {
+    fetch(`/api/tickets/availability?date=${date}`)
+      .then((response) => response.json())
+      .then((result) => setDiscountedRemaining(typeof result.discountedRemaining === "number" ? result.discountedRemaining : 0))
+      .catch(() => setDiscountedRemaining(0));
+  }, [date]);
 
   function changeQuantity(quantity: number) {
     setGuests((current) => Array.from({ length: quantity }, (_, index) => current[index] ?? blankGuest()));
@@ -53,8 +61,8 @@ export function TicketPurchase() {
   return (
     <section id="tickets" className="section-space px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl"><div className="relative overflow-hidden rounded-[2rem] border border-navy/10 bg-white/80 px-6 py-9 shadow-paper sm:px-10"><div className="section-floral opacity-70" />
-        <div className="relative z-10"><p className="eyebrow">Reserve your seat</p><h2 className="mt-4 font-display text-4xl text-ink sm:text-5xl">Choose your three drinks.</h2>
-          <p className="mt-4 max-w-2xl text-sm leading-7 text-navy/72">$85 per guest. The first 10 tickets sold across both nights are automatically reduced to $68. Limited to 14 guests per night. All sales are final; cancelled tickets are not refunded.</p>
+        <div className="relative z-10"><div className="flex items-start justify-between gap-6"><div><p className="eyebrow">Reserve your seat</p><h2 className="mt-4 font-display text-4xl text-ink sm:text-5xl">Choose your three drinks.</h2></div><div className="relative shrink-0 pt-1 text-right"><p className="font-display text-4xl text-ink">{discountedRemaining === null || discountedRemaining > 0 ? "$68" : "$85"}</p><p className="mt-1 text-[10px] uppercase tracking-[0.18em] text-navy/55">per guest · CAD</p>{discountedRemaining === null || discountedRemaining > 0 ? <span className="absolute -right-4 -top-3 rotate-12 rounded-full bg-rose-500 px-3 py-2 text-[10px] font-semibold tracking-[0.12em] text-white shadow-sm">−20%</span> : null}</div></div>
+          <p className="mt-4 max-w-2xl text-sm leading-7 text-navy/72">{discountedRemaining === null || discountedRemaining > 0 ? "The first 10 tickets sold across both nights are automatically reduced from $85 to $68." : "$85 per guest."} Limited to 14 guests per night. All sales are final; cancelled tickets are not refunded.</p>
           <div className="mt-8 grid max-w-3xl gap-4 sm:grid-cols-2">
             <label className="text-sm text-navy/74"><span className="mb-2 block text-[11px] uppercase tracking-[0.2em] text-navy/55">Choose a date</span><select value={date} onChange={(event) => setDate(event.target.value as typeof date)} className="w-full rounded-xl border border-navy/15 bg-white px-4 py-3 text-ink outline-none ring-navy/25 focus:ring-2">{dates.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}</select></label>
             <label className="text-sm text-navy/74"><span className="mb-2 block text-[11px] uppercase tracking-[0.2em] text-navy/55">Guests</span><select value={guests.length} onChange={(event) => changeQuantity(Number(event.target.value))} className="w-full rounded-xl border border-navy/15 bg-white px-4 py-3 text-ink outline-none ring-navy/25 focus:ring-2">{[1, 2, 3, 4].map((count) => <option key={count} value={count}>{count} {count === 1 ? "guest" : "guests"}</option>)}</select></label>
