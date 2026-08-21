@@ -18,9 +18,36 @@ export type EventItem = {
   dressCode?: string;
   atmosphere?: string;
   gallery?: string[];
+  ticketing?: {
+    price: number;
+    capacityPerDate: number;
+    discountTicketsTotal: number;
+  };
 };
 
 export const events: EventItem[] = [
+  {
+    slug: "cocktail-classes",
+    title: "Cocktail Classes",
+    status: "upcoming",
+    startDate: "2026-09-18T19:30:00-04:00",
+    endDate: "2026-09-18T21:30:00-04:00",
+    time: "7:30 PM - 9:30 PM",
+    location: "Equator Coffee Westboro",
+    address: "412 Churchill Ave N, Ottawa, ON K1Z 5C6",
+    description:
+      "A hands-on cocktail and mocktail class: choose any three drinks and create your own evening of favourites.",
+    longDescription:
+      "Join Prosper Events at Equator Coffee Westboro for an intimate evening of cocktail making and tasting. Guests may choose any three cocktails or mocktails to make their own combination, pick up new techniques, and enjoy a relaxed, social class with fellow drink enthusiasts.",
+    image: "/assets/events/cocktail-classes/hero.png",
+    ticketing: {
+      price: 85,
+      capacityPerDate: 14,
+      discountTicketsTotal: 10,
+    },
+    atmosphere:
+      "A fun, interactive class designed for learning, tasting, conversation, and discovering a new favourite drink.",
+  },
   {
     slug: "cocktails-in-naples",
     title: "Cocktails in Naples",

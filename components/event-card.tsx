@@ -46,10 +46,10 @@ export function EventCard({ event }: EventCardProps) {
           <p className="text-sm leading-7 text-navy/72">{event.description}</p>
           <div className="flex items-center justify-between border-t border-navy/10 pt-4 text-[11px] uppercase tracking-[0.24em] text-navy">
             <span>
-              {event.status === "upcoming" ? "Details coming soon" : "View event"}
+              {event.status === "upcoming" ? "Buy tickets" : "View event"}
             </span>
             <span className="transition duration-500 group-hover:translate-x-1">
-              Contact for inquiries
+              {event.status === "upcoming" ? "Reserve a seat" : "Contact for inquiries"}
             </span>
           </div>
         </div>

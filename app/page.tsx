@@ -8,6 +8,7 @@ import { events } from "@/data/events";
 import { contactDetails } from "@/lib/site";
 
 const upcomingEvents = events.filter((event) => event.status === "upcoming").slice(0, 3);
+const featuredEvent = events.find((event) => event.slug === "cocktail-classes");
 const galleryPreview = galleryImages.slice(0, 6);
 
 export default function HomePage() {
@@ -19,7 +20,7 @@ export default function HomePage() {
         <div className="floral-spray floral-spray-right" />
         <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
           <Reveal className="relative z-10">
-            <p className="eyebrow">Curated events in Ottawa & Gatineau</p>
+            <p className="eyebrow">Now booking · September 18 & 19</p>
             <div className="mt-8">
               <ProsperWordmark
                 priority
@@ -27,20 +28,17 @@ export default function HomePage() {
               />
             </div>
             <h1 className="mt-8 max-w-3xl font-display text-6xl leading-[0.94] text-ink sm:text-7xl lg:text-[6.25rem]">
-              Curated evenings in Ottawa & Gatineau.
+              The perfect cocktail class is here.
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-8 text-navy/72 sm:text-lg">
-              Intimate events shaped by atmosphere, taste, and connection.
-              Prosper Events creates social experiences with a French-European
-              sense of detail: quiet luxury, warm hospitality, and rooms
-              designed for real conversation.
+              An intimate cocktail and mocktail-making class at Equator Coffee Westboro. Choose any three drinks, learn the craft, and make an evening of it.
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
-              <ButtonLink href={contactDetails.subscribeHref}>
-                Sign Up
+              <ButtonLink href="/events/cocktail-classes#tickets">
+                Buy Cocktail Class Tickets
               </ButtonLink>
-              <ButtonLink href="/events" variant="secondary">
-                View Upcoming Events
+              <ButtonLink href="/events/cocktail-classes" variant="secondary">
+                Explore the class
               </ButtonLink>
             </div>
           </Reveal>
@@ -88,6 +86,17 @@ export default function HomePage() {
           </Reveal>
         </div>
       </section>
+
+      {featuredEvent ? (
+        <section className="px-4 pb-4 sm:px-6 lg:px-8">
+          <Reveal className="mx-auto max-w-7xl">
+            <div className="flex flex-col gap-5 rounded-[1.75rem] border border-navy/10 bg-navy px-6 py-7 text-white shadow-paper sm:flex-row sm:items-center sm:justify-between sm:px-9">
+              <div><p className="text-[11px] uppercase tracking-[0.24em] text-white/65">Featured event</p><p className="mt-2 font-display text-3xl">{featuredEvent.title} · $85</p><p className="mt-1 text-sm text-white/75">First 10 tickets across both dates are 20% off · 14 seats per night</p></div>
+              <ButtonLink href="/events/cocktail-classes#tickets" variant="secondary">Reserve a seat</ButtonLink>
+            </div>
+          </Reveal>
+        </section>
+      ) : null}
 
       <section className="section-space px-4 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">

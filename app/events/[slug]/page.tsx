@@ -11,6 +11,8 @@ import {
   getEventSchema,
 } from "@/data/events";
 import { absoluteUrl } from "@/lib/utils";
+import { TicketPurchase } from "@/components/ticket-purchase";
+import { cocktailMenu } from "@/lib/cocktail-classes";
 
 export async function generateStaticParams() {
   return events.map((event) => ({ slug: event.slug }));
@@ -84,7 +86,7 @@ export default async function EventDetailPage({
                   {event.longDescription}
                 </p>
                 <div className="mt-8 flex flex-wrap gap-4">
-                  <ButtonLink href="/inquiries">Contact for Inquiries</ButtonLink>
+                  {event.ticketing ? <ButtonLink href="#tickets">Buy tickets</ButtonLink> : <ButtonLink href="/inquiries">Contact for Inquiries</ButtonLink>}
                   <ButtonLink href="/events" variant="secondary">
                     Back to Events
                   </ButtonLink>
@@ -106,6 +108,8 @@ export default async function EventDetailPage({
           </Reveal>
         </div>
       </section>
+
+      {event.slug === "cocktail-classes" ? <TicketPurchase /> : null}
 
       <section className="section-space px-4 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[0.9fr_1.1fr]">
@@ -163,6 +167,27 @@ export default async function EventDetailPage({
           </Stagger>
         </div>
       </section>
+
+      {event.slug === "cocktail-classes" ? (
+        <section className="px-4 pb-16 sm:px-6 lg:px-8">
+          <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-2">
+            <Reveal className="luxury-card p-7">
+              <p className="eyebrow">Cocktails · 19+</p>
+              <h2 className="mt-4 font-display text-3xl text-ink">Cocktail menu</h2>
+              <div className="mt-6 space-y-4">
+                {cocktailMenu.cocktails.map(([name, ingredients]) => <div key={name}><p className="font-medium text-ink">{name}</p><p className="mt-1 text-sm leading-6 text-navy/68">{ingredients}</p></div>)}
+              </div>
+            </Reveal>
+            <Reveal className="luxury-card p-7">
+              <p className="eyebrow">Zero-proof</p>
+              <h2 className="mt-4 font-display text-3xl text-ink">Mocktail menu</h2>
+              <div className="mt-6 space-y-4">
+                {cocktailMenu.mocktails.map(([name, ingredients]) => <div key={name}><p className="font-medium text-ink">{name}</p><p className="mt-1 text-sm leading-6 text-navy/68">{ingredients}</p></div>)}
+              </div>
+            </Reveal>
+          </div>
+        </section>
+      ) : null}
 
       {event.gallery?.length ? (
         <section className="px-4 pb-8 sm:px-6 lg:px-8">
