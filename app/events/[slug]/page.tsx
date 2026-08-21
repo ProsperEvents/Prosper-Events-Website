@@ -101,7 +101,7 @@ export default async function EventDetailPage({
                   width={1600}
                   height={1200}
                   priority
-                  className="h-[420px] w-full rounded-[1.7rem] object-cover sm:h-[520px]"
+                  className="h-auto w-full rounded-[1.7rem] bg-[#efeeeb] object-contain"
                 />
               </div>
             </div>
