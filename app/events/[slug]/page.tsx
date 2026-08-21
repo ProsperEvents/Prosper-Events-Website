@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { ButtonLink } from "@/components/button-link";
-import { Reveal, Stagger, StaggerItem } from "@/components/reveal";
+import { Reveal } from "@/components/reveal";
 import { SchemaScript } from "@/components/schema-script";
 import {
   events,
@@ -63,6 +63,9 @@ export default async function EventDetailPage({
   if (!event) {
     notFound();
   }
+  const mapQuery = encodeURIComponent(`${event.location}, ${event.address ?? "Ottawa, Ontario"}`);
+  const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`;
+  const appleMapsUrl = `https://maps.apple.com/?q=${mapQuery}`;
 
   return (
     <div className="pb-24 pt-28 sm:pt-32">
@@ -112,60 +115,25 @@ export default async function EventDetailPage({
       {event.slug === "cocktail-classes" ? <TicketPurchase /> : null}
 
       <section className="section-space px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-          <Reveal className="section-frame">
-            <p className="eyebrow">Invitation details</p>
-            <div className="mt-6 space-y-5 text-sm leading-7 text-navy/72">
-              <div>
-                <p className="text-[11px] uppercase tracking-[0.24em] text-navy/48">
-                  Location
-                </p>
-                <p className="mt-2">{event.location}</p>
-              </div>
-              <div>
-                <p className="text-[11px] uppercase tracking-[0.24em] text-navy/48">
-                  Address
-                </p>
-                <p className="mt-2">{event.address ?? "Shared upon inquiry."}</p>
-              </div>
-              <div>
-                <p className="text-[11px] uppercase tracking-[0.24em] text-navy/48">
-                  Notes
-                </p>
-                <p className="mt-2">{event.description}</p>
+        <Reveal className="mx-auto max-w-7xl">
+          <div className="grid gap-10 border-y border-navy/12 py-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-center lg:py-14">
+            <div>
+              <p className="eyebrow">Venue</p>
+              <h2 className="mt-4 font-display text-4xl text-ink sm:text-5xl">{event.location}</h2>
+              <p className="mt-5 max-w-xl text-base leading-8 text-navy/72">{event.description}</p>
+              <div className="mt-8 border-t border-navy/12 pt-5">
+                <p className="text-[10px] uppercase tracking-[0.22em] text-navy/50">Address</p>
+                <a href={googleMapsUrl} target="_blank" rel="noreferrer" className="mt-2 inline-block text-lg text-navy underline decoration-navy/30 underline-offset-4 transition hover:decoration-navy">
+                  {event.address ?? "Shared upon inquiry."}
+                </a>
+                <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-[11px] uppercase tracking-[0.18em] text-navy/70"><a href={googleMapsUrl} target="_blank" rel="noreferrer" className="border-b border-navy/30 pb-1 transition hover:border-navy">Open in Google Maps ↗</a><a href={appleMapsUrl} target="_blank" rel="noreferrer" className="border-b border-navy/30 pb-1 transition hover:border-navy">Open in Apple Maps ↗</a></div>
               </div>
             </div>
-          </Reveal>
-
-          <Stagger className="grid gap-5 sm:grid-cols-2">
-            {event.menu ? (
-              <StaggerItem className="luxury-card p-6">
-                <p className="eyebrow">Menu</p>
-                <ul className="mt-5 space-y-3 text-sm leading-7 text-navy/72">
-                  {event.menu.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </StaggerItem>
-            ) : null}
-            {event.dressCode ? (
-              <StaggerItem className="luxury-card p-6">
-                <p className="eyebrow">Dress code</p>
-                <p className="mt-5 text-sm leading-7 text-navy/72">
-                  {event.dressCode}
-                </p>
-              </StaggerItem>
-            ) : null}
-            {event.atmosphere ? (
-              <StaggerItem className="luxury-card p-6 sm:col-span-2">
-                <p className="eyebrow">Music & atmosphere</p>
-                <p className="mt-5 max-w-3xl text-sm leading-7 text-navy/72">
-                  {event.atmosphere}
-                </p>
-              </StaggerItem>
-            ) : null}
-          </Stagger>
-        </div>
+            <div className="overflow-hidden rounded-[1.5rem] border border-navy/10 bg-white shadow-paper">
+              <iframe title={`Map of ${event.location}`} src={`https://www.google.com/maps?q=${mapQuery}&output=embed`} className="h-[320px] w-full border-0 sm:h-[390px]" loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
+            </div>
+          </div>
+        </Reveal>
       </section>
 
       {event.slug === "cocktail-classes" ? (
