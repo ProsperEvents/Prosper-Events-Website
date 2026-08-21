@@ -12,7 +12,6 @@ import {
 } from "@/data/events";
 import { absoluteUrl } from "@/lib/utils";
 import { TicketPurchase } from "@/components/ticket-purchase";
-import { cocktailMenu } from "@/lib/cocktail-classes";
 
 export async function generateStaticParams() {
   return events.map((event) => ({ slug: event.slug }));
@@ -138,20 +137,12 @@ export default async function EventDetailPage({
 
       {event.slug === "cocktail-classes" ? (
         <section className="px-4 pb-16 sm:px-6 lg:px-8">
-          <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-2">
-            <Reveal className="luxury-card p-7">
-              <p className="eyebrow">Cocktails · 19+</p>
-              <h2 className="mt-4 font-display text-3xl text-ink">Cocktail menu</h2>
-              <div className="mt-6 space-y-4">
-                {cocktailMenu.cocktails.map(([name, ingredients]) => <div key={name}><p className="font-medium text-ink">{name}</p><p className="mt-1 text-sm leading-6 text-navy/68">{ingredients}</p></div>)}
-              </div>
+          <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-2">
+            <Reveal>
+              <Image src="/assets/events/cocktail-classes/menus/cocktail-menu.png" alt="Cocktail Class cocktail menu" width={1080} height={1350} className="h-auto w-full" />
             </Reveal>
-            <Reveal className="luxury-card p-7">
-              <p className="eyebrow">Zero-proof</p>
-              <h2 className="mt-4 font-display text-3xl text-ink">Mocktail menu</h2>
-              <div className="mt-6 space-y-4">
-                {cocktailMenu.mocktails.map(([name, ingredients]) => <div key={name}><p className="font-medium text-ink">{name}</p><p className="mt-1 text-sm leading-6 text-navy/68">{ingredients}</p></div>)}
-              </div>
+            <Reveal delay={0.08}>
+              <Image src="/assets/events/cocktail-classes/menus/mocktail-menu.png" alt="Cocktail Class mocktail menu" width={1080} height={1350} className="h-auto w-full" />
             </Reveal>
           </div>
         </section>
