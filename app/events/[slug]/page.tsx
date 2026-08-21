@@ -12,6 +12,7 @@ import {
 } from "@/data/events";
 import { absoluteUrl } from "@/lib/utils";
 import { TicketPurchase } from "@/components/ticket-purchase";
+import { MenuGallery } from "@/components/menu-gallery";
 
 export async function generateStaticParams() {
   return events.map((event) => ({ slug: event.slug }));
@@ -113,6 +114,12 @@ export default async function EventDetailPage({
 
       {event.slug === "cocktail-classes" ? <TicketPurchase /> : null}
 
+      {event.slug === "cocktail-classes" ? (
+        <section className="px-4 pb-8 sm:px-6 lg:px-8">
+          <MenuGallery />
+        </section>
+      ) : null}
+
       <section className="section-space px-4 sm:px-6 lg:px-8">
         <Reveal className="mx-auto max-w-7xl">
           <div className="grid gap-10 border-y border-navy/12 py-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-center lg:py-14">
@@ -134,19 +141,6 @@ export default async function EventDetailPage({
           </div>
         </Reveal>
       </section>
-
-      {event.slug === "cocktail-classes" ? (
-        <section className="px-4 pb-16 sm:px-6 lg:px-8">
-          <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-2">
-            <Reveal>
-              <Image src="/assets/events/cocktail-classes/menus/cocktail-menu.png" alt="Cocktail Class cocktail menu" width={1080} height={1350} className="h-auto w-full" />
-            </Reveal>
-            <Reveal delay={0.08}>
-              <Image src="/assets/events/cocktail-classes/menus/mocktail-menu.png" alt="Cocktail Class mocktail menu" width={1080} height={1350} className="h-auto w-full" />
-            </Reveal>
-          </div>
-        </section>
-      ) : null}
 
       {event.gallery?.length ? (
         <section className="px-4 pb-8 sm:px-6 lg:px-8">
