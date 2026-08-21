@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { LoaderCircle } from "lucide-react";
 import { cocktailMenu } from "@/lib/cocktail-classes";
 import type { GuestSelection } from "@/lib/ticket-selections";
+import { MenuGallery } from "@/components/menu-gallery";
 
 const dates = [
   { value: "2026-09-18", label: "Friday, September 18" },
@@ -66,6 +67,9 @@ export function TicketPurchase() {
           <div className="mt-8 grid max-w-3xl gap-4 sm:grid-cols-2">
             <label className="text-sm text-navy/74"><span className="mb-2 block text-[11px] uppercase tracking-[0.2em] text-navy/55">Choose a date</span><select value={date} onChange={(event) => setDate(event.target.value as typeof date)} className="w-full rounded-xl border border-navy/15 bg-white px-4 py-3 text-ink outline-none ring-navy/25 focus:ring-2">{dates.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}</select></label>
             <label className="text-sm text-navy/74"><span className="mb-2 block text-[11px] uppercase tracking-[0.2em] text-navy/55">Guests</span><select value={guests.length} onChange={(event) => changeQuantity(Number(event.target.value))} className="w-full rounded-xl border border-navy/15 bg-white px-4 py-3 text-ink outline-none ring-navy/25 focus:ring-2">{[1, 2, 3, 4].map((count) => <option key={count} value={count}>{count} {count === 1 ? "guest" : "guests"}</option>)}</select></label>
+          </div>
+          <div className="mt-10">
+            <MenuGallery />
           </div>
           <div className="mt-10 border-y border-navy/10">
             <div className="grid gap-2 py-5 sm:grid-cols-[0.7fr_1fr] sm:items-end"><div><p className="eyebrow">Guest details</p><p className="mt-2 text-sm text-navy/65">Name each ticket and choose three distinct drinks for every guest.</p></div><p className="text-sm leading-6 text-navy/60 sm:text-right">Cocktails are 19+ · mocktails are zero-proof</p></div>

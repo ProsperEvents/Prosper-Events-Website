@@ -12,7 +12,6 @@ import {
 } from "@/data/events";
 import { absoluteUrl } from "@/lib/utils";
 import { TicketPurchase } from "@/components/ticket-purchase";
-import { MenuGallery } from "@/components/menu-gallery";
 
 export async function generateStaticParams() {
   return events.map((event) => ({ slug: event.slug }));
@@ -113,12 +112,6 @@ export default async function EventDetailPage({
       </section>
 
       {event.slug === "cocktail-classes" ? <TicketPurchase /> : null}
-
-      {event.slug === "cocktail-classes" ? (
-        <section className="px-4 pb-8 sm:px-6 lg:px-8">
-          <MenuGallery />
-        </section>
-      ) : null}
 
       <section className="section-space px-4 sm:px-6 lg:px-8">
         <Reveal className="mx-auto max-w-7xl">
