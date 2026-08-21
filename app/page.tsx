@@ -60,11 +60,12 @@ export default function HomePage() {
                   <div className="luxury-card overflow-hidden p-3">
                     <div className="floral-corner floral-corner-bottom-left" />
                     <Image
-                      src={galleryPreview[1]?.src ?? "/assets/gallery/march-1/2-_DSC9573.jpg"}
+                      src={galleryPreview[1]?.thumbnailSrc ?? "/assets/gallery/march-1-web/2-_DSC9573.webp"}
                       alt="Cocktail service at Prosper Events"
                       width={1200}
                       height={1600}
                       className="h-[360px] w-full rounded-[1.5rem] object-cover"
+                      unoptimized
                     />
                   </div>
                   <div className="relative overflow-hidden rounded-[1.6rem] border border-navy/10 bg-white/72 p-6 shadow-paper">
