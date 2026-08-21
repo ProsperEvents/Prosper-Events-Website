@@ -29,18 +29,13 @@ export function isCocktailClassDate(value: string): value is CocktailClassDate {
 
 export const cocktailMenu = {
   cocktails: [
-    ["Left Bank Martini", "Gin, St-Germain, Chardonnay, dry vermouth, lime"],
-    ["Man O' War", "Whisky, Triple Sec, sweet vermouth, lemon juice, lemon"],
-    ["Grapefruit Gimlet", "Gin, grapefruit juice, lime juice, simple syrup, grapefruit pieces"],
-    ["NYC Sour", "Whisky, lemon juice, simple syrup, egg white, Malbec"],
     ["Aviation", "Gin, Luxardo, crème de violette, lemon juice, lemon"],
-    ["Last Word", "Gin, Green Chartreuse, Luxardo, lime juice, lime"],
+    ["Left Bank Martini", "Dry gin, St-Germain, Chardonnay, dry vermouth, lime garnish"],
     ["Lillet St-Germain", "Lillet Blanc, St-Germain, grapefruit juice, lime juice, grapefruit pieces"],
   ],
   mocktails: [
+    ["Peach Basil Tingle", "Peach purée, lemon juice, basil, honey syrup, ginger kombucha, Tajín rim"],
+    ["Grapefruit Spritz Mocktail", "Grapefruit juice, lemon juice, ginger juice, honey syrup, soda, grapefruit garnish"],
     ["Perfect Pom", "Pomegranate juice, orange juice, ginger beer, club soda, mint"],
-    ["Lychee Spritz", "Lychee, club soda, lime, mint, lychee syrup"],
-    ["Peach Basil Tingle", "Peach purée, lemon juice, basil, honey syrup, ginger kombucha"],
-    ["Grapefruit Spritz", "Grapefruit juice, lemon juice, ginger apple juice, honey syrup, club soda, grapefruit pieces"],
   ],
 } as const;
