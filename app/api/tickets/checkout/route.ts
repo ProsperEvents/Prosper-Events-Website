@@ -43,8 +43,8 @@ export async function POST(request: NextRequest) {
       customer_creation: "always",
       allow_promotion_codes: false,
       line_items: [
-        ...(discountedTickets ? [{ price_data: { currency: "cad", product_data: { name: `Cocktail Classes — early ticket (${COCKTAIL_CLASSES.dates[date].label})` }, unit_amount: COCKTAIL_CLASSES.discountedPriceCents }, quantity: discountedTickets }] : []),
-        ...(regularTickets ? [{ price_data: { currency: "cad", product_data: { name: `Cocktail Classes (${COCKTAIL_CLASSES.dates[date].label})` }, unit_amount: COCKTAIL_CLASSES.priceCents }, quantity: regularTickets }] : []),
+        ...(discountedTickets ? [{ price_data: { currency: "cad", product_data: { name: `Cocktail Class — early ticket (${COCKTAIL_CLASSES.dates[date].label})` }, unit_amount: COCKTAIL_CLASSES.discountedPriceCents }, quantity: discountedTickets }] : []),
+        ...(regularTickets ? [{ price_data: { currency: "cad", product_data: { name: `Cocktail Class (${COCKTAIL_CLASSES.dates[date].label})` }, unit_amount: COCKTAIL_CLASSES.priceCents }, quantity: regularTickets }] : []),
       ],
       metadata: {
         eventSlug: COCKTAIL_CLASSES.slug,

@@ -19,9 +19,9 @@ export async function GET(request: NextRequest) {
     }
     const date = COCKTAIL_CLASSES.dates[eventDate];
     const body = [
-      "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Prosper Events//Cocktail Classes//EN", "BEGIN:VEVENT",
+      "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Prosper Events//Cocktail Class//EN", "BEGIN:VEVENT",
       `UID:${session.id}@prosperevents.ca`, `DTSTART:${icsDate(date.start)}`, `DTEND:${icsDate(date.end)}`,
-      "SUMMARY:Cocktail Classes — Prosper Events", `LOCATION:${COCKTAIL_CLASSES.venue}\\, ${COCKTAIL_CLASSES.address}`,
+      "SUMMARY:Cocktail Class — Prosper Events", `LOCATION:${COCKTAIL_CLASSES.venue}\\, ${COCKTAIL_CLASSES.address}`,
       "DESCRIPTION:Make any three drinks from the cocktail and mocktail menu.", "END:VEVENT", "END:VCALENDAR",
     ].join("\r\n");
     return new NextResponse(body, { headers: { "Content-Type": "text/calendar; charset=utf-8", "Content-Disposition": "attachment; filename=cocktail-classes.ics" } });

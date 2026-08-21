@@ -1,6 +1,6 @@
 export const COCKTAIL_CLASSES = {
   slug: "cocktail-classes",
-  title: "Cocktail Classes",
+  title: "Cocktail Class",
   priceCents: 8500,
   discountedPriceCents: 6800,
   discountTicketsTotal: 10,

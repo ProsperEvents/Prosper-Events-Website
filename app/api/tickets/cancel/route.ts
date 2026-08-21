@@ -27,15 +27,15 @@ export async function POST(request: NextRequest) {
       if (customerEmail) await resend.emails.send({
         from: process.env.TICKET_FROM_EMAIL || "Prosper Events <tickets@prosperevents.ca>",
         to: customerEmail,
-        subject: "Cocktail Classes ticket cancelled — no refund issued",
-        html: `<p>Your Cocktail Classes ticket has been cancelled. As stated at checkout, ticket sales are final and no refund has been issued.</p><p>Prosper Events has been notified.</p>`,
+        subject: "Cocktail Class ticket cancelled — no refund issued",
+        html: `<p>Your Cocktail Class ticket has been cancelled. As stated at checkout, ticket sales are final and no refund has been issued.</p><p>Prosper Events has been notified.</p>`,
       });
       const trackerCsv = await ticketTrackerCsv();
       await resend.emails.send({
         from: process.env.TICKET_FROM_EMAIL || "Prosper Events <tickets@prosperevents.ca>",
         to: "prosperevents032@gmail.com",
-        subject: "Cocktail Classes tracker updated — ticket cancelled",
-        html: `<p>A Cocktail Classes ticket was cancelled. The attached tracker reflects the current active guest list and drink selections.</p><p>No refund was issued.</p>`,
+        subject: "Cocktail Class tracker updated — ticket cancelled",
+        html: `<p>A Cocktail Class ticket was cancelled. The attached tracker reflects the current active guest list and drink selections.</p><p>No refund was issued.</p>`,
         attachments: [{ filename: "cocktail-classes-guest-tracker.csv", content: Buffer.from(trackerCsv).toString("base64") }],
       });
     }

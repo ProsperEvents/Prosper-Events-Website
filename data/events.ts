@@ -28,7 +28,7 @@ export type EventItem = {
 export const events: EventItem[] = [
   {
     slug: "cocktail-classes",
-    title: "Cocktail Classes",
+    title: "Cocktail Class",
     status: "upcoming",
     startDate: "2026-09-18T19:30:00-04:00",
     endDate: "2026-09-18T21:30:00-04:00",
