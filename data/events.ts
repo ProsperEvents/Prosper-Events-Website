@@ -41,9 +41,9 @@ export const events: EventItem[] = [
       "Join Prosper Events at Equator Coffee Westboro for an intimate evening of cocktail making and tasting. Guests may choose any three cocktails or mocktails to make their own combination, pick up new techniques, and enjoy a relaxed, social class with fellow drink enthusiasts.",
     image: "/assets/events/cocktail-classes/hero.png",
     ticketing: {
-      price: 85,
+      price: 69.99,
       capacityPerDate: 14,
-      discountTicketsTotal: 10,
+      discountTicketsTotal: 8,
     },
     atmosphere:
       "A fun, interactive class designed for learning, tasting, conversation, and discovering a new favourite drink.",

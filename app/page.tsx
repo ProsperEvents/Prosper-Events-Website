@@ -92,7 +92,7 @@ export default function HomePage() {
         <section className="px-4 pb-4 sm:px-6 lg:px-8">
           <Reveal className="mx-auto max-w-7xl">
             <div className="flex flex-col gap-5 rounded-[1.75rem] border border-navy/10 bg-navy px-6 py-7 text-white shadow-paper sm:flex-row sm:items-center sm:justify-between sm:px-9">
-              <div><p className="text-[11px] uppercase tracking-[0.24em] text-white/65">Featured event</p><p className="mt-2 font-display text-3xl">{featuredEvent.title} · $85</p><p className="mt-1 text-sm text-white/75">First 10 tickets across both dates are 20% off · 14 seats per night</p></div>
+              <div><p className="text-[11px] uppercase tracking-[0.24em] text-white/65">Featured event</p><p className="mt-2 font-display text-3xl">{featuredEvent.title} · $69.99</p><p className="mt-1 text-sm text-white/75">First 8 tickets across both dates are 20% off · 14 seats per night</p></div>
               <ButtonLink href="/events/cocktail-classes#tickets" variant="secondary">Reserve a seat</ButtonLink>
             </div>
           </Reveal>

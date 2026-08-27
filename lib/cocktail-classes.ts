@@ -1,9 +1,9 @@
 export const COCKTAIL_CLASSES = {
   slug: "cocktail-classes",
   title: "Cocktail Class",
-  priceCents: 8500,
-  discountedPriceCents: 6800,
-  discountTicketsTotal: 10,
+  priceCents: 6999,
+  discountedPriceCents: 5599,
+  discountTicketsTotal: 8,
   capacityPerDate: 14,
   venue: "Equator Coffee Westboro",
   address: "412 Churchill Ave N, Ottawa, ON K1Z 5C6",
