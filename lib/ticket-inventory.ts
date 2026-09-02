@@ -1,6 +1,6 @@
 import { getStripe } from "@/lib/stripe";
 import { COCKTAIL_CLASSES, type CocktailClassDate } from "@/lib/cocktail-classes";
-import { drinkNames, parseSelections } from "@/lib/ticket-selections";
+import { drinkNames, parseSelectionsFromMetadata } from "@/lib/ticket-selections";
 
 export async function soldTickets() {
   const stripe = getStripe();
@@ -45,7 +45,7 @@ export async function drinkInventory() {
   for (const session of sessions) {
     const eventDate = session.metadata?.eventDate;
     if (!eventDate || !isDate(eventDate)) continue;
-    for (const guest of parseSelections(session.metadata?.ticketSelections)) {
+    for (const guest of parseSelectionsFromMetadata(session.metadata)) {
       for (const drink of guest.drinks) {
         if (drink in totals) {
           const key = drink as keyof typeof totals;
@@ -81,7 +81,7 @@ export async function ticketTrackerCsv() {
     const reference = session.id.slice(-8).toUpperCase();
     const buyerName = session.customer_details?.name ?? "";
     const buyerEmail = session.customer_details?.email ?? session.customer_email ?? "";
-    for (const guest of parseSelections(session.metadata?.ticketSelections)) {
+    for (const guest of parseSelectionsFromMetadata(session.metadata)) {
       rows.push([buyerName, buyerEmail, guest.name, date, reference, ...guest.drinks]);
     }
   }

@@ -9,7 +9,10 @@ export async function GET(request: NextRequest) {
   if (!isCocktailClassDate(date)) return NextResponse.json({ error: "Invalid class date." }, { status: 400 });
   try {
     const availability = await ticketAvailability(date);
-    return NextResponse.json({ discountedRemaining: availability.discountedRemaining });
+    return NextResponse.json({
+      discountedRemaining: availability.discountedRemaining,
+      remainingForDate: availability.remainingForDate,
+    });
   } catch {
     return NextResponse.json({ discountedRemaining: 0 }, { status: 503 });
   }

@@ -3,7 +3,7 @@ import { Resend } from "resend";
 import { COCKTAIL_CLASSES, isCocktailClassDate } from "@/lib/cocktail-classes";
 import { getStripe } from "@/lib/stripe";
 import { calendarLinks } from "@/lib/calendar-links";
-import { parseSelections } from "@/lib/ticket-selections";
+import { parseSelectionsFromMetadata } from "@/lib/ticket-selections";
 import { drinkInventory, ticketOrderBreakdownCsv, ticketPrepSummaryCsv, ticketTrackerCsv } from "@/lib/ticket-inventory";
 
 export const runtime = "nodejs";
@@ -68,7 +68,7 @@ export async function POST(request: NextRequest) {
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.prosperevents.ca";
     const count = Number(session.metadata?.ticketCount ?? 1);
     const ticketCode = session.id.slice(-8).toUpperCase();
-    const selections = parseSelections(session.metadata?.ticketSelections);
+    const selections = parseSelectionsFromMetadata(session.metadata);
     const calendar = calendarLinks(eventDate, session.id, siteUrl);
     const customerSelectionRows = selections.map((guest) => `<tr><td style="padding:14px 0;border-top:1px solid #e8e2de"><strong>${escapeHtml(guest.name)}</strong><br><span style="color:#625d67">${guest.drinks.map(escapeHtml).join(" · ")}</span></td></tr>`).join("");
 
