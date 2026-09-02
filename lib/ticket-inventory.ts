@@ -4,12 +4,23 @@ import { drinkNames, parseSelections } from "@/lib/ticket-selections";
 
 export async function soldTickets() {
   const stripe = getStripe();
-  const sessions = await stripe.checkout.sessions.list({ limit: 100 });
+  const sessions = await stripe.checkout.sessions.list({
+    limit: 100,
+    expand: ["data.payment_intent.latest_charge"],
+  });
   return sessions.data.filter((session) =>
     session.metadata?.eventSlug === COCKTAIL_CLASSES.slug &&
     session.payment_status === "paid" &&
-    session.metadata?.cancelled !== "true",
+    session.metadata?.cancelled !== "true" &&
+    !isFullyRefunded(session),
   );
+}
+
+function isFullyRefunded(session: Awaited<ReturnType<ReturnType<typeof getStripe>["checkout"]["sessions"]["list"]>>["data"][number]) {
+  const paymentIntent = session.payment_intent;
+  if (!paymentIntent || typeof paymentIntent === "string") return false;
+  const charge = paymentIntent.latest_charge;
+  return Boolean(charge && typeof charge !== "string" && charge.amount_refunded >= charge.amount);
 }
 
 export async function ticketAvailability(date: CocktailClassDate) {
@@ -52,19 +63,65 @@ function csvCell(value: string | number | null | undefined) {
   return `"${text.replace(/"/g, '""')}"`;
 }
 
+function csv(rows: (string | number | null | undefined)[][]) {
+  return `\ufeff${rows.map((row) => row.map(csvCell).join(",")).join("\r\n")}`;
+}
+
+function cad(cents: number) {
+  return `CA$${(cents / 100).toFixed(2)}`;
+}
+
 export async function ticketTrackerCsv() {
   const sessions = await soldTickets();
-  const rows = [["Guest name", "Attending date", "Ticket reference", "Drink 1", "Drink 2", "Drink 3"]];
+  const rows = [["Buyer name", "Buyer email", "Guest name", "Attending date", "Ticket reference", "Drink 1", "Drink 2", "Drink 3"]];
   for (const session of sessions) {
     const eventDate = session.metadata?.eventDate;
     if (!eventDate || !isDate(eventDate)) continue;
     const date = COCKTAIL_CLASSES.dates[eventDate].label;
     const reference = session.id.slice(-8).toUpperCase();
+    const buyerName = session.customer_details?.name ?? "";
+    const buyerEmail = session.customer_details?.email ?? session.customer_email ?? "";
     for (const guest of parseSelections(session.metadata?.ticketSelections)) {
-      rows.push([guest.name, date, reference, ...guest.drinks]);
+      rows.push([buyerName, buyerEmail, guest.name, date, reference, ...guest.drinks]);
     }
   }
-  return `\ufeff${rows.map((row) => row.map(csvCell).join(",")).join("\r\n")}`;
+  return csv(rows);
+}
+
+export async function ticketOrderBreakdownCsv() {
+  const sessions = await soldTickets();
+  const rows: (string | number)[][] = [["Ticket reference", "Buyer name", "Buyer email", "Attending date", "Early tickets", "Early ticket price", "Regular tickets", "Regular ticket price", "Order total paid"]];
+  for (const session of sessions) {
+    const eventDate = session.metadata?.eventDate;
+    if (!eventDate || !isDate(eventDate)) continue;
+    const ticketCount = Number(session.metadata?.ticketCount ?? 0);
+    const earlyTickets = Math.min(ticketCount, Number(session.metadata?.discountedTickets ?? 0));
+    const regularTickets = Math.max(0, ticketCount - earlyTickets);
+    rows.push([
+      session.id.slice(-8).toUpperCase(),
+      session.customer_details?.name ?? "",
+      session.customer_details?.email ?? session.customer_email ?? "",
+      COCKTAIL_CLASSES.dates[eventDate].label,
+      earlyTickets,
+      earlyTickets ? cad(COCKTAIL_CLASSES.discountedPriceCents) : "",
+      regularTickets,
+      regularTickets ? cad(COCKTAIL_CLASSES.priceCents) : "",
+      cad(session.amount_total ?? 0),
+    ]);
+  }
+  return csv(rows);
+}
+
+export async function ticketPrepSummaryCsv() {
+  const inventory = await drinkInventory();
+  const dates = Object.keys(COCKTAIL_CLASSES.dates) as CocktailClassDate[];
+  const rows: (string | number)[][] = [["Drink", ...dates.map((date) => COCKTAIL_CLASSES.dates[date].label), "Total"]];
+  for (const drink of drinkNames) {
+    const byDate = dates.map((date) => inventory.byDate[date][drink]);
+    const total = inventory.totals[drink];
+    if (total > 0) rows.push([drink, ...byDate, total]);
+  }
+  return csv(rows);
 }
 
 function isDate(value: string): value is CocktailClassDate {

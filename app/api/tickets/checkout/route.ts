@@ -54,6 +54,14 @@ export async function POST(request: NextRequest) {
         ticketSelections: serializedSelections,
         cancellationPolicy: "No refunds",
       },
+      payment_intent_data: {
+        metadata: {
+          eventSlug: COCKTAIL_CLASSES.slug,
+          eventDate: date,
+          ticketCount: String(quantity),
+          ticketSelections: serializedSelections,
+        },
+      },
       success_url: `${origin}/tickets/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/events/cocktail-classes#tickets`,
     });

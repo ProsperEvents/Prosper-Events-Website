@@ -4,7 +4,7 @@ Production website for Prosper Events, built with Next.js, TypeScript, Tailwind 
 
 ## Cocktail Classes ticketing setup
 
-The ticket checkout uses Stripe Checkout. Add the values in `.env.example` to the production environment (and a local `.env.local` for testing), then configure Stripe to send the `checkout.session.completed` event to:
+The ticket checkout uses Stripe Checkout. Add the values in `.env.example` to the production environment (and a local `.env.local` for testing), then configure Stripe to send the `checkout.session.completed` and `charge.refunded` events to:
 
 `https://prosperevents.ca/api/stripe/webhook`
 
