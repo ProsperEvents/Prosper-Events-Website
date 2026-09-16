@@ -1,5 +1,5 @@
 import { getStripe } from "@/lib/stripe";
-import { COCKTAIL_CLASSES, type CocktailClassDate } from "@/lib/cocktail-classes";
+import { COCKTAIL_CLASSES, isTicketSalesOpen, type CocktailClassDate } from "@/lib/cocktail-classes";
 import { drinkNames, parseSelectionsFromMetadata } from "@/lib/ticket-selections";
 
 export async function soldTickets() {
@@ -30,11 +30,13 @@ export async function ticketAvailability(date: CocktailClassDate) {
   const soldForDate = sessions
     .filter((session) => session.metadata?.eventDate === date)
     .reduce((total, session) => total + Number(session.metadata?.ticketCount ?? 0), 0);
+  const salesOpen = isTicketSalesOpen(date);
 
   return {
-    remainingForDate: Math.max(0, COCKTAIL_CLASSES.capacityPerDate - soldForDate),
+    remainingForDate: salesOpen ? Math.max(0, COCKTAIL_CLASSES.capacityPerDate - soldForDate) : 0,
     discountedRemaining: Math.max(0, COCKTAIL_CLASSES.discountTicketsTotal - discounted),
     ticketsSold: quantities.reduce((total, quantity) => total + quantity, 0),
+    salesOpen,
   };
 }
 

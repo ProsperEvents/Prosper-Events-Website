@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { COCKTAIL_CLASSES, isCocktailClassDate } from "@/lib/cocktail-classes";
+import { COCKTAIL_CLASSES, isCocktailClassDate, isTicketSalesOpen } from "@/lib/cocktail-classes";
 import { ticketAvailability } from "@/lib/ticket-inventory";
 import { getStripe } from "@/lib/stripe";
 import { drinkNames, serializeSelectionMetadata, type GuestSelection } from "@/lib/ticket-selections";
@@ -23,6 +23,9 @@ export async function POST(request: NextRequest) {
     const { date, quantity, guests } = await request.json();
     if (!isCocktailClassDate(date) || !Number.isInteger(quantity) || quantity < 1 || quantity > COCKTAIL_CLASSES.capacityPerDate) {
       return NextResponse.json({ error: "Please choose a valid class date and ticket quantity." }, { status: 400 });
+    }
+    if (!isTicketSalesOpen(date)) {
+      return NextResponse.json({ error: "Ticket sales are closed for this date." }, { status: 409 });
     }
     const selections = validSelections(guests, quantity);
     if (!selections) return NextResponse.json({ error: "Please enter each guest’s name and choose three different drinks for each ticket." }, { status: 400 });

@@ -8,7 +8,7 @@ import { MenuGallery } from "@/components/menu-gallery";
 
 const dates = [
   { value: "2026-09-18", label: "Friday, September 18" },
-  { value: "2026-09-19", label: "Saturday, September 19" },
+  { value: "2026-09-19", label: "Saturday, September 19 — Sold out" },
 ] as const;
 const blankGuest = (): GuestSelection => ({ name: "", drinks: ["", "", ""] });
 

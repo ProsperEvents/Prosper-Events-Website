@@ -12,11 +12,13 @@ export const COCKTAIL_CLASSES = {
       label: "Friday, September 18, 2026",
       start: "2026-09-18T19:30:00-04:00",
       end: "2026-09-18T21:30:00-04:00",
+      salesOpen: true,
     },
     "2026-09-19": {
       label: "Saturday, September 19, 2026",
       start: "2026-09-19T19:30:00-04:00",
       end: "2026-09-19T21:30:00-04:00",
+      salesOpen: false,
     },
   },
 } as const;
@@ -25,6 +27,10 @@ export type CocktailClassDate = keyof typeof COCKTAIL_CLASSES.dates;
 
 export function isCocktailClassDate(value: string): value is CocktailClassDate {
   return value in COCKTAIL_CLASSES.dates;
+}
+
+export function isTicketSalesOpen(date: CocktailClassDate) {
+  return COCKTAIL_CLASSES.dates[date].salesOpen;
 }
 
 export const cocktailMenu = {
