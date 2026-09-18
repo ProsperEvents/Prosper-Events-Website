@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { LoaderCircle } from "lucide-react";
-import { cocktailMenu } from "@/lib/cocktail-classes";
+import { COCKTAIL_CLASSES, cocktailMenu } from "@/lib/cocktail-classes";
 import type { GuestSelection } from "@/lib/ticket-selections";
 import { MenuGallery } from "@/components/menu-gallery";
 
@@ -10,9 +10,27 @@ const dates = [
   { value: "2026-09-18", label: "Friday, September 18" },
   { value: "2026-09-19", label: "Saturday, September 19 — Sold out" },
 ] as const;
+const ticketSalesOpen = dates.some(({ value }) => COCKTAIL_CLASSES.dates[value].salesOpen);
 const blankGuest = (): GuestSelection => ({ name: "", drinks: ["", "", ""] });
 
 export function TicketPurchase() {
+  if (!ticketSalesOpen) {
+    return (
+      <section id="tickets" className="section-space px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="relative overflow-hidden rounded-[2rem] border border-navy/10 bg-white/80 px-6 py-12 text-center shadow-paper sm:px-10">
+            <div className="section-floral opacity-70" />
+            <div className="relative z-10 mx-auto max-w-2xl">
+              <p className="eyebrow">Cocktail Class</p>
+              <h2 className="mt-4 font-display text-4xl text-ink sm:text-5xl">Ticket sales are now closed.</h2>
+              <p className="mt-5 text-sm leading-7 text-navy/72">Thank you to everyone joining us. We look forward to welcoming our guests for an evening of cocktails, conversation, and connection.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   const [date, setDate] = useState<(typeof dates)[number]["value"]>(dates[0].value);
   const [guests, setGuests] = useState<GuestSelection[]>([blankGuest()]);
   const [loading, setLoading] = useState(false);
