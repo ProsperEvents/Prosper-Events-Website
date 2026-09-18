@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import { ProsperWordmark } from "@/components/prosper-wordmark";
 import { navigation } from "@/lib/site";
 
-const ticketHref = "/events/cocktail-classes#tickets";
+const inquiryHref = "/inquiries";
 
 export function SiteHeader() {
   const pathname = usePathname();
@@ -67,10 +67,10 @@ export function SiteHeader() {
               })}
             </nav>
             <a
-              href={ticketHref}
+              href={inquiryHref}
               className="inline-flex items-center justify-center rounded-full border border-navy bg-navy px-5 py-2.5 text-[11px] font-medium uppercase tracking-[0.24em] text-cream transition duration-500 hover:-translate-y-0.5 hover:bg-ink hover:shadow-card"
             >
-              Sign Up
+              Inquire
             </a>
           </div>
 
@@ -145,10 +145,10 @@ export function SiteHeader() {
                   );
                 })}
                 <a
-                  href={ticketHref}
+                  href={inquiryHref}
                   className="flex items-center justify-between rounded-3xl border border-navy/10 bg-navy px-5 py-4 font-display text-2xl tracking-wide text-cream transition hover:bg-ink"
                 >
-                  <span>Sign Up</span>
+                  <span>Inquire</span>
                   <span className="text-sm uppercase tracking-[0.24em]">05</span>
                 </a>
               </div>
