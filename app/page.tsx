@@ -4,13 +4,16 @@ import { EventCard } from "@/components/event-card";
 import { ProsperWordmark } from "@/components/prosper-wordmark";
 import { Reveal, Stagger, StaggerItem } from "@/components/reveal";
 import { galleryImages } from "@/data/gallery";
-import { events } from "@/data/events";
+import { events, getEventStatus } from "@/data/events";
 import { contactDetails } from "@/lib/site";
 
-const upcomingEvents = events.filter((event) => event.status === "upcoming").slice(0, 3);
 const galleryPreview = galleryImages.slice(0, 6);
 
+export const dynamic = "force-dynamic";
+
 export default function HomePage() {
+  const upcomingEvents = events.filter((event) => getEventStatus(event) === "upcoming").slice(0, 3);
+
   return (
     <div className="pb-24 pt-24 sm:pt-28">
       <section className="relative overflow-hidden px-4 pb-16 pt-8 sm:px-6 lg:px-8 lg:pb-24">

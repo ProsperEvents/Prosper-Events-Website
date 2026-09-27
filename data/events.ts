@@ -5,7 +5,6 @@ export type EventStatus = "upcoming" | "past";
 export type EventItem = {
   slug: string;
   title: string;
-  status: EventStatus;
   startDate: string;
   endDate?: string;
   time: string;
@@ -29,7 +28,6 @@ export const events: EventItem[] = [
   {
     slug: "cocktail-classes",
     title: "Cocktail Class",
-    status: "past",
     startDate: "2026-09-18T19:30:00-04:00",
     endDate: "2026-09-18T21:30:00-04:00",
     time: "7:30 PM - 9:30 PM",
@@ -51,7 +49,6 @@ export const events: EventItem[] = [
   {
     slug: "cocktails-in-naples",
     title: "Cocktails in Naples",
-    status: "past",
     startDate: "2026-03-01T18:00:00-05:00",
     endDate: "2026-03-01T22:00:00-05:00",
     time: "6:00 PM - 10:00 PM",
@@ -86,6 +83,11 @@ export function getEventDateLabel(event: EventItem) {
   return formatLongDate(event.startDate);
 }
 
+export function getEventStatus(event: EventItem, now = new Date()): EventStatus {
+  const eventEnd = new Date(event.endDate ?? event.startDate);
+  return eventEnd.getTime() < now.getTime() ? "past" : "upcoming";
+}
+
 export function getEventSchema(event: EventItem) {
   return {
     "@context": "https://schema.org",
@@ -96,7 +98,7 @@ export function getEventSchema(event: EventItem) {
     startDate: event.startDate,
     endDate: event.endDate,
     eventStatus:
-      event.status === "upcoming"
+      getEventStatus(event) === "upcoming"
         ? "https://schema.org/EventScheduled"
         : "https://schema.org/EventCompleted",
     eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",

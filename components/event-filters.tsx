@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import type { EventItem, EventStatus } from "@/data/events";
+import { getEventStatus, type EventItem, type EventStatus } from "@/data/events";
 import { EventCard } from "@/components/event-card";
 import { Stagger, StaggerItem } from "@/components/reveal";
 
@@ -25,7 +25,7 @@ export function EventFilters({ events }: { events: EventItem[] }) {
     if (activeFilter === "all") {
       return orderedEvents;
     }
-    return orderedEvents.filter((event) => event.status === activeFilter);
+    return orderedEvents.filter((event) => getEventStatus(event) === activeFilter);
   }, [activeFilter, events]);
 
   return (

@@ -4,13 +4,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import type { EventItem } from "@/data/events";
-import { getEventDateLabel } from "@/data/events";
+import { getEventDateLabel, getEventStatus } from "@/data/events";
 
 type EventCardProps = {
   event: EventItem;
 };
 
 export function EventCard({ event }: EventCardProps) {
+  const status = getEventStatus(event);
+
   return (
     <motion.article
       whileHover={{ y: -6 }}
@@ -20,7 +22,7 @@ export function EventCard({ event }: EventCardProps) {
       <Link href={`/events/${event.slug}`} className="block">
         <div className="relative overflow-hidden">
           <div className="absolute left-5 top-5 z-10 rounded-full border border-white/20 bg-white/16 px-3 py-1 text-[10px] uppercase tracking-[0.24em] text-white backdrop-blur-sm">
-            {event.status}
+            {status}
           </div>
           <Image
             src={event.image}
@@ -46,10 +48,10 @@ export function EventCard({ event }: EventCardProps) {
           <p className="text-sm leading-7 text-navy/72">{event.description}</p>
           <div className="flex items-center justify-between border-t border-navy/10 pt-4 text-[11px] uppercase tracking-[0.24em] text-navy">
             <span>
-              {event.status === "upcoming" ? "Event details" : "View event"}
+              {status === "upcoming" ? "Event details" : "View event"}
             </span>
             <span className="transition duration-500 group-hover:translate-x-1">
-              {event.status === "upcoming" ? "Explore event" : "Contact for inquiries"}
+              {status === "upcoming" ? "Explore event" : "Contact for inquiries"}
             </span>
           </div>
         </div>

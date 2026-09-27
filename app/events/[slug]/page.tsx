@@ -9,13 +9,12 @@ import {
   getEventBySlug,
   getEventDateLabel,
   getEventSchema,
+  getEventStatus,
 } from "@/data/events";
 import { absoluteUrl } from "@/lib/utils";
 import { TicketPurchase } from "@/components/ticket-purchase";
 
-export async function generateStaticParams() {
-  return events.map((event) => ({ slug: event.slug }));
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params,
@@ -62,6 +61,7 @@ export default async function EventDetailPage({
   if (!event) {
     notFound();
   }
+  const status = getEventStatus(event);
   const mapQuery = encodeURIComponent(`${event.location}, ${event.address ?? "Ottawa, Ontario"}`);
   const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`;
   const appleMapsUrl = `https://maps.apple.com/?q=${mapQuery}`;
@@ -75,7 +75,7 @@ export default async function EventDetailPage({
           <Reveal>
             <div className="grid gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:items-end">
               <div>
-                <p className="eyebrow">{event.status === "upcoming" ? "Upcoming event" : "Past event"}</p>
+                <p className="eyebrow">{status === "upcoming" ? "Upcoming event" : "Past event"}</p>
                 <h1 className="mt-5 font-display text-5xl leading-tight text-ink sm:text-6xl lg:text-[4.5rem]">
                   {event.title}
                 </h1>
@@ -88,7 +88,7 @@ export default async function EventDetailPage({
                   {event.longDescription}
                 </p>
                 <div className="mt-8 flex flex-wrap gap-4">
-                  {event.status === "upcoming" && event.ticketing ? <ButtonLink href="#tickets">Buy tickets</ButtonLink> : <ButtonLink href="/inquiries">Contact for Inquiries</ButtonLink>}
+                  {status === "upcoming" && event.ticketing ? <ButtonLink href="#tickets">Buy tickets</ButtonLink> : <ButtonLink href="/inquiries">Contact for Inquiries</ButtonLink>}
                   <ButtonLink href="/events" variant="secondary">
                     Back to Events
                   </ButtonLink>
@@ -111,7 +111,7 @@ export default async function EventDetailPage({
         </div>
       </section>
 
-      {event.status === "upcoming" && event.slug === "cocktail-classes" ? <TicketPurchase /> : null}
+      {status === "upcoming" && event.slug === "cocktail-classes" ? <TicketPurchase /> : null}
 
       <section className="section-space px-4 sm:px-6 lg:px-8">
         <Reveal className="mx-auto max-w-7xl">
