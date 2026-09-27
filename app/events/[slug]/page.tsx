@@ -88,7 +88,7 @@ export default async function EventDetailPage({
                   {event.longDescription}
                 </p>
                 <div className="mt-8 flex flex-wrap gap-4">
-                  {event.ticketing ? <ButtonLink href="#tickets">Buy tickets</ButtonLink> : <ButtonLink href="/inquiries">Contact for Inquiries</ButtonLink>}
+                  {event.status === "upcoming" && event.ticketing ? <ButtonLink href="#tickets">Buy tickets</ButtonLink> : <ButtonLink href="/inquiries">Contact for Inquiries</ButtonLink>}
                   <ButtonLink href="/events" variant="secondary">
                     Back to Events
                   </ButtonLink>
@@ -111,7 +111,7 @@ export default async function EventDetailPage({
         </div>
       </section>
 
-      {event.slug === "cocktail-classes" ? <TicketPurchase /> : null}
+      {event.status === "upcoming" && event.slug === "cocktail-classes" ? <TicketPurchase /> : null}
 
       <section className="section-space px-4 sm:px-6 lg:px-8">
         <Reveal className="mx-auto max-w-7xl">

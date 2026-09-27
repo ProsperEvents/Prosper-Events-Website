@@ -29,7 +29,7 @@ export const events: EventItem[] = [
   {
     slug: "cocktail-classes",
     title: "Cocktail Class",
-    status: "upcoming",
+    status: "past",
     startDate: "2026-09-18T19:30:00-04:00",
     endDate: "2026-09-18T21:30:00-04:00",
     time: "7:30 PM - 9:30 PM",
