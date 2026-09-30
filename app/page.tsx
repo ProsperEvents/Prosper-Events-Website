@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ButtonLink } from "@/components/button-link";
 import { EventCard } from "@/components/event-card";
 import { ProsperWordmark } from "@/components/prosper-wordmark";
@@ -94,10 +95,14 @@ export default function HomePage() {
 
       <section className="px-4 pb-4 sm:px-6 lg:px-8">
         <Reveal className="mx-auto max-w-7xl">
-          <div className="flex flex-col gap-5 rounded-[1.75rem] border border-navy/10 bg-navy px-6 py-7 text-white shadow-paper sm:flex-row sm:items-center sm:justify-between sm:px-9">
+          <Link
+            href={primaryEventCta.href}
+            aria-label="Sign up for The Perfect Cocktail Class on October 23"
+            className="group flex flex-col gap-5 rounded-[1.75rem] border border-navy/10 bg-navy px-6 py-7 text-white shadow-paper transition duration-500 hover:-translate-y-0.5 hover:bg-ink hover:shadow-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-4 sm:flex-row sm:items-center sm:justify-between sm:px-9"
+          >
             <div><p className="text-[11px] uppercase tracking-[0.24em] text-white/65">October 23 · Equator Coffee Westboro</p><p className="mt-2 font-display text-3xl">The Perfect Cocktail Class.</p><p className="mt-1 text-sm text-white/75">7:30 PM–9:30 PM · 14 spots available.</p></div>
-            <ButtonLink href={primaryEventCta.href} variant="secondary">Sign Up</ButtonLink>
-          </div>
+            <span className="inline-flex items-center justify-center self-start rounded-full border border-cream px-6 py-3 text-xs font-medium uppercase tracking-[0.22em] text-cream transition duration-500 group-hover:bg-cream group-hover:text-navy sm:self-auto">Sign Up</span>
+          </Link>
         </Reveal>
       </section>
 
