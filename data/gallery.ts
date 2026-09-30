@@ -68,15 +68,6 @@ const privateCocktailEventImages: GalleryImage[] = [
     height: 1024,
   },
   {
-    id: "private-cocktail-event-02",
-    src: "/assets/gallery/private-cocktail-event/guests-at-cocktail-workshop.jpg",
-    thumbnailSrc:
-      "/assets/gallery/private-cocktail-event-web/guests-at-cocktail-workshop.webp",
-    alt: "Guests gathering around a table during a private cocktail workshop",
-    width: 360,
-    height: 640,
-  },
-  {
     id: "private-cocktail-event-03",
     src: "/assets/gallery/private-cocktail-event/private-cocktail-event-guests.jpg",
     thumbnailSrc:
@@ -84,33 +75,6 @@ const privateCocktailEventImages: GalleryImage[] = [
     alt: "Guests socializing during a Prosper Events cocktail experience",
     width: 768,
     height: 1024,
-  },
-  {
-    id: "private-cocktail-event-04",
-    src: "/assets/gallery/private-cocktail-event/finished-cocktails.jpg",
-    thumbnailSrc:
-      "/assets/gallery/private-cocktail-event-web/finished-cocktails.webp",
-    alt: "Two freshly mixed cocktails topped with foam and aromatic bitters",
-    width: 768,
-    height: 1024,
-  },
-  {
-    id: "private-cocktail-event-05",
-    src: "/assets/gallery/private-cocktail-event/custom-cocktail-menu.jpg",
-    thumbnailSrc:
-      "/assets/gallery/private-cocktail-event-web/custom-cocktail-menu.webp",
-    alt: "Custom cocktail and mocktail menu created for a private birthday event",
-    width: 360,
-    height: 480,
-  },
-  {
-    id: "private-cocktail-event-06",
-    src: "/assets/gallery/private-cocktail-event/cocktail-instructor-preparing-drinks.jpg",
-    thumbnailSrc:
-      "/assets/gallery/private-cocktail-event-web/cocktail-instructor-preparing-drinks.webp",
-    alt: "Cocktail instructor preparing ingredients behind the bar",
-    width: 360,
-    height: 640,
   },
 ];
 
