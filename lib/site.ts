@@ -25,6 +25,11 @@ export const navigation = [
   { label: "Inquiries", href: "/inquiries" },
 ] as const;
 
+export const primaryEventCta = {
+  label: "Sign Up",
+  href: "/events/cocktail-class-october-23-2026#registration",
+} as const;
+
 export const contactDetails = {
   email: "theliau@prosperevents.ca",
   phoneLabel: "343 463 3333",

@@ -91,7 +91,7 @@ export default async function EventDetailPage({
                   {status === "upcoming" && event.ticketing ? (
                     <ButtonLink href="#tickets">Buy tickets</ButtonLink>
                   ) : status === "upcoming" && event.registrationStatus === "coming-soon" ? (
-                    <ButtonLink href="#registration">Registration details</ButtonLink>
+                    <ButtonLink href="#registration">Sign Up</ButtonLink>
                   ) : (
                     <ButtonLink href="/inquiries">Contact for Inquiries</ButtonLink>
                   )}

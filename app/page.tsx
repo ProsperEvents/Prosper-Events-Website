@@ -5,7 +5,7 @@ import { ProsperWordmark } from "@/components/prosper-wordmark";
 import { Reveal, Stagger, StaggerItem } from "@/components/reveal";
 import { galleryImages } from "@/data/gallery";
 import { events, getEventStatus } from "@/data/events";
-import { contactDetails } from "@/lib/site";
+import { primaryEventCta } from "@/lib/site";
 
 const galleryPreview = galleryImages
   .filter((image) => image.id.startsWith("march-1-"))
@@ -38,11 +38,11 @@ export default function HomePage() {
               Prosper Events brings together elevated hospitality, local venues, food, music, and thoughtful social design—creating rooms with energy, ease, and a sense of occasion.
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
-              <ButtonLink href="/events">
-                Explore Experiences
+              <ButtonLink href={primaryEventCta.href}>
+                Sign Up for October 23
               </ButtonLink>
-              <ButtonLink href="/inquiries" variant="secondary">
-                Work With Us
+              <ButtonLink href="/events" variant="secondary">
+                Explore Experiences
               </ButtonLink>
             </div>
           </Reveal>
@@ -95,8 +95,8 @@ export default function HomePage() {
       <section className="px-4 pb-4 sm:px-6 lg:px-8">
         <Reveal className="mx-auto max-w-7xl">
           <div className="flex flex-col gap-5 rounded-[1.75rem] border border-navy/10 bg-navy px-6 py-7 text-white shadow-paper sm:flex-row sm:items-center sm:justify-between sm:px-9">
-            <div><p className="text-[11px] uppercase tracking-[0.24em] text-white/65">Prosper Events</p><p className="mt-2 font-display text-3xl">Atmosphere, hospitality, and connection.</p><p className="mt-1 text-sm text-white/75">Private gatherings, creative collaborations, and elevated social evenings.</p></div>
-            <ButtonLink href="/inquiries" variant="secondary">Start a Conversation</ButtonLink>
+            <div><p className="text-[11px] uppercase tracking-[0.24em] text-white/65">October 23 · Equator Coffee Westboro</p><p className="mt-2 font-display text-3xl">The Perfect Cocktail Class.</p><p className="mt-1 text-sm text-white/75">7:30 PM–9:30 PM · 14 spots available.</p></div>
+            <ButtonLink href={primaryEventCta.href} variant="secondary">Sign Up</ButtonLink>
           </div>
         </Reveal>
       </section>
@@ -274,9 +274,9 @@ export default function HomePage() {
                 we welcome thoughtful inquiries.
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
-                <ButtonLink href="/inquiries">Contact Prosper Events</ButtonLink>
-                <ButtonLink href="mailto:theliau@prosperevents.ca" variant="secondary">
-                  Email Directly
+                <ButtonLink href={primaryEventCta.href}>Sign Up for October 23</ButtonLink>
+                <ButtonLink href="/inquiries" variant="secondary">
+                  Contact Prosper Events
                 </ButtonLink>
               </div>
             </div>

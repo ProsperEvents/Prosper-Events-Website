@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Facebook, Instagram, Mail, Phone } from "lucide-react";
 import { ProsperWordmark } from "@/components/prosper-wordmark";
-import { contactDetails } from "@/lib/site";
+import { contactDetails, primaryEventCta } from "@/lib/site";
 
 export function SiteFooter() {
   return (
@@ -56,9 +56,15 @@ export function SiteFooter() {
 
         <div>
           <p className="text-[11px] uppercase tracking-[0.24em] text-navy/55">
-            Ottawa / Gatineau curated events
+            October 23 cocktail class
           </p>
-          <div className="mt-4 flex items-center gap-3">
+          <Link
+            href={primaryEventCta.href}
+            className="mt-4 inline-flex items-center justify-center rounded-full border border-navy bg-navy px-5 py-2.5 text-[11px] font-medium uppercase tracking-[0.22em] text-cream transition hover:-translate-y-0.5 hover:bg-ink hover:shadow-card"
+          >
+            {primaryEventCta.label}
+          </Link>
+          <div className="mt-5 flex items-center gap-3">
             <Link
               href={`mailto:${contactDetails.email}`}
               aria-label="Email Prosper Events"

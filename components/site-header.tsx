@@ -5,9 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { ProsperWordmark } from "@/components/prosper-wordmark";
-import { navigation } from "@/lib/site";
-
-const inquiryHref = "/inquiries";
+import { navigation, primaryEventCta } from "@/lib/site";
 
 export function SiteHeader() {
   const pathname = usePathname();
@@ -66,12 +64,12 @@ export function SiteHeader() {
                 );
               })}
             </nav>
-            <a
-              href={inquiryHref}
+            <Link
+              href={primaryEventCta.href}
               className="inline-flex items-center justify-center rounded-full border border-navy bg-navy px-5 py-2.5 text-[11px] font-medium uppercase tracking-[0.24em] text-cream transition duration-500 hover:-translate-y-0.5 hover:bg-ink hover:shadow-card"
             >
-              Inquire
-            </a>
+              {primaryEventCta.label}
+            </Link>
           </div>
 
           <button
@@ -144,13 +142,13 @@ export function SiteHeader() {
                     </Link>
                   );
                 })}
-                <a
-                  href={inquiryHref}
+                <Link
+                  href={primaryEventCta.href}
                   className="flex items-center justify-between rounded-3xl border border-navy/10 bg-navy px-5 py-4 font-display text-2xl tracking-wide text-cream transition hover:bg-ink"
                 >
-                  <span>Inquire</span>
+                  <span>{primaryEventCta.label}</span>
                   <span className="text-sm uppercase tracking-[0.24em]">05</span>
-                </a>
+                </Link>
               </div>
             </motion.div>
           </motion.div>
