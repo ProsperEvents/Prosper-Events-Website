@@ -19,6 +19,7 @@ const ticketPrice = new Intl.NumberFormat("en-CA", {
   currency: "CAD",
 }).format(COCKTAIL_CLASSES.priceCents / 100);
 const blankGuest = (): GuestSelection => ({ name: "", drinks: ["", "", ""] });
+const blankBuyer = { name: "", email: "", phone: "" };
 
 export function TicketPurchase() {
   if (!ticketSalesOpen) {
@@ -38,6 +39,7 @@ export function TicketPurchase() {
   }
 
   const [date, setDate] = useState<CocktailClassDate>(dates[0].value);
+  const [buyer, setBuyer] = useState(blankBuyer);
   const [guests, setGuests] = useState<GuestSelection[]>([blankGuest()]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -79,13 +81,25 @@ export function TicketPurchase() {
   }
 
   async function beginCheckout() {
-    setLoading(true);
     setError("");
+    if (!buyer.name.trim() || !buyer.email.trim() || !buyer.phone.trim()) {
+      setError("Please enter the purchaser’s full name, email address, and phone number.");
+      return;
+    }
+    if (!/^\S+@\S+\.\S+$/.test(buyer.email.trim())) {
+      setError("Please enter a valid email address for the ticket confirmation.");
+      return;
+    }
+    if (guests.some((guest) => !guest.name.trim() || guest.drinks.some((drink) => !drink) || new Set(guest.drinks).size !== 3)) {
+      setError("Please enter each guest’s name and choose three different drinks for every ticket.");
+      return;
+    }
+    setLoading(true);
     try {
       const response = await fetch("/api/tickets/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ date, quantity: guests.length, guests }),
+        body: JSON.stringify({ date, quantity: guests.length, buyer, guests }),
       });
       const result = await response.json();
       if (!response.ok || !result.url) throw new Error(result.error || "We could not start checkout. Please try again.");
@@ -128,6 +142,24 @@ export function TicketPurchase() {
                   {availabilityLoading ? <option>Checking availability…</option> : remainingForDate === 0 ? <option value={guests.length}>Sold out</option> : Array.from({ length: remainingForDate }, (_, index) => index + 1).map((count) => <option key={count} value={count}>{count} {count === 1 ? "guest" : "guests"}</option>)}
                 </select>
               </label>
+            </div>
+            <div className="mt-10 rounded-[1.5rem] border border-navy/10 bg-white/65 p-5 sm:p-7">
+              <p className="eyebrow">Purchaser information</p>
+              <p className="mt-2 text-sm leading-6 text-navy/65">Your receipt and ticket confirmation will be sent to this email. We’ll only use your phone number if we need to contact you about the class.</p>
+              <div className="mt-6 grid gap-5 md:grid-cols-3">
+                <label className="block text-sm text-navy/74">
+                  <span className="mb-2 block text-[10px] uppercase tracking-[0.2em] text-navy/50">Full name</span>
+                  <input required autoComplete="name" value={buyer.name} maxLength={80} onChange={(event) => setBuyer((current) => ({ ...current, name: event.target.value }))} className="w-full border-b border-navy/20 bg-transparent px-0 py-3 text-ink outline-none transition placeholder:text-navy/35 focus:border-navy" placeholder="Your full name" />
+                </label>
+                <label className="block text-sm text-navy/74">
+                  <span className="mb-2 block text-[10px] uppercase tracking-[0.2em] text-navy/50">Email address</span>
+                  <input required type="email" autoComplete="email" value={buyer.email} maxLength={254} onChange={(event) => setBuyer((current) => ({ ...current, email: event.target.value }))} className="w-full border-b border-navy/20 bg-transparent px-0 py-3 text-ink outline-none transition placeholder:text-navy/35 focus:border-navy" placeholder="you@example.com" />
+                </label>
+                <label className="block text-sm text-navy/74">
+                  <span className="mb-2 block text-[10px] uppercase tracking-[0.2em] text-navy/50">Phone number</span>
+                  <input required type="tel" inputMode="tel" autoComplete="tel" value={buyer.phone} maxLength={30} onChange={(event) => setBuyer((current) => ({ ...current, phone: event.target.value }))} className="w-full border-b border-navy/20 bg-transparent px-0 py-3 text-ink outline-none transition placeholder:text-navy/35 focus:border-navy" placeholder="343 555 0123" />
+                </label>
+              </div>
             </div>
             <div className="mt-10"><MenuGallery /></div>
             <div className="mt-10 border-y border-navy/10">

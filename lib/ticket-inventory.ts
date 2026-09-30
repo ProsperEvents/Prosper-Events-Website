@@ -98,9 +98,9 @@ export async function ticketTrackerCsv() {
     if (!eventDate || !isDate(eventDate)) continue;
     const date = COCKTAIL_CLASSES.dates[eventDate].label;
     const reference = session.id.slice(-8).toUpperCase();
-    const buyerName = session.customer_details?.name ?? "";
-    const buyerEmail = session.customer_details?.email ?? session.customer_email ?? "";
-    const buyerPhone = session.customer_details?.phone ?? "";
+    const buyerName = session.metadata?.buyerName ?? session.customer_details?.name ?? "";
+    const buyerEmail = session.metadata?.buyerEmail ?? session.customer_details?.email ?? session.customer_email ?? "";
+    const buyerPhone = session.metadata?.buyerPhone ?? session.customer_details?.phone ?? "";
     for (const [guestIndex, guest] of parseSelectionsFromMetadata(session.metadata).entries()) {
       rows.push([reference, buyerName, buyerEmail, buyerPhone, guest.name, date, ...guest.drinks, guestIndex === 0 ? cad(session.amount_total ?? 0) : ""]);
     }
@@ -117,9 +117,9 @@ export async function ticketOrderBreakdownCsv() {
     const ticketCount = Number(session.metadata?.ticketCount ?? 0);
     rows.push([
       session.id.slice(-8).toUpperCase(),
-      session.customer_details?.name ?? "",
-      session.customer_details?.email ?? session.customer_email ?? "",
-      session.customer_details?.phone ?? "",
+      session.metadata?.buyerName ?? session.customer_details?.name ?? "",
+      session.metadata?.buyerEmail ?? session.customer_details?.email ?? session.customer_email ?? "",
+      session.metadata?.buyerPhone ?? session.customer_details?.phone ?? "",
       COCKTAIL_CLASSES.dates[eventDate].label,
       ticketCount,
       cad(COCKTAIL_CLASSES.priceCents),

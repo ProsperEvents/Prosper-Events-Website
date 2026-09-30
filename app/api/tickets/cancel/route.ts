@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
     }
 
     await stripe.checkout.sessions.update(sessionId, { metadata: { ...session.metadata, cancelled: "true" } });
-    const customerEmail = session.customer_details?.email || session.customer_email;
+    const customerEmail = session.metadata?.buyerEmail || session.customer_details?.email || session.customer_email;
     if (process.env.RESEND_API_KEY) {
       const resend = new Resend(process.env.RESEND_API_KEY);
       if (customerEmail) await resend.emails.send({

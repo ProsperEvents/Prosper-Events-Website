@@ -76,7 +76,7 @@ export async function POST(request: NextRequest) {
     const eventDate = session.metadata?.eventDate ?? "";
     if (session.metadata?.eventSlug !== COCKTAIL_CLASSES.slug || !isCocktailClassDate(eventDate)) return NextResponse.json({ received: true });
 
-    const email = session.customer_details?.email || session.customer_email;
+    const email = session.metadata?.buyerEmail || session.customer_details?.email || session.customer_email;
     if (!email) throw new Error("Completed checkout session has no customer email address.");
     const count = Number(session.metadata?.ticketCount ?? 1);
     const ticketCode = session.id.slice(-8).toUpperCase();
@@ -98,8 +98,8 @@ export async function POST(request: NextRequest) {
       trackerAttachments(),
       ticketRevenueSummary(),
     ]);
-    const buyerName = escapeHtml(session.customer_details?.name || "Guest");
-    const buyerPhone = escapeHtml(session.customer_details?.phone || "Not provided");
+    const buyerName = escapeHtml(session.metadata?.buyerName || session.customer_details?.name || "Guest");
+    const buyerPhone = escapeHtml(session.metadata?.buyerPhone || session.customer_details?.phone || "Not provided");
     const orderRows = selections.map((guest) => `<tr><td style="padding:10px 0;border-bottom:1px solid #e9e4df"><strong>${escapeHtml(guest.name)}</strong></td><td style="padding:10px 0;border-bottom:1px solid #e9e4df">${guest.drinks.map(escapeHtml).join("<br>")}</td></tr>`).join("");
     const prepRows = Object.entries(inventory.totals).filter(([, total]) => total > 0).map(([drink, total]) => `<tr><td style="padding:8px 0;border-bottom:1px solid #e9e4df">${escapeHtml(drink)}</td><td style="padding:8px 0;border-bottom:1px solid #e9e4df;text-align:right"><strong>${total}</strong></td></tr>`).join("");
 
