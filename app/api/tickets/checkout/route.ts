@@ -6,15 +6,14 @@ import { drinkNames, serializeSelectionMetadata, type GuestSelection } from "@/l
 
 export const runtime = "nodejs";
 
-type BuyerDetails = { name: string; email: string; phone: string };
+type BuyerDetails = { name: string; email: string };
 
 function validBuyer(input: unknown): BuyerDetails | null {
   if (!input || typeof input !== "object") return null;
-  const { name, email, phone } = input as { name?: unknown; email?: unknown; phone?: unknown };
+  const { name, email } = input as { name?: unknown; email?: unknown };
   if (typeof name !== "string" || !name.trim() || name.trim().length > 80) return null;
   if (typeof email !== "string" || email.length > 254 || !/^\S+@\S+\.\S+$/.test(email.trim())) return null;
-  if (typeof phone !== "string" || phone.trim().length < 7 || phone.trim().length > 30) return null;
-  return { name: name.trim(), email: email.trim().toLowerCase(), phone: phone.trim() };
+  return { name: name.trim(), email: email.trim().toLowerCase() };
 }
 
 function validSelections(input: unknown, quantity: number): GuestSelection[] | null {
@@ -39,7 +38,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Ticket sales are closed for this date." }, { status: 409 });
     }
     const buyer = validBuyer(buyerInput);
-    if (!buyer) return NextResponse.json({ error: "Please enter a valid purchaser name, email address, and phone number." }, { status: 400 });
+    if (!buyer) return NextResponse.json({ error: "Please enter a valid purchaser name and email address." }, { status: 400 });
     const selections = validSelections(guests, quantity);
     if (!selections) return NextResponse.json({ error: "Please enter each guest’s name and choose three different drinks for each ticket." }, { status: 400 });
     const selectionMetadata = serializeSelectionMetadata(selections);
@@ -53,6 +52,7 @@ export async function POST(request: NextRequest) {
     const session = await getStripe().checkout.sessions.create({
       mode: "payment",
       billing_address_collection: "required",
+      phone_number_collection: { enabled: true },
       customer_creation: "always",
       customer_email: buyer.email,
       allow_promotion_codes: false,
@@ -75,7 +75,6 @@ export async function POST(request: NextRequest) {
         ticketCount: String(quantity),
         buyerName: buyer.name,
         buyerEmail: buyer.email,
-        buyerPhone: buyer.phone,
         ...selectionMetadata,
         cancellationPolicy: "No refunds",
       },
@@ -86,7 +85,6 @@ export async function POST(request: NextRequest) {
           ticketCount: String(quantity),
           buyerName: buyer.name,
           buyerEmail: buyer.email,
-          buyerPhone: buyer.phone,
           ...selectionMetadata,
         },
       },
