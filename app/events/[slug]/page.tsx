@@ -13,6 +13,7 @@ import {
 } from "@/data/events";
 import { absoluteUrl } from "@/lib/utils";
 import { TicketPurchase } from "@/components/ticket-purchase";
+import { COCKTAIL_CLASSES } from "@/lib/cocktail-classes";
 
 export const dynamic = "force-dynamic";
 
@@ -89,7 +90,7 @@ export default async function EventDetailPage({
                 </p>
                 <div className="mt-8 flex flex-wrap gap-4">
                   {status === "upcoming" && event.ticketing ? (
-                    <ButtonLink href="#tickets">Buy tickets</ButtonLink>
+                    <ButtonLink href="#tickets">Sign Up</ButtonLink>
                   ) : status === "upcoming" && event.registrationStatus === "coming-soon" ? (
                     <ButtonLink href="#registration">Sign Up</ButtonLink>
                   ) : (
@@ -118,7 +119,7 @@ export default async function EventDetailPage({
         </div>
       </section>
 
-      {status === "upcoming" && event.slug === "cocktail-classes" ? <TicketPurchase /> : null}
+      {status === "upcoming" && event.slug === COCKTAIL_CLASSES.slug ? <TicketPurchase /> : null}
 
       {status === "upcoming" && event.registrationStatus === "coming-soon" ? (
         <section id="registration" className="section-space px-4 sm:px-6 lg:px-8">

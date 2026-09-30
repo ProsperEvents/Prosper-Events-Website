@@ -27,7 +27,7 @@ export const navigation = [
 
 export const primaryEventCta = {
   label: "Sign Up",
-  href: "/events/cocktail-class-october-23-2026#registration",
+  href: "/events/cocktail-class-october-23-2026#tickets",
 } as const;
 
 export const contactDetails = {

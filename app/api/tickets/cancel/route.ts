@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { getStripe } from "@/lib/stripe";
-import { ticketTrackerCsv } from "@/lib/ticket-inventory";
+import { COCKTAIL_CLASSES } from "@/lib/cocktail-classes";
+import { ticketOrderBreakdownCsv, ticketPrepSummaryCsv, ticketRevenueSummary, ticketTrackerCsv } from "@/lib/ticket-inventory";
 
 export const runtime = "nodejs";
 
@@ -13,7 +14,7 @@ export async function POST(request: NextRequest) {
     }
     const stripe = getStripe();
     const session = await stripe.checkout.sessions.retrieve(sessionId);
-    if (session.metadata?.eventSlug !== "cocktail-classes" || session.payment_status !== "paid") {
+    if (session.metadata?.eventSlug !== COCKTAIL_CLASSES.slug || session.payment_status !== "paid") {
       return NextResponse.json({ error: "This ticket cannot be cancelled." }, { status: 400 });
     }
     if (session.metadata?.cancelled === "true") {
@@ -27,16 +28,20 @@ export async function POST(request: NextRequest) {
       if (customerEmail) await resend.emails.send({
         from: process.env.TICKET_FROM_EMAIL || "Prosper Events <theliau@prosperevents.ca>",
         to: customerEmail,
-        subject: "Cocktail Class ticket cancelled — no refund issued",
-        html: `<p>Your Cocktail Class ticket has been cancelled. As stated at checkout, ticket sales are final and no refund has been issued.</p><p>Prosper Events has been notified.</p>`,
+        subject: `${COCKTAIL_CLASSES.title} ticket cancelled — no refund issued`,
+        html: `<p>Your ${COCKTAIL_CLASSES.title} ticket has been cancelled. As stated at checkout, ticket sales are final and no refund has been issued.</p><p>Prosper Events has been notified.</p>`,
       });
-      const trackerCsv = await ticketTrackerCsv();
+      const [trackerCsv, ordersCsv, prepCsv, summary] = await Promise.all([ticketTrackerCsv(), ticketOrderBreakdownCsv(), ticketPrepSummaryCsv(), ticketRevenueSummary()]);
       await resend.emails.send({
         from: process.env.TICKET_FROM_EMAIL || "Prosper Events <theliau@prosperevents.ca>",
-        to: "prosperevents032@gmail.com",
-        subject: "Cocktail Class tracker updated — ticket cancelled",
-        html: `<p>A Cocktail Class ticket was cancelled. The attached tracker reflects the current active guest list and drink selections.</p><p>No refund was issued.</p>`,
-        attachments: [{ filename: "cocktail-classes-guest-tracker.csv", content: Buffer.from(trackerCsv).toString("base64") }],
+        to: process.env.TICKET_REPORT_EMAIL || "prosperevents032@gmail.com",
+        subject: `${COCKTAIL_CLASSES.title} tracker updated — ticket cancelled`,
+        html: `<p>A ticket was cancelled. The attached files contain the current active attendee list, contact details, selections, revenue, and preparation totals.</p><p><strong>${summary.tickets}</strong> active attendee${summary.tickets === 1 ? "" : "s"} · <strong>CA$${(summary.revenueCents / 100).toFixed(2)}</strong> current revenue</p><p>No refund was issued.</p>`,
+        attachments: [
+          { filename: "october-23-attendees.csv", content: Buffer.from(trackerCsv).toString("base64") },
+          { filename: "october-23-orders-and-revenue.csv", content: Buffer.from(ordersCsv).toString("base64") },
+          { filename: "october-23-drink-prep.csv", content: Buffer.from(prepCsv).toString("base64") },
+        ],
       });
     }
     return NextResponse.json({ message: "Your ticket has been cancelled. No refund has been issued." });

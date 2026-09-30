@@ -24,9 +24,18 @@ function isFullyRefunded(session: Awaited<ReturnType<ReturnType<typeof getStripe
 }
 
 export async function ticketAvailability(date: CocktailClassDate) {
-  const sessions = await soldTickets();
-  const quantities = sessions.map((session) => Number(session.metadata?.ticketCount ?? 0));
-  const discounted = sessions.reduce((total, session) => total + Number(session.metadata?.discountedTickets ?? 0), 0);
+  const stripe = getStripe();
+  const listed = await stripe.checkout.sessions.list({
+    limit: 100,
+    expand: ["data.payment_intent.latest_charge"],
+  });
+  const sessions = listed.data.filter((session) =>
+    session.metadata?.eventSlug === COCKTAIL_CLASSES.slug &&
+    session.metadata?.cancelled !== "true" &&
+    session.status !== "expired" &&
+    (session.payment_status === "paid" ? !isFullyRefunded(session) : session.status === "open"),
+  );
+  const soldSessions = sessions.filter((session) => session.payment_status === "paid");
   const soldForDate = sessions
     .filter((session) => session.metadata?.eventDate === date)
     .reduce((total, session) => total + Number(session.metadata?.ticketCount ?? 0), 0);
@@ -34,9 +43,17 @@ export async function ticketAvailability(date: CocktailClassDate) {
 
   return {
     remainingForDate: salesOpen ? Math.max(0, COCKTAIL_CLASSES.capacityPerDate - soldForDate) : 0,
-    discountedRemaining: Math.max(0, COCKTAIL_CLASSES.discountTicketsTotal - discounted),
-    ticketsSold: quantities.reduce((total, quantity) => total + quantity, 0),
+    ticketsSold: soldSessions.reduce((total, session) => total + Number(session.metadata?.ticketCount ?? 0), 0),
     salesOpen,
+  };
+}
+
+export async function ticketRevenueSummary() {
+  const sessions = await soldTickets();
+  return {
+    orders: sessions.length,
+    tickets: sessions.reduce((total, session) => total + Number(session.metadata?.ticketCount ?? 0), 0),
+    revenueCents: sessions.reduce((total, session) => total + (session.amount_total ?? 0), 0),
   };
 }
 
@@ -75,7 +92,7 @@ function cad(cents: number) {
 
 export async function ticketTrackerCsv() {
   const sessions = await soldTickets();
-  const rows = [["Buyer name", "Buyer email", "Guest name", "Attending date", "Ticket reference", "Drink 1", "Drink 2", "Drink 3"]];
+  const rows = [["Ticket reference", "Buyer name", "Buyer email", "Buyer phone", "Guest name", "Attending date", "Drink 1", "Drink 2", "Drink 3", "Order total paid"]];
   for (const session of sessions) {
     const eventDate = session.metadata?.eventDate;
     if (!eventDate || !isDate(eventDate)) continue;
@@ -83,8 +100,9 @@ export async function ticketTrackerCsv() {
     const reference = session.id.slice(-8).toUpperCase();
     const buyerName = session.customer_details?.name ?? "";
     const buyerEmail = session.customer_details?.email ?? session.customer_email ?? "";
-    for (const guest of parseSelectionsFromMetadata(session.metadata)) {
-      rows.push([buyerName, buyerEmail, guest.name, date, reference, ...guest.drinks]);
+    const buyerPhone = session.customer_details?.phone ?? "";
+    for (const [guestIndex, guest] of parseSelectionsFromMetadata(session.metadata).entries()) {
+      rows.push([reference, buyerName, buyerEmail, buyerPhone, guest.name, date, ...guest.drinks, guestIndex === 0 ? cad(session.amount_total ?? 0) : ""]);
     }
   }
   return csv(rows);
@@ -92,22 +110,19 @@ export async function ticketTrackerCsv() {
 
 export async function ticketOrderBreakdownCsv() {
   const sessions = await soldTickets();
-  const rows: (string | number)[][] = [["Ticket reference", "Buyer name", "Buyer email", "Attending date", "Early tickets", "Early ticket price", "Regular tickets", "Regular ticket price", "Order total paid"]];
+  const rows: (string | number)[][] = [["Ticket reference", "Buyer name", "Buyer email", "Buyer phone", "Attending date", "Tickets", "Ticket price", "Order total paid"]];
   for (const session of sessions) {
     const eventDate = session.metadata?.eventDate;
     if (!eventDate || !isDate(eventDate)) continue;
     const ticketCount = Number(session.metadata?.ticketCount ?? 0);
-    const earlyTickets = Math.min(ticketCount, Number(session.metadata?.discountedTickets ?? 0));
-    const regularTickets = Math.max(0, ticketCount - earlyTickets);
     rows.push([
       session.id.slice(-8).toUpperCase(),
       session.customer_details?.name ?? "",
       session.customer_details?.email ?? session.customer_email ?? "",
+      session.customer_details?.phone ?? "",
       COCKTAIL_CLASSES.dates[eventDate].label,
-      earlyTickets,
-      earlyTickets ? cad(COCKTAIL_CLASSES.discountedPriceCents) : "",
-      regularTickets,
-      regularTickets ? cad(COCKTAIL_CLASSES.priceCents) : "",
+      ticketCount,
+      cad(COCKTAIL_CLASSES.priceCents),
       cad(session.amount_total ?? 0),
     ]);
   }
