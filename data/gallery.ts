@@ -55,7 +55,52 @@ const marchFirstGalleryFilenames = [
   "47-_DSC9742.jpg",
 ] as const;
 
-export const galleryImages: GalleryImage[] = marchFirstGalleryFilenames.map(
+const privateCocktailEventImages: GalleryImage[] = [
+  {
+    id: "private-cocktail-event-01",
+    src: "/assets/gallery/private-cocktail-event/cocktail-workshop-table.jpg",
+    thumbnailSrc:
+      "/assets/gallery/private-cocktail-event-web/cocktail-workshop-table.webp",
+    alt: "Cocktail workshop table set with shakers, strainers, and mixing bowls",
+  },
+  {
+    id: "private-cocktail-event-02",
+    src: "/assets/gallery/private-cocktail-event/guests-at-cocktail-workshop.jpg",
+    thumbnailSrc:
+      "/assets/gallery/private-cocktail-event-web/guests-at-cocktail-workshop.webp",
+    alt: "Guests gathering around a table during a private cocktail workshop",
+  },
+  {
+    id: "private-cocktail-event-03",
+    src: "/assets/gallery/private-cocktail-event/private-cocktail-event-guests.jpg",
+    thumbnailSrc:
+      "/assets/gallery/private-cocktail-event-web/private-cocktail-event-guests.webp",
+    alt: "Guests socializing during a Prosper Events cocktail experience",
+  },
+  {
+    id: "private-cocktail-event-04",
+    src: "/assets/gallery/private-cocktail-event/finished-cocktails.jpg",
+    thumbnailSrc:
+      "/assets/gallery/private-cocktail-event-web/finished-cocktails.webp",
+    alt: "Two freshly mixed cocktails topped with foam and aromatic bitters",
+  },
+  {
+    id: "private-cocktail-event-05",
+    src: "/assets/gallery/private-cocktail-event/custom-cocktail-menu.jpg",
+    thumbnailSrc:
+      "/assets/gallery/private-cocktail-event-web/custom-cocktail-menu.webp",
+    alt: "Custom cocktail and mocktail menu created for a private birthday event",
+  },
+  {
+    id: "private-cocktail-event-06",
+    src: "/assets/gallery/private-cocktail-event/cocktail-instructor-preparing-drinks.jpg",
+    thumbnailSrc:
+      "/assets/gallery/private-cocktail-event-web/cocktail-instructor-preparing-drinks.webp",
+    alt: "Cocktail instructor preparing ingredients behind the bar",
+  },
+];
+
+const marchFirstGalleryImages: GalleryImage[] = marchFirstGalleryFilenames.map(
   (filename, index) => ({
     id: `march-1-${String(index + 1).padStart(2, "0")}`,
     src: `/assets/gallery/march-1/${filename}`,
@@ -63,3 +108,8 @@ export const galleryImages: GalleryImage[] = marchFirstGalleryFilenames.map(
     alt: `Prosper Events March 1 gallery photo ${index + 1}`,
   }),
 );
+
+export const galleryImages: GalleryImage[] = [
+  ...privateCocktailEventImages,
+  ...marchFirstGalleryImages,
+];
