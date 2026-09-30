@@ -41,8 +41,8 @@ export async function generateMetadata({
       images: [
         {
           url: absoluteUrl(event.image),
-          width: 1600,
-          height: 1200,
+          width: event.imageWidth,
+          height: event.imageHeight,
           alt: event.title,
         },
       ],
@@ -88,7 +88,13 @@ export default async function EventDetailPage({
                   {event.longDescription}
                 </p>
                 <div className="mt-8 flex flex-wrap gap-4">
-                  {status === "upcoming" && event.ticketing ? <ButtonLink href="#tickets">Buy tickets</ButtonLink> : <ButtonLink href="/inquiries">Contact for Inquiries</ButtonLink>}
+                  {status === "upcoming" && event.ticketing ? (
+                    <ButtonLink href="#tickets">Buy tickets</ButtonLink>
+                  ) : status === "upcoming" && event.registrationStatus === "coming-soon" ? (
+                    <ButtonLink href="#registration">Registration details</ButtonLink>
+                  ) : (
+                    <ButtonLink href="/inquiries">Contact for Inquiries</ButtonLink>
+                  )}
                   <ButtonLink href="/events" variant="secondary">
                     Back to Events
                   </ButtonLink>
@@ -100,8 +106,9 @@ export default async function EventDetailPage({
                 <Image
                   src={event.image}
                   alt={event.title}
-                  width={1600}
-                  height={1200}
+                  width={event.imageWidth}
+                  height={event.imageHeight}
+                  sizes="(min-width: 1024px) 56vw, 100vw"
                   priority
                   className="h-auto w-full rounded-[1.7rem] bg-[#efeeeb] object-contain"
                 />
@@ -112,6 +119,32 @@ export default async function EventDetailPage({
       </section>
 
       {status === "upcoming" && event.slug === "cocktail-classes" ? <TicketPurchase /> : null}
+
+      {status === "upcoming" && event.registrationStatus === "coming-soon" ? (
+        <section id="registration" className="section-space px-4 sm:px-6 lg:px-8">
+          <Reveal className="mx-auto max-w-7xl">
+            <div className="relative overflow-hidden rounded-[2rem] border border-navy/10 bg-white/80 px-6 py-12 shadow-paper sm:px-10 lg:px-14">
+              <div className="section-floral opacity-70" />
+              <div className="relative z-10 grid gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:items-end">
+                <div>
+                  <p className="eyebrow">Registration</p>
+                  <p className="mt-4 font-display text-6xl text-ink">{event.capacity}</p>
+                  <p className="mt-1 text-xs uppercase tracking-[0.22em] text-navy/55">spots available</p>
+                </div>
+                <div>
+                  <h2 className="font-display text-4xl text-ink sm:text-5xl">Full class details are coming soon.</h2>
+                  <p className="mt-5 max-w-2xl text-sm leading-7 text-navy/72">
+                    Drink options, menus, pricing, and registration will be added here shortly. This is the official event page, so you can save or share this link now.
+                  </p>
+                  <div className="mt-7">
+                    <ButtonLink href="/inquiries" variant="secondary">Ask about this class</ButtonLink>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        </section>
+      ) : null}
 
       <section className="section-space px-4 sm:px-6 lg:px-8">
         <Reveal className="mx-auto max-w-7xl">

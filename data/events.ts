@@ -13,10 +13,14 @@ export type EventItem = {
   description: string;
   longDescription: string;
   image: string;
+  imageWidth: number;
+  imageHeight: number;
   menu?: string[];
   dressCode?: string;
   atmosphere?: string;
   gallery?: string[];
+  capacity?: number;
+  registrationStatus?: "coming-soon";
   ticketing?: {
     price: number;
     capacityPerDate: number;
@@ -25,6 +29,26 @@ export type EventItem = {
 };
 
 export const events: EventItem[] = [
+  {
+    slug: "cocktail-class-october-23-2026",
+    title: "The Perfect Cocktail Class",
+    startDate: "2026-10-23T19:30:00-04:00",
+    endDate: "2026-10-23T21:30:00-04:00",
+    time: "7:30 PM - 9:30 PM",
+    location: "Equator Coffee Westboro",
+    address: "412 Churchill Ave N, Ottawa, ON K1Z 5C6",
+    description:
+      "A two-hour cocktail class at Equator Coffee Westboro with 14 available spots. Registration details are coming soon.",
+    longDescription:
+      "Join Prosper Events at Equator Coffee Westboro for The Perfect Cocktail Class: an intimate evening of cocktail making, tasting, and connection. Fourteen spots will be available. Drink options, menus, pricing, and registration details will be added to this page soon.",
+    image: "/assets/events/cocktail-class-october-23-2026/cover.webp",
+    imageWidth: 1080,
+    imageHeight: 1350,
+    capacity: 14,
+    registrationStatus: "coming-soon",
+    atmosphere:
+      "A fun, interactive evening for learning, tasting, conversation, and raising a glass together.",
+  },
   {
     slug: "cocktail-classes",
     title: "Cocktail Class",
@@ -38,6 +62,8 @@ export const events: EventItem[] = [
     longDescription:
       "Join Prosper Events at Equator Coffee Westboro for an intimate evening of cocktail making and tasting. Guests may choose any three cocktails or mocktails to make their own combination, pick up new techniques, and enjoy a relaxed, social class with fellow drink enthusiasts.",
     image: "/assets/events/cocktail-classes/hero.png",
+    imageWidth: 1200,
+    imageHeight: 1500,
     ticketing: {
       price: 69.99,
       capacityPerDate: 14,
@@ -59,6 +85,8 @@ export const events: EventItem[] = [
     longDescription:
       "Cocktails in Naples brought Prosper Events to Pizzeria Da Romolo for an intimate night built around four featured cocktails, a surprise dessert, and the easy social rhythm of a room filled with music, food, and conversation. The evening reflected Prosper Events at its most direct: a thoughtfully curated nightlife experience where local partnership, atmosphere, and community met in one setting.",
     image: "/assets/events/cocktails-in-naples/title.jpg",
+    imageWidth: 1080,
+    imageHeight: 1350,
     menu: [
       "Air Mail: light rum, prosecco, lime juice, honey syrup, mint",
       "Grapefruit Gimlet: infused dry gin, grapefruit juice, lime juice, simple syrup",
