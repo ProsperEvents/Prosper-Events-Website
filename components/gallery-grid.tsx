@@ -48,11 +48,13 @@ export function GalleryGrid({ images }: { images: GalleryImage[] }) {
             }}
             whileHover={{ y: -5 }}
           >
-            <img
+            <Image
               src={image.thumbnailSrc}
               alt={image.alt}
-              loading="lazy"
-              decoding="async"
+              width={image.width}
+              height={image.height}
+              sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+              priority={index === 0}
               className="h-auto w-full rounded-[1.4rem] object-cover transition duration-700 group-hover:scale-[1.02]"
             />
           </motion.button>
@@ -88,9 +90,13 @@ export function GalleryGrid({ images }: { images: GalleryImage[] }) {
               >
                 <X className="h-5 w-5" />
               </button>
-              <img
+              <Image
                 src={activeImage.src}
                 alt={activeImage.alt}
+                width={activeImage.width}
+                height={activeImage.height}
+                sizes="(min-width: 1024px) 1024px, 100vw"
+                loading="eager"
                 className="h-auto max-h-[82vh] w-full rounded-[1.8rem] object-contain bg-transparent"
               />
             </motion.div>

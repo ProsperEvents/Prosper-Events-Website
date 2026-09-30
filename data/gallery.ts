@@ -3,6 +3,8 @@ export type GalleryImage = {
   src: string;
   thumbnailSrc: string;
   alt: string;
+  width: number;
+  height: number;
 };
 
 const marchFirstGalleryFilenames = [
@@ -62,6 +64,8 @@ const privateCocktailEventImages: GalleryImage[] = [
     thumbnailSrc:
       "/assets/gallery/private-cocktail-event-web/cocktail-workshop-table.webp",
     alt: "Cocktail workshop table set with shakers, strainers, and mixing bowls",
+    width: 768,
+    height: 1024,
   },
   {
     id: "private-cocktail-event-02",
@@ -69,6 +73,8 @@ const privateCocktailEventImages: GalleryImage[] = [
     thumbnailSrc:
       "/assets/gallery/private-cocktail-event-web/guests-at-cocktail-workshop.webp",
     alt: "Guests gathering around a table during a private cocktail workshop",
+    width: 360,
+    height: 640,
   },
   {
     id: "private-cocktail-event-03",
@@ -76,6 +82,8 @@ const privateCocktailEventImages: GalleryImage[] = [
     thumbnailSrc:
       "/assets/gallery/private-cocktail-event-web/private-cocktail-event-guests.webp",
     alt: "Guests socializing during a Prosper Events cocktail experience",
+    width: 768,
+    height: 1024,
   },
   {
     id: "private-cocktail-event-04",
@@ -83,6 +91,8 @@ const privateCocktailEventImages: GalleryImage[] = [
     thumbnailSrc:
       "/assets/gallery/private-cocktail-event-web/finished-cocktails.webp",
     alt: "Two freshly mixed cocktails topped with foam and aromatic bitters",
+    width: 768,
+    height: 1024,
   },
   {
     id: "private-cocktail-event-05",
@@ -90,6 +100,8 @@ const privateCocktailEventImages: GalleryImage[] = [
     thumbnailSrc:
       "/assets/gallery/private-cocktail-event-web/custom-cocktail-menu.webp",
     alt: "Custom cocktail and mocktail menu created for a private birthday event",
+    width: 360,
+    height: 480,
   },
   {
     id: "private-cocktail-event-06",
@@ -97,16 +109,35 @@ const privateCocktailEventImages: GalleryImage[] = [
     thumbnailSrc:
       "/assets/gallery/private-cocktail-event-web/cocktail-instructor-preparing-drinks.webp",
     alt: "Cocktail instructor preparing ingredients behind the bar",
+    width: 360,
+    height: 640,
   },
 ];
 
+const marchFirstLandscapeImages = new Set([
+  12, 20, 21, 22, 23, 25, 26, 28, 29, 39, 40, 41, 42, 46, 47,
+]);
+
+const marchFirstFourByFiveImages = new Set([43, 44, 45]);
+
 const marchFirstGalleryImages: GalleryImage[] = marchFirstGalleryFilenames.map(
-  (filename, index) => ({
-    id: `march-1-${String(index + 1).padStart(2, "0")}`,
-    src: `/assets/gallery/march-1/${filename}`,
-    thumbnailSrc: `/assets/gallery/march-1-web/${filename.replace(/\.jpg$/i, ".webp")}`,
-    alt: `Prosper Events March 1 gallery photo ${index + 1}`,
-  }),
+  (filename, index) => {
+    const imageNumber = index + 1;
+    const [width, height] = marchFirstLandscapeImages.has(imageNumber)
+      ? [1200, 800]
+      : marchFirstFourByFiveImages.has(imageNumber)
+        ? [960, 1200]
+        : [800, 1200];
+
+    return {
+      id: `march-1-${String(imageNumber).padStart(2, "0")}`,
+      src: `/assets/gallery/march-1/${filename}`,
+      thumbnailSrc: `/assets/gallery/march-1-web/${filename.replace(/\.jpg$/i, ".webp")}`,
+      alt: `Prosper Events March 1 gallery photo ${imageNumber}`,
+      width,
+      height,
+    };
+  },
 );
 
 export const galleryImages: GalleryImage[] = [
