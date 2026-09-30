@@ -7,7 +7,9 @@ import { galleryImages } from "@/data/gallery";
 import { events, getEventStatus } from "@/data/events";
 import { contactDetails } from "@/lib/site";
 
-const galleryPreview = galleryImages.slice(0, 6);
+const galleryPreview = galleryImages
+  .filter((image) => image.id.startsWith("march-1-"))
+  .slice(0, 6);
 
 export const dynamic = "force-dynamic";
 
