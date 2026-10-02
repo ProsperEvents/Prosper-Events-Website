@@ -119,6 +119,32 @@ export default async function EventDetailPage({
         </div>
       </section>
 
+      {event.attendeeBenefits?.length ? (
+        <section className="section-space px-4 sm:px-6 lg:px-8">
+          <Reveal className="mx-auto max-w-7xl">
+            <div className="relative overflow-hidden rounded-[2rem] border border-navy/10 bg-white/80 px-6 py-12 shadow-paper sm:px-10 lg:px-14">
+              <div className="section-floral opacity-60" />
+              <div className="relative z-10">
+                <p className="eyebrow">Included with your ticket</p>
+                <h2 className="mt-4 max-w-3xl font-display text-4xl text-ink sm:text-5xl">
+                  What you’ll get from the evening.
+                </h2>
+                <div className="mt-9 grid gap-4 sm:grid-cols-2">
+                  {event.attendeeBenefits.map((benefit, index) => (
+                    <div key={benefit} className="flex gap-4 rounded-[1.25rem] border border-navy/10 bg-cream/65 p-5">
+                      <span className="font-display text-2xl text-navy/45" aria-hidden="true">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <p className="text-sm leading-7 text-navy/78">{benefit}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        </section>
+      ) : null}
+
       {status === "upcoming" && event.slug === COCKTAIL_CLASSES.slug ? <TicketPurchase /> : null}
 
       {status === "upcoming" && event.registrationStatus === "coming-soon" ? (

@@ -18,6 +18,7 @@ export type EventItem = {
   menu?: string[];
   dressCode?: string;
   atmosphere?: string;
+  attendeeBenefits?: string[];
   gallery?: string[];
   capacity?: number;
   registrationStatus?: "coming-soon";
@@ -38,14 +39,20 @@ export const events: EventItem[] = [
     location: "Equator Coffee Westboro",
     address: "412 Churchill Ave N, Ottawa, ON K1Z 5C6",
     description:
-      "A two-hour cocktail and mocktail class at Equator Coffee Westboro. Choose any three drinks from the new fall menu.",
+      "Learn to make three drinks, take home all six recipes, enjoy live music by Ottawa artist Dana Dufour, and spend a fun social evening in good company.",
     longDescription:
-      "Join Prosper Events at Equator Coffee Westboro for The Perfect Cocktail Class: an intimate evening of cocktail making, tasting, and connection. Choose any three cocktails or mocktails from the six-drink fall menu. Only fourteen spots are available.",
+      "Join Prosper Events at Equator Coffee Westboro for The Perfect Cocktail Class: an intimate evening of hands-on cocktail making, live local music, and connection. Choose three cocktails or mocktails to learn and make, then take home the full recipe book featuring all six drinks. Ottawa artist Dana Dufour will perform live while you enjoy a fun social evening in good company. Only fourteen spots are available.",
     image: "/assets/events/cocktail-class-october-23-2026/cover.webp",
     imageWidth: 1080,
     imageHeight: 1350,
     capacity: 14,
     menu: ["Last Word", "Paper Plane", "Corpse Reviver", "Fall Harvest", "Figure No. 3", "Sage Paloma"],
+    attendeeBenefits: [
+      "Learn how to make three cocktails or mocktails of your choice",
+      "Take home a full recipe book featuring all six drinks",
+      "Enjoy a live musical performance by local Ottawa artist Dana Dufour",
+      "Spend a fun social evening in good company",
+    ],
     gallery: [
       "/assets/events/cocktail-class-october-23-2026/menus/cocktails.webp",
       "/assets/events/cocktail-class-october-23-2026/menus/mocktails.webp",
