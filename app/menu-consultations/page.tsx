@@ -299,7 +299,8 @@ export default function MenuConsultationsPage() {
       </section>
 
       <section className="px-4 pb-8 pt-8 sm:px-6 lg:px-8">
-        <Reveal className="relative mx-auto max-w-7xl overflow-hidden border border-navy bg-navy px-7 py-12 text-cream sm:px-12 sm:py-16 lg:px-16">
+        <Reveal className="relative mx-auto max-w-7xl overflow-hidden rounded-[2rem] border border-navy bg-navy px-7 py-12 text-cream shadow-card sm:px-12 sm:py-16 lg:px-16">
+          <div className="absolute -right-20 -top-28 h-80 w-80 rounded-full border border-cream/10" />
           <div className="relative grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
             <div>
               <p className="text-[11px] uppercase tracking-[0.26em] text-cream/58">

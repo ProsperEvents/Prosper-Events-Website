@@ -65,6 +65,9 @@ export default function RootLayout({
         <div className="relative min-h-screen overflow-x-clip">
           <div className="fixed inset-0 -z-10 bg-cream" />
           <div className="paper-texture fixed inset-0 -z-10" />
+          <div className="fixed inset-x-0 top-0 -z-10 h-[34rem] bg-[radial-gradient(circle_at_top,rgba(231,220,195,0.48),transparent_62%)]" />
+          <div className="floral-watercolor floral-watercolor-site floral-watercolor-site-top" />
+          <div className="floral-watercolor floral-watercolor-site floral-watercolor-site-bottom" />
           <SiteHeader />
           <main>{children}</main>
           <SiteFooter />

@@ -10,12 +10,12 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        cream: "#f4f0e8",
-        ivory: "#fbf8f2",
-        champagne: "#d8ccb6",
-        sage: "#9ea99a",
-        ink: "#101630",
-        navy: "#1b2452",
+        cream: "#fefbea",
+        ivory: "#fffdf3",
+        champagne: "#e7dcc3",
+        sage: "#c7d0bf",
+        ink: "#141744",
+        navy: "#202484",
       },
       fontFamily: {
         display: [
@@ -36,8 +36,8 @@ const config: Config = {
         ],
       },
       boxShadow: {
-        card: "0 16px 40px rgba(16, 22, 48, 0.08)",
-        paper: "0 10px 30px rgba(16, 22, 48, 0.06)",
+        card: "0 18px 45px rgba(20, 23, 68, 0.09)",
+        paper: "0 14px 38px rgba(20, 23, 68, 0.07)",
       },
       borderRadius: {
         "4xl": "2rem",

@@ -39,10 +39,10 @@ export function EventFilters({ events }: { events: EventItem[] }) {
               type="button"
               aria-pressed={active}
               onClick={() => setActiveFilter(filter.key)}
-              className={`rounded-[2px] border px-5 py-3 text-[11px] uppercase tracking-[0.24em] transition ${
+              className={`rounded-full border px-5 py-3 text-[11px] uppercase tracking-[0.24em] transition ${
                 active
-                  ? "border-navy bg-navy text-cream"
-                  : "border-navy/20 bg-transparent text-navy hover:border-navy"
+                  ? "border-navy bg-navy text-cream shadow-paper"
+                  : "border-navy/15 bg-ivory/65 text-navy hover:border-navy hover:bg-ivory"
               }`}
             >
               {filter.label}

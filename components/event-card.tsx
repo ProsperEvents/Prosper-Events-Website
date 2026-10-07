@@ -14,11 +14,11 @@ export function EventCard({ event }: EventCardProps) {
   const status = getEventStatus(event);
   return (
     <motion.article
-      className="luxury-card group overflow-hidden transition-colors duration-300 hover:border-navy/35"
+      className="luxury-card group overflow-hidden transition duration-300 hover:-translate-y-1 hover:border-navy/20 hover:shadow-card"
     >
       <Link href={`/events/${event.slug}`} className="block">
         <div className="relative overflow-hidden">
-          <div className="absolute left-5 top-5 z-10 border border-white/35 bg-ink/55 px-3 py-1 text-[10px] uppercase tracking-[0.24em] text-white">
+          <div className="absolute left-5 top-5 z-10 rounded-full border border-white/25 bg-ink/50 px-3 py-1 text-[10px] uppercase tracking-[0.24em] text-white backdrop-blur-sm">
             {status}
           </div>
           <Image

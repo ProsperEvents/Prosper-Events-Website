@@ -4,10 +4,10 @@
 
 :root {
   color-scheme: light;
-  --paper: #f4f0e8;
-  --paper-light: #fbf8f2;
-  --navy: #1b2452;
-  --ink: #101630;
+  --paper: #fefbea;
+  --paper-light: #fffdf3;
+  --navy: #202484;
+  --ink: #141744;
 }
 
 html {
@@ -21,7 +21,7 @@ body {
 }
 
 ::selection {
-  background: rgba(27, 36, 82, 0.14);
+  background: rgba(32, 36, 132, 0.14);
   color: var(--ink);
 }
 
@@ -49,15 +49,32 @@ textarea:focus-visible {
   box-shadow: none;
 }
 
-/* A restrained paper grain gives the cream ground depth without competing
-   with the event photography. */
+/* The site backdrop should feel like printed stationery: soft colour washes,
+   visible paper grain, and a restrained botanical drawing at the edges. */
 .paper-texture::before {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");
-  opacity: 0.035;
-  mix-blend-mode: multiply;
+  background-image:
+    radial-gradient(circle at 8% 16%, rgba(239, 208, 216, 0.34), transparent 20%),
+    radial-gradient(circle at 92% 13%, rgba(199, 208, 191, 0.3), transparent 19%),
+    radial-gradient(circle at 88% 82%, rgba(231, 220, 195, 0.36), transparent 24%),
+    radial-gradient(circle at 9% 86%, rgba(239, 208, 216, 0.24), transparent 23%),
+    linear-gradient(115deg, rgba(255, 253, 245, 0.22), transparent 42%, rgba(231, 220, 195, 0.13));
+}
+
+.paper-texture::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 260 420'%3E%3Cg fill='none' stroke='%23202484' stroke-opacity='.15' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M82 402c-4-65 8-126 26-184 18-60 49-118 84-170'/%3E%3Cpath d='M108 292c-35-33-68-49-104-54'/%3E%3Cpath d='M134 222c34-15 68-18 113-8'/%3E%3Cpath d='M165 156c-13-25-19-51-18-78'/%3E%3Cpath d='M68 354c-10-31-27-59-52-83'/%3E%3Cellipse cx='202' cy='42' rx='22' ry='35'/%3E%3Cellipse cx='179' cy='128' rx='18' ry='31'/%3E%3Cellipse cx='231' cy='181' rx='16' ry='27'/%3E%3Cellipse cx='45' cy='227' rx='20' ry='34'/%3E%3Cellipse cx='16' cy='238' rx='13' ry='23'/%3E%3Cellipse cx='214' cy='218' rx='18' ry='32'/%3E%3Cellipse cx='39' cy='327' rx='17' ry='30'/%3E%3C/g%3E%3Cg fill='%23efd0d8' fill-opacity='.2'%3E%3Ccircle cx='202' cy='76' r='18'/%3E%3Ccircle cx='220' cy='60' r='15'/%3E%3Ccircle cx='237' cy='79' r='17'/%3E%3C/g%3E%3Cg fill='%23c7d0bf' fill-opacity='.2'%3E%3Cellipse cx='128' cy='264' rx='10' ry='23' transform='rotate(30 128 264)'/%3E%3Cellipse cx='89' cy='326' rx='10' ry='22' transform='rotate(-25 89 326)'/%3E%3C/g%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 260 420'%3E%3Cg fill='none' stroke='%23202484' stroke-opacity='.12' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M82 402c-4-65 8-126 26-184 18-60 49-118 84-170'/%3E%3Cpath d='M108 292c-35-33-68-49-104-54'/%3E%3Cpath d='M134 222c34-15 68-18 113-8'/%3E%3Cpath d='M165 156c-13-25-19-51-18-78'/%3E%3Cpath d='M68 354c-10-31-27-59-52-83'/%3E%3Cellipse cx='202' cy='42' rx='22' ry='35'/%3E%3Cellipse cx='179' cy='128' rx='18' ry='31'/%3E%3Cellipse cx='231' cy='181' rx='16' ry='27'/%3E%3Cellipse cx='45' cy='227' rx='20' ry='34'/%3E%3Cellipse cx='16' cy='238' rx='13' ry='23'/%3E%3Cellipse cx='214' cy='218' rx='18' ry='32'/%3E%3Cellipse cx='39' cy='327' rx='17' ry='30'/%3E%3C/g%3E%3Cg fill='%23e7dcc3' fill-opacity='.22'%3E%3Ccircle cx='202' cy='76' r='18'/%3E%3Ccircle cx='220' cy='60' r='15'/%3E%3Ccircle cx='237' cy='79' r='17'/%3E%3C/g%3E%3Cg fill='%23c7d0bf' fill-opacity='.18'%3E%3Cellipse cx='128' cy='264' rx='10' ry='23' transform='rotate(30 128 264)'/%3E%3Cellipse cx='89' cy='326' rx='10' ry='22' transform='rotate(-25 89 326)'/%3E%3C/g%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.68' numOctaves='4' seed='7' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.24'/%3E%3C/svg%3E");
+  background-position: right -4rem top 8rem, left -5rem bottom -4rem, center;
+  background-repeat: no-repeat, no-repeat, repeat;
+  background-size: 23rem auto, 21rem auto, 150px 150px;
+  opacity: 0.88;
 }
 
 /* Legacy decorative hooks remain in the markup on some pages, but the
@@ -67,11 +84,88 @@ textarea:focus-visible {
 .botanical-outline-bottom,
 .botanical-outline-hero-left,
 .botanical-outline-hero-right,
-.floral-watercolor,
-.floral-corner,
-.floral-spray,
-.section-floral {
+.floral-spray {
   display: none;
+}
+
+.floral-watercolor {
+  position: absolute;
+  z-index: 0;
+  border-radius: 9999px;
+  pointer-events: none;
+  filter: blur(18px);
+  opacity: 0.34;
+  background:
+    radial-gradient(circle at 28% 34%, rgba(239, 208, 216, 0.72), transparent 38%),
+    radial-gradient(circle at 70% 24%, rgba(199, 208, 191, 0.62), transparent 36%),
+    radial-gradient(circle at 54% 74%, rgba(231, 220, 195, 0.74), transparent 42%);
+}
+
+.floral-watercolor-hero {
+  left: 26%;
+  top: 1rem;
+  height: 16rem;
+  width: 18rem;
+}
+
+.floral-watercolor-site {
+  position: fixed;
+  z-index: -9;
+  filter: blur(16px);
+  opacity: 0.5;
+}
+
+.floral-watercolor-site-top {
+  right: 6%;
+  top: 5rem;
+  height: 25rem;
+  width: 29rem;
+}
+
+.floral-watercolor-site-bottom {
+  bottom: -3rem;
+  left: 3%;
+  height: 23rem;
+  width: 27rem;
+}
+
+.floral-corner {
+  position: absolute;
+  z-index: 0;
+  height: 9rem;
+  width: 8rem;
+  pointer-events: none;
+  opacity: 0.48;
+}
+
+.floral-corner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Cg fill='none' stroke='%23202484' stroke-opacity='.25' stroke-width='1.4' stroke-linecap='round'%3E%3Cpath d='M28 164c30-31 50-70 59-118'/%3E%3Cpath d='M75 84c24-2 44 5 61 21'/%3E%3Cpath d='M62 116c-18 5-32 16-42 33'/%3E%3C/g%3E%3Cg fill='%23efd0d8' fill-opacity='.72'%3E%3Ccircle cx='132' cy='98' r='13'/%3E%3Ccircle cx='146' cy='88' r='11'/%3E%3Ccircle cx='153' cy='104' r='12'/%3E%3C/g%3E%3Cg fill='%23c7d0bf' fill-opacity='.7'%3E%3Cellipse cx='83' cy='70' rx='7' ry='15' transform='rotate(28 83 70)'/%3E%3Cellipse cx='58' cy='125' rx='7' ry='14' transform='rotate(-24 58 125)'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.floral-corner-top-right {
+  right: -1rem;
+  top: -1.25rem;
+}
+
+.floral-corner-bottom-left {
+  bottom: -1.25rem;
+  left: -1rem;
+  transform: rotate(180deg);
+}
+
+.section-floral {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 8% 12%, rgba(239, 208, 216, 0.18), transparent 24%),
+    radial-gradient(circle at 92% 12%, rgba(199, 208, 191, 0.16), transparent 22%),
+    radial-gradient(circle at 86% 90%, rgba(231, 220, 195, 0.2), transparent 26%);
 }
 
 .section-space {
@@ -82,24 +176,20 @@ textarea:focus-visible {
 .section-frame {
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(27, 36, 82, 0.16);
-  border-radius: 0.25rem;
-  background: rgba(251, 248, 242, 0.78);
+  border: 1px solid rgba(32, 36, 132, 0.1);
+  border-radius: 1.6rem;
+  background: rgba(255, 253, 245, 0.76);
   padding: 1.75rem;
-  box-shadow: none;
-}
-
-.section-frame::after {
-  display: none;
+  box-shadow: 0 18px 55px rgba(20, 23, 68, 0.065);
 }
 
 .luxury-card {
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(27, 36, 82, 0.16);
-  border-radius: 0.25rem;
-  background: rgba(251, 248, 242, 0.86);
-  box-shadow: none;
+  border: 1px solid rgba(32, 36, 132, 0.1);
+  border-radius: 1.6rem;
+  background: rgba(255, 253, 245, 0.82);
+  box-shadow: 0 16px 42px rgba(20, 23, 68, 0.065);
 }
 
 .eyebrow {
@@ -110,7 +200,7 @@ textarea:focus-visible {
   font-weight: 500;
   letter-spacing: 0.27em;
   text-transform: uppercase;
-  color: rgba(27, 36, 82, 0.62);
+  color: rgba(32, 36, 132, 0.62);
 }
 
 .eyebrow::before {
@@ -118,7 +208,7 @@ textarea:focus-visible {
   display: inline-block;
   height: 1px;
   width: 2.5rem;
-  background: rgba(27, 36, 82, 0.36);
+  background: rgba(32, 36, 132, 0.3);
 }
 
 .nav-link {
@@ -144,21 +234,6 @@ textarea:focus-visible {
   transform: scaleX(1);
 }
 
-.shadow-paper,
-.shadow-card {
-  box-shadow: none !important;
-}
-
-main [class*="rounded-[1."],
-main [class*="rounded-[2."] {
-  border-radius: 0.25rem !important;
-}
-
-main a.rounded-full:not([aria-label]),
-main button.rounded-full:not([aria-label]) {
-  border-radius: 0.15rem;
-}
-
 @media (min-width: 640px) {
   .section-space {
     padding-top: 7rem;
@@ -167,6 +242,27 @@ main button.rounded-full:not([aria-label]) {
 
   .section-frame {
     padding: 3rem;
+  }
+}
+
+@media (max-width: 639px) {
+  .paper-texture::after {
+    background-position: right -7rem top 7rem, left bottom, center;
+    background-size: 15rem auto, 0 0, 150px 150px;
+    opacity: 0.58;
+  }
+
+  .floral-watercolor-site-top {
+    right: -9rem;
+    height: 20rem;
+    width: 22rem;
+  }
+
+  .floral-watercolor-site-bottom {
+    bottom: -5rem;
+    left: -9rem;
+    height: 18rem;
+    width: 21rem;
   }
 }
 
