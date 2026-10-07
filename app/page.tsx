@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import { ButtonLink } from "@/components/button-link";
 import { EventCard } from "@/components/event-card";
 import { ProsperWordmark } from "@/components/prosper-wordmark";
@@ -104,6 +105,73 @@ export default function HomePage() {
             <span className="inline-flex items-center justify-center self-start rounded-full border border-cream px-6 py-3 text-xs font-medium uppercase tracking-[0.22em] text-cream transition duration-500 group-hover:bg-cream group-hover:text-navy sm:self-auto">Sign Up</span>
           </Link>
         </Reveal>
+      </section>
+
+      <section className="section-space px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <Reveal className="max-w-3xl">
+            <p className="eyebrow">Explore Prosper</p>
+            <h2 className="mt-5 font-display text-4xl leading-tight text-ink sm:text-6xl">
+              Plan an occasion. Discover the next one.
+            </h2>
+            <p className="mt-6 text-base leading-8 text-navy/72">
+              From event planning in Ottawa to hospitality menu consulting and
+              memorable local nights out, Prosper brings atmosphere and practical
+              detail together.
+            </p>
+          </Reveal>
+          <Stagger className="mt-12 grid gap-5 lg:grid-cols-3">
+            {[
+              {
+                number: "01",
+                title: "Event Planning in Ottawa",
+                description:
+                  "Weddings, private parties, corporate gatherings, and year-end events shaped around your guests and goals.",
+                href: "/event-planning-ottawa",
+              },
+              {
+                number: "02",
+                title: "Menu Consultations",
+                description:
+                  "Food and beverage menu guidance for restaurants, hotels, bars, and private members’ clubs.",
+                href: "/menu-consultations",
+              },
+              {
+                number: "03",
+                title: "Things to Do in Ottawa",
+                description:
+                  "Cocktail classes, date nights, and dynamic social experiences designed to make going out feel special.",
+                href: "/things-to-do-ottawa",
+              },
+            ].map((service) => (
+              <StaggerItem key={service.href} className="h-full">
+                <Link
+                  href={service.href}
+                  className="luxury-card group flex h-full min-h-[20rem] flex-col justify-between p-7 transition duration-500 hover:-translate-y-1 hover:shadow-card sm:p-8"
+                >
+                  <div className="section-floral opacity-65" />
+                  <div className="relative flex items-start justify-between gap-5">
+                    <span className="text-[11px] uppercase tracking-[0.25em] text-navy/48">
+                      {service.number}
+                    </span>
+                    <ArrowUpRight
+                      className="h-5 w-5 text-navy/45 transition duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <div className="relative mt-12">
+                    <h3 className="font-display text-3xl leading-tight text-ink">
+                      {service.title}
+                    </h3>
+                    <p className="mt-4 text-sm leading-7 text-navy/68">
+                      {service.description}
+                    </p>
+                  </div>
+                </Link>
+              </StaggerItem>
+            ))}
+          </Stagger>
+        </div>
       </section>
 
       <section className="section-space px-4 sm:px-6 lg:px-8">

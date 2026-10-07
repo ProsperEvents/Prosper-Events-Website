@@ -4,9 +4,9 @@ import { Reveal } from "@/components/reveal";
 import { events } from "@/data/events";
 
 export const metadata: Metadata = {
-  title: "Events | Prosper Events",
+  title: "Upcoming Ottawa Events & Experiences | Prosper Events",
   description:
-    "Browse upcoming and past Prosper Events gatherings across Ottawa and Gatineau, from intimate cocktail evenings to curated private dining experiences.",
+    "Browse upcoming Ottawa events and past Prosper Events experiences, including cocktail classes, social nights, date-night ideas, and intimate local gatherings.",
   alternates: {
     canonical: "/events",
   },

@@ -11,7 +11,7 @@ export function SiteFooter() {
       <div className="floral-corner floral-corner-top-right" />
       <div className="floral-corner floral-corner-bottom-left" />
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-        <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr_0.8fr]">
+        <div className="grid gap-10 md:grid-cols-2 xl:grid-cols-[1.15fr_0.7fr_0.85fr_0.8fr]">
         <div>
           <div className="flex items-center gap-4">
             <Image
@@ -30,6 +30,26 @@ export function SiteFooter() {
           <p className="mt-4 text-xs uppercase tracking-[0.22em] text-navy/55">
             prosperevents.ca
           </p>
+        </div>
+
+        <div>
+          <p className="text-[11px] uppercase tracking-[0.24em] text-navy/55">
+            Explore
+          </p>
+          <nav className="mt-4 flex flex-col items-start gap-3 text-sm text-navy">
+            <Link href="/event-planning-ottawa" className="hover:text-ink">
+              Event Planning in Ottawa
+            </Link>
+            <Link href="/menu-consultations" className="hover:text-ink">
+              Menu Consultations
+            </Link>
+            <Link href="/things-to-do-ottawa" className="hover:text-ink">
+              Things to Do in Ottawa
+            </Link>
+            <Link href="/events" className="hover:text-ink">
+              Upcoming Events
+            </Link>
+          </nav>
         </div>
 
         <div>

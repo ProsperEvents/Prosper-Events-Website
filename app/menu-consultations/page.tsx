@@ -7,16 +7,16 @@ import { SchemaScript } from "@/components/schema-script";
 import { contactDetails, siteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Menu Consultations for Restaurants, Hotels & Bars | Prosper Events",
+  title: "Menu Consulting for Restaurants, Hotels, Bars & Clubs | Prosper Events",
   description:
-    "Menu consultation for restaurants, hotels, and bars—from new venue openings and seasonal refreshes to custom cocktails, mocktails, recipes, and food pairings.",
+    "Menu consultation for restaurants, hotels, bars, and private members’ clubs—from new openings and seasonal refreshes to cocktails, mocktails, recipes, and pairings.",
   alternates: {
     canonical: "/menu-consultations",
   },
   openGraph: {
     title: "Menu Consultations | Prosper Events",
     description:
-      "Thoughtful, operationally sound menus for restaurants, hotels, and bars.",
+      "Thoughtful, operationally sound menus for restaurants, hotels, bars, and private members’ clubs.",
     url: `${siteUrl}/menu-consultations`,
     images: [
       {
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Menu Consultations | Prosper Events",
     description:
-      "Thoughtful, operationally sound menus for restaurants, hotels, and bars.",
+      "Thoughtful, operationally sound menus for restaurants, hotels, bars, and private members’ clubs.",
     images: ["/assets/menu-consultations-og.jpg"],
   },
 };
@@ -41,7 +41,7 @@ const services = [
     number: "01",
     title: "New venue menus",
     description:
-      "Build a cohesive opening menu for a new restaurant, hotel, bar, or hospitality concept—from the first idea to service-ready recipes.",
+      "Build a cohesive opening menu for a restaurant, hotel, bar, private members’ club, or new hospitality concept—from the first idea to service-ready recipes.",
   },
   {
     number: "02",
@@ -109,7 +109,7 @@ const serviceSchema = {
   serviceType: "Food and beverage menu consulting",
   url: `${siteUrl}/menu-consultations`,
   description:
-    "Menu consultation for restaurants, hotels, and bars, including new venue menus, seasonal and operational refreshes, cocktails, mocktails, custom recipes, recipe implementation, and food pairings.",
+    "Menu consultation for restaurants, hotels, bars, and private members’ clubs, including new venue menus, seasonal and operational refreshes, cocktails, mocktails, custom recipes, recipe implementation, and food pairings.",
   areaServed: ["Ottawa, Ontario", "Gatineau, Quebec"],
   provider: {
     "@type": "Organization",
@@ -134,9 +134,9 @@ export default function MenuConsultationsPage() {
               A menu with a clear point of view—and a plan to deliver it.
             </h1>
             <p className="mt-7 max-w-2xl text-base leading-8 text-navy/72 sm:text-lg">
-              Prosper Events advises restaurants, hotels, and bars on food and
-              beverage menus for new openings, seasonal changes, operational
-              improvements, and full menu revamps.
+              Prosper Events advises restaurants, hotels, bars, and private
+              members’ clubs on food and beverage menus for new openings,
+              seasonal changes, operational improvements, and full menu revamps.
             </p>
             <div className="mt-9 flex flex-wrap gap-4">
               <ButtonLink href={consultationEmail}>
@@ -245,7 +245,7 @@ export default function MenuConsultationsPage() {
               <div className="floral-corner floral-corner-bottom-left" />
               <Image
                 src="/assets/gallery/gathered-table.jpg"
-                alt="A thoughtfully arranged hospitality table"
+                alt="Guests gathered around a bar during a Prosper Events evening"
                 width={1200}
                 height={1500}
                 className="h-[28rem] w-full rounded-[1.55rem] object-cover lg:h-full lg:min-h-[38rem]"

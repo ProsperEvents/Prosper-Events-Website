@@ -1,9 +1,9 @@
 export const siteUrl = "https://prosperevents.ca";
 
-export const siteTitle = "Prosper Events | Curated Events in Ottawa & Gatineau";
+export const siteTitle = "Prosper Events | Ottawa Event Planning & Experiences";
 
 export const siteDescription =
-  "Prosper Events curates intimate, elevated social experiences across Ottawa and Gatineau, blending atmosphere, hospitality, music, food, and connection.";
+  "Prosper Events plans weddings, private parties, corporate events, and year-end celebrations in Ottawa, creates memorable local experiences, and consults on hospitality menus.";
 
 export const siteKeywords = [
   "Ottawa events",
@@ -16,11 +16,19 @@ export const siteKeywords = [
   "things to do in Ottawa",
   "upscale events Ottawa",
   "private event inquiries Ottawa",
+  "event planning Ottawa",
+  "Ottawa wedding planner",
+  "corporate events Ottawa",
+  "year end events Ottawa",
+  "menu consultant Ottawa",
+  "things to do Ottawa",
+  "Ottawa date night ideas",
 ];
 
 export const navigation = [
   { label: "Home", href: "/" },
   { label: "Events", href: "/events" },
+  { label: "Planning", href: "/event-planning-ottawa" },
   { label: "Gallery", href: "/gallery" },
   { label: "Menu Consulting", href: "/menu-consultations" },
   { label: "Inquiries", href: "/inquiries" },
@@ -57,6 +65,9 @@ export const organizationSchema = {
       sameAs: [contactDetails.instagram, contactDetails.facebook],
       areaServed: ["Ottawa, Ontario", "Gatineau, Quebec"],
       knowsAbout: [
+        "Event planning in Ottawa",
+        "Weddings and private parties",
+        "Corporate and year-end events",
         "Curated events",
         "Luxury social gatherings",
         "Cocktail events",
@@ -64,6 +75,36 @@ export const organizationSchema = {
         "Cocktail and mocktail menu development",
         "Private bookings",
       ],
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Prosper Events services",
+        itemListElement: [
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Event planning in Ottawa",
+              url: `${siteUrl}/event-planning-ottawa`,
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Hospitality menu consultations",
+              url: `${siteUrl}/menu-consultations`,
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Curated Ottawa events and experiences",
+              url: `${siteUrl}/things-to-do-ottawa`,
+            },
+          },
+        ],
+      },
     },
     {
       "@type": "LocalBusiness",
@@ -77,7 +118,7 @@ export const organizationSchema = {
       areaServed: ["Ottawa, Ontario", "Gatineau, Quebec"],
       sameAs: [contactDetails.instagram, contactDetails.facebook],
       description:
-        "Ottawa and Gatineau curated events with an intimate, hospitality-led, European luxury sensibility.",
+        "Ottawa and Gatineau event planning, curated experiences, and hospitality menu consulting with an intimate, atmosphere-led sensibility.",
     },
   ],
 };
