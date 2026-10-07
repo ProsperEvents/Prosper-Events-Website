@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import type { EventItem } from "@/data/events";
 import { getEventDateLabel, getEventStatus } from "@/data/events";
 
@@ -12,11 +12,16 @@ type EventCardProps = {
 
 export function EventCard({ event }: EventCardProps) {
   const status = getEventStatus(event);
+  const shouldReduceMotion = useReducedMotion();
 
   return (
     <motion.article
-      whileHover={{ y: -6 }}
-      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+      whileHover={shouldReduceMotion ? undefined : { y: -6 }}
+      transition={
+        shouldReduceMotion
+          ? { duration: 0 }
+          : { duration: 0.45, ease: [0.22, 1, 0.36, 1] }
+      }
       className="luxury-card group overflow-hidden"
     >
       <Link href={`/events/${event.slug}`} className="block">

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { ArrowDownRight, Check, Mail, Phone } from "lucide-react";
 import { ButtonLink } from "@/components/button-link";
+import { Breadcrumbs } from "@/components/breadcrumbs";
 import { Reveal, Stagger, StaggerItem } from "@/components/reveal";
 import { SchemaScript } from "@/components/schema-script";
 import { contactDetails, siteUrl } from "@/lib/site";
@@ -129,9 +130,21 @@ export default function MenuConsultationsPage() {
         <div className="floral-spray floral-spray-left" />
         <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.02fr_0.98fr]">
           <Reveal className="relative z-10">
+            <Breadcrumbs
+              id="menu-consultation-breadcrumbs"
+              items={[
+                { label: "Home", href: "/" },
+                {
+                  label: "Menu Consultations",
+                  href: "/menu-consultations",
+                  current: true,
+                },
+              ]}
+              className="mb-7"
+            />
             <p className="eyebrow">Menu consultations</p>
             <h1 className="mt-7 max-w-3xl font-display text-5xl leading-[0.98] text-ink sm:text-7xl lg:text-[5.7rem]">
-              A menu with a clear point of view—and a plan to deliver it.
+              Menu consultation, built for service.
             </h1>
             <p className="mt-7 max-w-2xl text-base leading-8 text-navy/72 sm:text-lg">
               Prosper Events advises restaurants, hotels, bars, and private

@@ -184,7 +184,14 @@ export default function HomePage() {
                 Prosper Events, with atmosphere at the center.
               </h2>
               <p className="mt-6 text-base leading-8 text-navy/74">
-                Prosper Events is an event curation company bringing elevated nightlife experiences to Ottawa and Gatineau. Partnering with local venues, mixologists, and creatives, we design specialty events centered around curated cocktails, vibrant music, and exceptional food. Our focus is on crafting immersive social environments where energy, ambiance, and connection come together seamlessly. From stylish pop-up gatherings to dynamic nightlife showcases, each event is intentionally curated to create memorable shared experiences. At Prosper Events, our mission is simple: bring people together through thoughtfully designed events that celebrate drink, music, and community.
+                Prosper Events is an Ottawa event-planning and experience company
+                built around thoughtful hospitality. We plan weddings, private
+                parties, corporate gatherings, and year-end events; create local
+                cocktail classes and social nights; and advise restaurants,
+                hotels, bars, and private members’ clubs on food and beverage
+                menus. Across every project, the goal is the same: bring people
+                together through a clear concept, a well-composed room, and
+                details that support genuine connection.
               </p>
             </div>
           </Reveal>

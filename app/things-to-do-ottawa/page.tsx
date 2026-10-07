@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { ButtonLink } from "@/components/button-link";
+import { Breadcrumbs } from "@/components/breadcrumbs";
 import { EventCard } from "@/components/event-card";
 import { Reveal, Stagger, StaggerItem } from "@/components/reveal";
 import { SchemaScript } from "@/components/schema-script";
@@ -105,7 +106,13 @@ export default function ThingsToDoOttawaPage() {
           location: {
             "@type": "Place",
             name: event.location,
-            address: event.address ?? "Ottawa, Ontario",
+            address: {
+              "@type": "PostalAddress",
+              name: event.address ?? "Ottawa, Ontario, Canada",
+              addressLocality: "Ottawa",
+              addressRegion: "ON",
+              addressCountry: "CA",
+            },
           },
         },
       })),
@@ -122,9 +129,21 @@ export default function ThingsToDoOttawaPage() {
         <div className="floral-spray floral-spray-right" />
         <div className="mx-auto max-w-7xl">
           <Reveal className="relative z-10 max-w-5xl">
-            <p className="eyebrow">Things to do in Ottawa</p>
+            <Breadcrumbs
+              id="things-to-do-breadcrumbs"
+              items={[
+                { label: "Home", href: "/" },
+                {
+                  label: "Things to Do in Ottawa",
+                  href: "/things-to-do-ottawa",
+                  current: true,
+                },
+              ]}
+              className="mb-7"
+            />
+            <p className="eyebrow">Date nights · Classes · Social events</p>
             <h1 className="mt-7 font-display text-5xl leading-[0.98] text-ink sm:text-7xl lg:text-[6.25rem]">
-              Go out for the story you will tell after.
+              Things to do in Ottawa, made to be remembered.
             </h1>
             <p className="mt-7 max-w-3xl text-base leading-8 text-navy/72 sm:text-lg">
               Discover cocktail classes, date-night ideas, and fun, dynamic things

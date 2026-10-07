@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { Check, Mail, Phone, Sparkles } from "lucide-react";
 import { ButtonLink } from "@/components/button-link";
+import { Breadcrumbs } from "@/components/breadcrumbs";
 import { Reveal, Stagger, StaggerItem } from "@/components/reveal";
 import { SchemaScript } from "@/components/schema-script";
 import { contactDetails, siteUrl } from "@/lib/site";
@@ -149,9 +150,21 @@ export default function EventPlanningOttawaPage() {
         <div className="floral-spray floral-spray-left" />
         <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
           <Reveal className="relative z-10">
-            <p className="eyebrow">Event planning in Ottawa</p>
+            <Breadcrumbs
+              id="event-planning-breadcrumbs"
+              items={[
+                { label: "Home", href: "/" },
+                {
+                  label: "Event Planning in Ottawa",
+                  href: "/event-planning-ottawa",
+                  current: true,
+                },
+              ]}
+              className="mb-7"
+            />
+            <p className="eyebrow">Weddings · Parties · Business events</p>
             <h1 className="mt-7 max-w-3xl font-display text-5xl leading-[0.98] text-ink sm:text-7xl lg:text-[5.65rem]">
-              Celebrations designed around the people in the room.
+              Ottawa event planning, shaped around your people.
             </h1>
             <p className="mt-7 max-w-2xl text-base leading-8 text-navy/72 sm:text-lg">
               Prosper Events plans weddings, private parties, corporate events,

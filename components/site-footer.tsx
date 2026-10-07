@@ -24,8 +24,8 @@ export function SiteFooter() {
             <ProsperWordmark className="h-11 w-36" />
           </div>
           <p className="mt-5 max-w-md text-sm leading-7 text-navy/72">
-            Intimate gatherings shaped by atmosphere, hospitality, and the slow
-            elegance of a well-composed room.
+            Ottawa event planning, curated local experiences, and hospitality
+            menu consulting shaped by atmosphere and thoughtful service.
           </p>
           <p className="mt-4 text-xs uppercase tracking-[0.22em] text-navy/55">
             prosperevents.ca

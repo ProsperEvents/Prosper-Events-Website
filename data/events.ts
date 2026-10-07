@@ -134,6 +134,9 @@ export function getEventStatus(event: EventItem, now = new Date()): EventStatus 
 }
 
 export function getEventSchema(event: EventItem) {
+  const eventUrl = absoluteUrl(`/events/${event.slug}`);
+  const status = getEventStatus(event);
+
   return {
     "@context": "https://schema.org",
     "@type": "Event",
@@ -143,19 +146,37 @@ export function getEventSchema(event: EventItem) {
     startDate: event.startDate,
     endDate: event.endDate,
     eventStatus:
-      getEventStatus(event) === "upcoming"
+      status === "upcoming"
         ? "https://schema.org/EventScheduled"
         : "https://schema.org/EventCompleted",
     eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+    url: eventUrl,
     location: {
       "@type": "Place",
       name: event.location,
-      address: event.address ?? "Ottawa / Gatineau",
+      address: {
+        "@type": "PostalAddress",
+        name: event.address ?? "Ottawa, Ontario, Canada",
+        addressLocality: "Ottawa",
+        addressRegion: "ON",
+        addressCountry: "CA",
+      },
     },
     organizer: {
       "@type": "Organization",
+      "@id": "https://prosperevents.ca/#organization",
       name: "Prosper Events",
       url: "https://prosperevents.ca",
     },
+    ...(event.ticketing && status === "upcoming"
+      ? {
+          offers: {
+            "@type": "Offer",
+            url: `${eventUrl}#tickets`,
+            price: event.ticketing.price,
+            priceCurrency: "CAD",
+          },
+        }
+      : {}),
   };
 }

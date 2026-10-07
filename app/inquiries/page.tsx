@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Facebook, Instagram, Mail, Phone } from "lucide-react";
+import { ButtonLink } from "@/components/button-link";
 import { InfoPacketPreview } from "@/components/info-packet-preview";
 import { Reveal } from "@/components/reveal";
 import { contactDetails } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Inquiries | Prosper Events",
+  title: "Event Planning & Menu Consulting Inquiries | Prosper Events",
   description:
-    "Contact Prosper Events for event inquiries, collaborations, and private bookings in Ottawa and Gatineau.",
+    "Contact Prosper Events about Ottawa event planning, private experiences, collaborations, and menu consulting for hospitality venues.",
   alternates: {
     canonical: "/inquiries",
   },
@@ -31,14 +32,21 @@ export default function InquiriesPage() {
             <div className="floral-corner floral-corner-bottom-left" />
             <p className="eyebrow">Inquiries</p>
             <h1 className="mt-5 font-display text-4xl leading-tight text-ink sm:text-6xl">
-              For event inquiries, collaborations, or private bookings, contact
-              Prosper Events.
+              Let’s talk about the event, experience, or menu you are building.
             </h1>
             <p className="mt-6 text-base leading-8 text-navy/72">
-              We welcome thoughtful inquiries for private gatherings, curated
-              collaborations, and upcoming Prosper Events experiences across the
-              Ottawa and Gatineau area.
+              We welcome inquiries for weddings, private parties, corporate and
+              year-end events, private group experiences, collaborations, and
+              menu consultations across Ottawa and Gatineau.
             </p>
+            <div className="mt-8 flex flex-wrap gap-4">
+              <ButtonLink href="/event-planning-ottawa">
+                Explore Event Planning
+              </ButtonLink>
+              <ButtonLink href="/menu-consultations" variant="secondary">
+                Explore Menu Consulting
+              </ButtonLink>
+            </div>
             <div className="mt-8 space-y-4 text-sm text-navy">
               <a
                 href={`mailto:${contactDetails.email}`}

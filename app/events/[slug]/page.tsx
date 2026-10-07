@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import { Breadcrumbs } from "@/components/breadcrumbs";
 import { ButtonLink } from "@/components/button-link";
 import { Reveal } from "@/components/reveal";
 import { SchemaScript } from "@/components/schema-script";
@@ -48,6 +49,12 @@ export async function generateMetadata({
         },
       ],
     },
+    twitter: {
+      card: "summary_large_image",
+      title: `${event.title} | Prosper Events`,
+      description: event.description,
+      images: [absoluteUrl(event.image)],
+    },
   };
 }
 
@@ -76,6 +83,19 @@ export default async function EventDetailPage({
           <Reveal>
             <div className="grid gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:items-end">
               <div>
+                <Breadcrumbs
+                  id={`${event.slug}-breadcrumbs`}
+                  items={[
+                    { label: "Home", href: "/" },
+                    { label: "Events", href: "/events" },
+                    {
+                      label: event.title,
+                      href: `/events/${event.slug}`,
+                      current: true,
+                    },
+                  ]}
+                  className="mb-7"
+                />
                 <p className="eyebrow">{status === "upcoming" ? "Upcoming event" : "Past event"}</p>
                 <h1 className="mt-5 font-display text-5xl leading-tight text-ink sm:text-6xl lg:text-[4.5rem]">
                   {event.title}
