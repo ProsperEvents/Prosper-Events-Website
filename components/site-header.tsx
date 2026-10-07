@@ -47,8 +47,8 @@ export function SiteHeader() {
             />
           </Link>
 
-          <div className="hidden items-center gap-5 md:flex">
-            <nav className="flex items-center gap-8">
+          <div className="hidden items-center gap-4 lg:flex">
+            <nav className="flex items-center gap-6 xl:gap-8">
               {navigation.map((item) => {
                 const active = pathname === item.href;
                 return (
@@ -75,7 +75,7 @@ export function SiteHeader() {
           <button
             type="button"
             onClick={() => setOpen((value) => !value)}
-            className="group flex items-center gap-3 rounded-full border border-navy/15 bg-white/60 px-4 py-2 text-[11px] uppercase tracking-[0.24em] text-navy transition hover:bg-white/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy md:hidden"
+            className="group flex items-center gap-3 rounded-full border border-navy/15 bg-white/60 px-4 py-2 text-[11px] uppercase tracking-[0.24em] text-navy transition hover:bg-white/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy lg:hidden"
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "Close menu" : "Open menu"}
@@ -105,7 +105,7 @@ export function SiteHeader() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.35 }}
-            className="fixed inset-0 z-40 md:hidden"
+            className="fixed inset-0 z-40 lg:hidden"
           >
             <div
               className="absolute inset-0 bg-ink/25 backdrop-blur-sm"
@@ -147,7 +147,9 @@ export function SiteHeader() {
                   className="flex items-center justify-between rounded-3xl border border-navy/10 bg-navy px-5 py-4 font-display text-2xl tracking-wide text-cream transition hover:bg-ink"
                 >
                   <span>{primaryEventCta.label}</span>
-                  <span className="text-sm uppercase tracking-[0.24em]">05</span>
+                  <span className="text-sm uppercase tracking-[0.24em]">
+                    {String(navigation.length + 1).padStart(2, "0")}
+                  </span>
                 </Link>
               </div>
             </motion.div>
