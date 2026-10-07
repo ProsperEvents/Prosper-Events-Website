@@ -10,18 +10,20 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        cream: "#fefbea",
-        ivory: "#fffdf3",
-        champagne: "#e7dcc3",
-        sage: "#c7d0bf",
-        ink: "#141744",
-        navy: "#202484",
+        cream: "#f4f0e8",
+        ivory: "#fbf8f2",
+        champagne: "#d8ccb6",
+        sage: "#9ea99a",
+        ink: "#101630",
+        navy: "#1b2452",
       },
       fontFamily: {
         display: [
-          "Iowan Old Style",
-          "Palatino Linotype",
-          "Book Antiqua",
+          '"Bodoni 72"',
+          "Didot",
+          '"Iowan Old Style"',
+          '"Palatino Linotype"',
+          '"Book Antiqua"',
           "Georgia",
           "serif",
         ],
@@ -34,8 +36,8 @@ const config: Config = {
         ],
       },
       boxShadow: {
-        card: "0 18px 40px rgba(32, 36, 132, 0.08)",
-        paper: "0 14px 45px rgba(32, 36, 132, 0.07)",
+        card: "0 16px 40px rgba(16, 22, 48, 0.08)",
+        paper: "0 10px 30px rgba(16, 22, 48, 0.06)",
       },
       borderRadius: {
         "4xl": "2rem",

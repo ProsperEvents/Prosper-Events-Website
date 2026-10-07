@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import type { EventItem } from "@/data/events";
 import { getEventDateLabel, getEventStatus } from "@/data/events";
 
@@ -12,21 +12,13 @@ type EventCardProps = {
 
 export function EventCard({ event }: EventCardProps) {
   const status = getEventStatus(event);
-  const shouldReduceMotion = useReducedMotion();
-
   return (
     <motion.article
-      whileHover={shouldReduceMotion ? undefined : { y: -6 }}
-      transition={
-        shouldReduceMotion
-          ? { duration: 0 }
-          : { duration: 0.45, ease: [0.22, 1, 0.36, 1] }
-      }
-      className="luxury-card group overflow-hidden"
+      className="luxury-card group overflow-hidden transition-colors duration-300 hover:border-navy/35"
     >
       <Link href={`/events/${event.slug}`} className="block">
         <div className="relative overflow-hidden">
-          <div className="absolute left-5 top-5 z-10 rounded-full border border-white/20 bg-white/16 px-3 py-1 text-[10px] uppercase tracking-[0.24em] text-white backdrop-blur-sm">
+          <div className="absolute left-5 top-5 z-10 border border-white/35 bg-ink/55 px-3 py-1 text-[10px] uppercase tracking-[0.24em] text-white">
             {status}
           </div>
           <Image
@@ -35,7 +27,7 @@ export function EventCard({ event }: EventCardProps) {
             width={event.imageWidth}
             height={event.imageHeight}
             sizes="(min-width: 1024px) 50vw, 100vw"
-            className="h-[300px] w-full object-cover transition duration-700 group-hover:scale-[1.04]"
+            className="h-[300px] w-full object-cover transition duration-700 group-hover:scale-[1.015]"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-ink/50 via-transparent to-transparent" />
         </div>

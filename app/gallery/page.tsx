@@ -23,7 +23,7 @@ export default function GalleryPage() {
             <p className="eyebrow">Gallery</p>
             <div className="mt-5 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
               <h1 className="font-display text-5xl leading-tight text-ink sm:text-6xl">
-                A gallery of atmosphere, detail, and social rhythm.
+                Behind the bar. Around the table. In the room.
               </h1>
             </div>
           </div>

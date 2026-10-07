@@ -46,7 +46,6 @@ export function GalleryGrid({ images }: { images: GalleryImage[] }) {
               ease: [0.22, 1, 0.36, 1],
               delay: index * 0.04,
             }}
-            whileHover={{ y: -5 }}
           >
             <Image
               src={image.thumbnailSrc}
@@ -80,12 +79,12 @@ export function GalleryGrid({ images }: { images: GalleryImage[] }) {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 24, scale: 0.97 }}
               transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-              className="relative z-10 w-full max-w-5xl overflow-hidden rounded-[1.8rem] shadow-2xl"
+              className="relative z-10 w-full max-w-5xl overflow-hidden border border-white/20 bg-ink"
             >
               <button
                 type="button"
                 onClick={() => setActiveId(null)}
-                className="absolute right-5 top-5 z-10 rounded-full border border-white/20 bg-white/80 p-2 text-navy backdrop-blur focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy"
+                className="absolute right-5 top-5 z-10 border border-white/30 bg-cream p-2 text-navy focus-visible:outline-none"
                 aria-label="Close image modal"
               >
                 <X className="h-5 w-5" />

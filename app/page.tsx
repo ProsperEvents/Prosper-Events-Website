@@ -3,7 +3,6 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { ButtonLink } from "@/components/button-link";
 import { EventCard } from "@/components/event-card";
-import { ProsperWordmark } from "@/components/prosper-wordmark";
 import { Reveal, Stagger, StaggerItem } from "@/components/reveal";
 import { galleryImages } from "@/data/gallery";
 import { events, getEventStatus } from "@/data/events";
@@ -21,23 +20,15 @@ export default function HomePage() {
   return (
     <div className="pb-24 pt-24 sm:pt-28">
       <section className="relative overflow-hidden px-4 pb-16 pt-8 sm:px-6 lg:px-8 lg:pb-24">
-        <div className="floral-watercolor floral-watercolor-hero" />
-        <div className="floral-spray floral-spray-left" />
-        <div className="floral-spray floral-spray-right" />
         <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
           <Reveal className="relative z-10">
-            <p className="eyebrow">Ottawa & Gatineau · Curated experiences</p>
-            <div className="mt-8">
-              <ProsperWordmark
-                priority
-                className="h-16 w-72 sm:h-20 sm:w-96 lg:h-24 lg:w-[34rem]"
-              />
-            </div>
-            <h1 className="mt-8 max-w-3xl font-display text-6xl leading-[0.94] text-ink sm:text-7xl lg:text-[6.25rem]">
+            <p className="eyebrow">Ottawa & Gatineau · Events, experiences, hospitality</p>
+            <h1 className="mt-9 max-w-3xl font-display text-6xl leading-[0.94] text-ink sm:text-7xl lg:text-[6.25rem]">
               Evenings made to be remembered.
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-8 text-navy/72 sm:text-lg">
-              Prosper Events brings together elevated hospitality, local venues, food, music, and thoughtful social design—creating rooms with energy, ease, and a sense of occasion.
+              Prosper Events brings together local venues, attentive service,
+              food, music, and the details that let a room come alive.
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
               <ButtonLink href={primaryEventCta.href}>
@@ -49,47 +40,21 @@ export default function HomePage() {
             </div>
           </Reveal>
 
-          <Reveal className="relative lg:pl-10" delay={0.14}>
-            <div className="relative mx-auto max-w-[34rem]">
-              <div className="grid gap-5 sm:grid-cols-[0.75fr_1fr]">
-                <div className="luxury-card self-end overflow-hidden p-3 sm:mb-10">
-                  <div className="floral-corner floral-corner-top-right" />
-                  <Image
-                    src={galleryPreview[0]?.src ?? "/assets/gallery/march-1/1-_DSC9572.jpg"}
-                    alt="Guests in conversation at Prosper Events"
-                    width={1200}
-                    height={900}
-                    className="h-full min-h-[280px] w-full rounded-[1.5rem] object-cover"
-                  />
-                </div>
-                <div className="space-y-5">
-                  <div className="luxury-card overflow-hidden p-3">
-                    <div className="floral-corner floral-corner-bottom-left" />
-                    <Image
-                      src={galleryPreview[1]?.thumbnailSrc ?? "/assets/gallery/march-1-web/2-_DSC9573.webp"}
-                      alt="Cocktail service at Prosper Events"
-                      width={1200}
-                      height={1600}
-                      className="h-[360px] w-full rounded-[1.5rem] object-cover"
-                      unoptimized
-                    />
-                  </div>
-                  <div className="relative overflow-hidden rounded-[1.6rem] border border-navy/10 bg-white/72 p-6 shadow-paper">
-                    <div className="floral-corner floral-corner-top-right" />
-                    <p className="text-[11px] uppercase tracking-[0.24em] text-navy/48">
-                      Signature mood
-                    </p>
-                    <p className="mt-4 font-display text-3xl text-ink">
-                      Composed with intention.
-                    </p>
-                    <p className="mt-3 text-sm leading-7 text-navy/68">
-                      Hospitality, music, food, and mood brought together in a
-                      room that never feels overdone.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <Reveal className="lg:pl-10" delay={0.14}>
+            <figure className="mx-auto max-w-[34rem]">
+              <Image
+                src="/assets/gallery/hero-cocktails.jpg"
+                alt="Cocktails prepared for a Prosper Events evening"
+                width={1200}
+                height={1600}
+                className="h-[34rem] w-full object-cover sm:h-[40rem]"
+                priority
+              />
+              <figcaption className="mt-4 flex items-start justify-between gap-6 border-t border-navy/20 pt-4 text-[10px] uppercase tracking-[0.22em] text-navy/58">
+                <span>Prosper Events</span>
+                <span className="text-right">Ottawa · Hospitality, atmosphere, connection</span>
+              </figcaption>
+            </figure>
           </Reveal>
         </div>
       </section>
@@ -99,10 +64,10 @@ export default function HomePage() {
           <Link
             href={primaryEventCta.href}
             aria-label="Sign up for The Perfect Cocktail Class on October 23"
-            className="group flex flex-col gap-5 rounded-[1.75rem] border border-navy/10 bg-navy px-6 py-7 text-white shadow-paper transition duration-500 hover:-translate-y-0.5 hover:bg-ink hover:shadow-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-4 sm:flex-row sm:items-center sm:justify-between sm:px-9"
+            className="group flex flex-col gap-5 border border-navy bg-navy px-6 py-7 text-white transition duration-300 hover:bg-ink focus-visible:outline-none sm:flex-row sm:items-center sm:justify-between sm:px-9"
           >
             <div><p className="text-[11px] uppercase tracking-[0.24em] text-white/65">October 23 · Equator Coffee Westboro</p><p className="mt-2 font-display text-3xl">The Perfect Cocktail Class.</p><p className="mt-1 text-sm text-white/75">7:30 PM–9:30 PM · 14 spots available.</p></div>
-            <span className="inline-flex items-center justify-center self-start rounded-full border border-cream px-6 py-3 text-xs font-medium uppercase tracking-[0.22em] text-cream transition duration-500 group-hover:bg-cream group-hover:text-navy sm:self-auto">Sign Up</span>
+            <span className="inline-flex items-center justify-center self-start border border-cream px-6 py-3 text-xs font-medium uppercase tracking-[0.22em] text-cream transition duration-300 group-hover:bg-cream group-hover:text-navy sm:self-auto">Sign Up</span>
           </Link>
         </Reveal>
       </section>
@@ -191,7 +156,7 @@ export default function HomePage() {
                 hotels, bars, and private members’ clubs on food and beverage
                 menus. Across every project, the goal is the same: bring people
                 together through a clear concept, a well-composed room, and
-                details that support genuine connection.
+                details that make time together feel easy.
               </p>
             </div>
           </Reveal>
@@ -246,17 +211,17 @@ export default function HomePage() {
             <div className="section-floral" />
             <p className="eyebrow">Experience</p>
             <h2 className="mt-5 font-display text-4xl text-ink sm:text-5xl">
-              A carefully composed evening.
+              What guests notice.
             </h2>
             <div className="mt-8 space-y-5 text-base leading-8 text-navy/72">
-              <p>Designed for conversation.</p>
+              <p>The welcome feels warm. The room has energy. Conversation comes easily.</p>
               <p>
-                Where hospitality meets atmosphere, and every detail supports
-                the room rather than competing with it.
+                Service, lighting, music, and timing work quietly in the
+                background so guests can stay present.
               </p>
               <p>
-                Prosper Events brings music, food, drinks, and social rhythm
-                together with intention.
+                Nothing needs to announce itself. The whole evening simply feels
+                considered.
               </p>
             </div>
           </Reveal>
@@ -273,7 +238,7 @@ export default function HomePage() {
                 />
               </div>
                 <div className="grid gap-5">
-                  <div className="rounded-[1.8rem] border border-navy/10 bg-white/75 p-6 shadow-paper">
+                  <div className="border-t border-navy/20 py-6">
                     <p className="eyebrow">01</p>
                     <p className="mt-4 font-display text-2xl text-ink">
                       Service with warmth
@@ -282,24 +247,24 @@ export default function HomePage() {
                     Attentive without intrusion, polished without stiffness.
                   </p>
                 </div>
-                <div className="rounded-[1.8rem] border border-navy/10 bg-white/75 p-6 shadow-paper">
+                <div className="border-t border-navy/20 py-6">
                   <p className="eyebrow">02</p>
                   <p className="mt-4 font-display text-2xl text-ink">
                     Rooms with mood
                   </p>
                   <p className="mt-3 text-sm leading-7 text-navy/68">
-                    Lighting, texture, and timing curated to feel cinematic and
-                    intimate.
+                    Lighting, texture, and timing that make the room feel warm
+                    and settled.
                   </p>
                 </div>
-                <div className="rounded-[1.8rem] border border-navy/10 bg-white/75 p-6 shadow-paper">
+                <div className="border-y border-navy/20 py-6">
                   <p className="eyebrow">03</p>
                   <p className="mt-4 font-display text-2xl text-ink">
                     Social design
                   </p>
                   <p className="mt-3 text-sm leading-7 text-navy/68">
-                    A guest experience built around ease, pacing, and genuine
-                    connection.
+                    A natural pace that gives people time to arrive, talk, and
+                    enjoy the room.
                   </p>
                 </div>
               </div>

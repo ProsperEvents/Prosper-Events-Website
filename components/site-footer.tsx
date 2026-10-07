@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Facebook, Instagram, Mail, Phone } from "lucide-react";
 import { ProsperWordmark } from "@/components/prosper-wordmark";
@@ -6,25 +5,13 @@ import { contactDetails, primaryEventCta } from "@/lib/site";
 
 export function SiteFooter() {
   return (
-    <footer className="relative overflow-hidden border-t border-navy/10 bg-white/50">
-      <div className="section-floral opacity-70" />
-      <div className="floral-corner floral-corner-top-right" />
-      <div className="floral-corner floral-corner-bottom-left" />
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-        <div className="grid gap-10 md:grid-cols-2 xl:grid-cols-[1.15fr_0.7fr_0.85fr_0.8fr]">
+    <footer className="border-t border-navy/15 bg-ivory">
+      <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+        <div className="grid gap-12 md:grid-cols-2 xl:grid-cols-[1.15fr_0.7fr_0.85fr_0.8fr]">
         <div>
-          <div className="flex items-center gap-4">
-            <Image
-              src="/assets/logos/prosper-events-rounded-logo.png"
-              alt="Prosper Events rounded logo"
-              width={72}
-              height={72}
-              className="h-16 w-16 rounded-full"
-            />
-            <ProsperWordmark className="h-11 w-36" />
-          </div>
+          <ProsperWordmark className="h-14 w-48" />
           <p className="mt-5 max-w-md text-sm leading-7 text-navy/72">
-            Ottawa event planning, curated local experiences, and hospitality
+            Ottawa event planning, original local experiences, and hospitality
             menu consulting shaped by atmosphere and thoughtful service.
           </p>
           <p className="mt-4 text-xs uppercase tracking-[0.22em] text-navy/55">
@@ -80,7 +67,7 @@ export function SiteFooter() {
           </p>
           <Link
             href={primaryEventCta.href}
-            className="mt-4 inline-flex items-center justify-center rounded-full border border-navy bg-navy px-5 py-2.5 text-[11px] font-medium uppercase tracking-[0.22em] text-cream transition hover:-translate-y-0.5 hover:bg-ink hover:shadow-card"
+            className="mt-4 inline-flex items-center justify-center rounded-[2px] border border-navy bg-navy px-5 py-2.5 text-[11px] font-medium uppercase tracking-[0.22em] text-cream transition hover:bg-ink"
           >
             {primaryEventCta.label}
           </Link>
@@ -88,7 +75,7 @@ export function SiteFooter() {
             <Link
               href={`mailto:${contactDetails.email}`}
               aria-label="Email Prosper Events"
-              className="rounded-full border border-navy/12 bg-white/70 p-3 text-navy transition hover:-translate-y-0.5 hover:bg-white"
+              className="border border-navy/20 p-3 text-navy transition hover:bg-navy hover:text-cream"
             >
               <Mail className="h-4 w-4" />
             </Link>
@@ -97,7 +84,7 @@ export function SiteFooter() {
               target="_blank"
               rel="noreferrer"
               aria-label="Prosper Events Instagram"
-              className="rounded-full border border-navy/12 bg-white/70 p-3 text-navy transition hover:-translate-y-0.5 hover:bg-white"
+              className="border border-navy/20 p-3 text-navy transition hover:bg-navy hover:text-cream"
             >
               <Instagram className="h-4 w-4" />
             </Link>
@@ -106,7 +93,7 @@ export function SiteFooter() {
               target="_blank"
               rel="noreferrer"
               aria-label="Prosper Events Facebook"
-              className="rounded-full border border-navy/12 bg-white/70 p-3 text-navy transition hover:-translate-y-0.5 hover:bg-white"
+              className="border border-navy/20 p-3 text-navy transition hover:bg-navy hover:text-cream"
             >
               <Facebook className="h-4 w-4" />
             </Link>

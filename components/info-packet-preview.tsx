@@ -40,7 +40,7 @@ export function InfoPacketPreview({
           <a
             href={downloadHref}
             download
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-navy/16 bg-white/72 px-5 py-3 text-[11px] font-medium uppercase tracking-[0.22em] text-navy transition duration-500 hover:-translate-y-0.5 hover:border-navy hover:bg-white hover:text-ink hover:shadow-card"
+            className="inline-flex items-center justify-center gap-2 border border-navy/25 px-5 py-3 text-[11px] font-medium uppercase tracking-[0.22em] text-navy transition duration-300 hover:border-navy hover:bg-navy hover:text-cream"
           >
             <Download className="h-4 w-4" />
             <span>Download PDF</span>
@@ -54,15 +54,14 @@ export function InfoPacketPreview({
             type="button"
             onClick={() => setSpreadIndex((index) => Math.max(index - 1, 0))}
             disabled={spreadIndex === 0}
-            className="absolute left-4 top-1/2 z-10 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-navy/14 bg-white/72 text-navy transition duration-500 hover:-translate-y-[52%] hover:bg-white hover:text-ink hover:shadow-card disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:-translate-y-1/2 sm:left-5"
+            className="absolute left-4 top-1/2 z-10 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center border border-navy/20 bg-ivory text-navy transition duration-300 hover:bg-navy hover:text-cream disabled:cursor-not-allowed disabled:opacity-35 sm:left-5"
             aria-label="View previous packet spread"
           >
             <ChevronLeft className="h-4 w-4" />
           </button>
-          <div className="rounded-[2rem] bg-[linear-gradient(180deg,rgba(255,255,255,0.88),rgba(248,242,228,0.92))] p-5 shadow-[0_30px_80px_rgba(32,36,132,0.14)] sm:p-7">
-            <div className="relative rounded-[1.6rem] bg-[radial-gradient(circle_at_center,rgba(32,36,132,0.08),transparent_38%)] px-4 py-5 sm:px-5">
+          <div className="border border-navy/15 bg-cream p-5 sm:p-7">
+            <div className="relative px-4 py-5 sm:px-5">
             <div className="pointer-events-none absolute inset-y-6 left-1/2 w-px -translate-x-1/2 bg-navy/10" />
-            <div className="pointer-events-none absolute inset-y-8 left-1/2 w-12 -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(32,36,132,0.10),transparent_72%)] blur-md" />
             <AnimatePresence mode="wait">
               <motion.div
                 key={spreadIndex}
@@ -75,7 +74,7 @@ export function InfoPacketPreview({
                 {[leftPage, rightPage].map((page, columnIndex) => (
                   <div
                     key={page?.src ?? `empty-${columnIndex}`}
-                    className="relative aspect-[1/1.414] overflow-hidden rounded-[1.2rem] bg-[#f8f3e7] shadow-[0_16px_40px_rgba(93,85,68,0.16)]"
+                    className="relative aspect-[1/1.414] overflow-hidden border border-navy/10 bg-[#f8f3e7] shadow-[0_8px_24px_rgba(16,22,48,0.08)]"
                   >
                     {page ? (
                       <Image
@@ -101,7 +100,7 @@ export function InfoPacketPreview({
               setSpreadIndex((index) => Math.min(index + 1, totalSpreads - 1))
             }
             disabled={spreadIndex === totalSpreads - 1}
-            className="absolute right-4 top-1/2 z-10 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-navy/14 bg-white/72 text-navy transition duration-500 hover:-translate-y-[52%] hover:bg-white hover:text-ink hover:shadow-card disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:-translate-y-1/2 sm:right-5"
+            className="absolute right-4 top-1/2 z-10 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center border border-navy/20 bg-ivory text-navy transition duration-300 hover:bg-navy hover:text-cream disabled:cursor-not-allowed disabled:opacity-35 sm:right-5"
             aria-label="View next packet spread"
           >
             <ChevronRight className="h-4 w-4" />

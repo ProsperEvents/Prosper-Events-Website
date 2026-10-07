@@ -68,7 +68,7 @@ const activityTypes = [
     number: "04",
     title: "Dynamic local events",
     description:
-      "Pop-ups and specialty evenings connect Ottawa venues, hospitality, food, drinks, and creative partners in one thoughtfully composed room.",
+      "Pop-ups and specialty evenings bring Ottawa venues, hospitality, food, drinks, and creative partners together for one night.",
   },
 ] as const;
 
@@ -143,7 +143,7 @@ export default function ThingsToDoOttawaPage() {
             />
             <p className="eyebrow">Date nights · Classes · Social events</p>
             <h1 className="mt-7 font-display text-5xl leading-[0.98] text-ink sm:text-7xl lg:text-[6.25rem]">
-              Things to do in Ottawa, made to be remembered.
+              Things to do in Ottawa, beyond the usual night out.
             </h1>
             <p className="mt-7 max-w-3xl text-base leading-8 text-navy/72 sm:text-lg">
               Discover cocktail classes, date-night ideas, and fun, dynamic things
@@ -171,11 +171,11 @@ export default function ThingsToDoOttawaPage() {
                 className="h-[24rem] w-full rounded-[1.55rem] object-cover sm:h-[32rem]"
               />
             </div>
-            <div className="absolute -bottom-6 left-5 rounded-[1.5rem] border border-navy/10 bg-cream/95 px-6 py-5 shadow-card backdrop-blur-sm sm:left-8 sm:w-[23rem]">
+            <div className="mt-4 border-t border-navy/20 pt-4 sm:flex sm:items-baseline sm:justify-between sm:gap-8">
               <p className="text-[10px] uppercase tracking-[0.25em] text-navy/50">
                 More than a reservation
               </p>
-              <p className="mt-2 font-display text-2xl text-ink">
+              <p className="mt-2 font-display text-xl text-ink sm:mt-0 sm:text-right">
                 An activity, a room, and a reason to connect.
               </p>
             </div>

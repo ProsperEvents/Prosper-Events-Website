@@ -23,12 +23,12 @@ export default function EventsPage() {
             <p className="eyebrow">Events</p>
             <div className="mt-5 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
               <h1 className="font-display text-5xl leading-tight text-ink sm:text-6xl">
-                A calendar of intimate gatherings.
+                Upcoming nights and past gatherings.
               </h1>
               <p className="max-w-2xl text-base leading-8 text-navy/72">
-                Explore upcoming evenings and past Prosper Events experiences
-                across Ottawa and Gatineau. Each event is designed as an
-                invitation rather than a listing, with atmosphere leading the way.
+                Cocktail classes, social evenings, and one-off gatherings across
+                Ottawa and Gatineau. Find the next date, or revisit the rooms we
+                have already shared.
               </p>
             </div>
           </div>

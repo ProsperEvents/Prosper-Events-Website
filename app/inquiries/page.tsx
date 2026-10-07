@@ -67,7 +67,7 @@ export default function InquiriesPage() {
               <Link
                 href={`mailto:${contactDetails.email}`}
                 aria-label="Email Prosper Events"
-                className="rounded-full border border-navy/12 bg-white/70 p-3 text-navy transition hover:-translate-y-0.5 hover:bg-white"
+                className="border border-navy/20 p-3 text-navy transition hover:bg-navy hover:text-cream"
               >
                 <Mail className="h-4 w-4" />
               </Link>
@@ -76,7 +76,7 @@ export default function InquiriesPage() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Prosper Events Instagram"
-                className="rounded-full border border-navy/12 bg-white/70 p-3 text-navy transition hover:-translate-y-0.5 hover:bg-white"
+                className="border border-navy/20 p-3 text-navy transition hover:bg-navy hover:text-cream"
               >
                 <Instagram className="h-4 w-4" />
               </Link>
@@ -85,7 +85,7 @@ export default function InquiriesPage() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Prosper Events Facebook"
-                className="rounded-full border border-navy/12 bg-white/70 p-3 text-navy transition hover:-translate-y-0.5 hover:bg-white"
+                className="border border-navy/20 p-3 text-navy transition hover:bg-navy hover:text-cream"
               >
                 <Facebook className="h-4 w-4" />
               </Link>

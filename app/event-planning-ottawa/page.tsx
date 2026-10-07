@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Check, Mail, Phone, Sparkles } from "lucide-react";
+import { Check, Mail, Phone } from "lucide-react";
 import { ButtonLink } from "@/components/button-link";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { Reveal, Stagger, StaggerItem } from "@/components/reveal";
@@ -193,11 +193,11 @@ export default function EventPlanningOttawaPage() {
                   className="h-[34rem] w-full rounded-[1.55rem] object-cover sm:h-[39rem]"
                 />
               </div>
-              <div className="absolute -bottom-6 left-5 right-5 rounded-[1.5rem] border border-navy/10 bg-cream/95 px-6 py-5 shadow-card backdrop-blur-sm sm:left-auto sm:right-6 sm:w-[19rem]">
+              <div className="mt-4 border-t border-navy/20 pt-4 sm:flex sm:items-baseline sm:justify-between sm:gap-8">
                 <p className="text-[10px] uppercase tracking-[0.25em] text-navy/50">
                   Ottawa & Gatineau
                 </p>
-                <p className="mt-2 font-display text-2xl text-ink">
+                <p className="mt-2 font-display text-xl text-ink sm:mt-0 sm:text-right">
                   Personal in feeling. Precise in execution.
                 </p>
               </div>
@@ -229,7 +229,6 @@ export default function EventPlanningOttawaPage() {
                       <span className="text-[11px] uppercase tracking-[0.25em] text-navy/48">
                         {eventType.number}
                       </span>
-                      <Sparkles className="h-5 w-5 text-navy/38" aria-hidden="true" />
                     </div>
                     <h3 className="mt-9 font-display text-3xl text-ink sm:text-4xl">
                       {eventType.title}
@@ -317,8 +316,7 @@ export default function EventPlanningOttawaPage() {
       </section>
 
       <section className="px-4 pb-8 pt-20 sm:px-6 lg:px-8">
-        <Reveal className="relative mx-auto max-w-7xl overflow-hidden rounded-[2rem] bg-navy px-7 py-12 text-cream shadow-card sm:px-12 sm:py-16 lg:px-16">
-          <div className="absolute -right-20 -top-28 h-80 w-80 rounded-full border border-cream/10" />
+        <Reveal className="relative mx-auto max-w-7xl overflow-hidden border border-navy bg-navy px-7 py-12 text-cream sm:px-12 sm:py-16 lg:px-16">
           <div className="relative grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
             <div>
               <p className="text-[11px] uppercase tracking-[0.26em] text-cream/58">

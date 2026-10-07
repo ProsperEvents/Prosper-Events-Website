@@ -15,13 +15,13 @@ export function Reveal({ children, className, delay = 0 }: RevealProps) {
   return (
     <motion.div
       className={className}
-      initial={shouldReduceMotion ? false : { opacity: 0, y: 28 }}
+      initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.18 }}
       transition={
         shouldReduceMotion
           ? { duration: 0 }
-          : { duration: 0.9, ease: [0.22, 1, 0.36, 1], delay }
+          : { duration: 0.55, ease: [0.22, 1, 0.36, 1], delay }
       }
     >
       {children}
@@ -47,7 +47,7 @@ export function Stagger({ children, className }: StaggerProps) {
         hidden: {},
         show: {
           transition: {
-            staggerChildren: 0.12,
+            staggerChildren: 0.07,
           },
         },
       }}
@@ -72,13 +72,13 @@ export function StaggerItem({
       variants={{
         hidden: shouldReduceMotion
           ? { opacity: 1, y: 0 }
-          : { opacity: 0, y: 24 },
+          : { opacity: 0, y: 12 },
         show: {
           opacity: 1,
           y: 0,
           transition: shouldReduceMotion
             ? { duration: 0 }
-            : { duration: 0.75, ease: [0.22, 1, 0.36, 1] },
+            : { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
         },
       }}
     >

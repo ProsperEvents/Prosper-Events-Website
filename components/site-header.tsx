@@ -46,13 +46,15 @@ export function SiteHeader() {
 
   return (
     <>
-      <header className="pointer-events-none fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6 lg:px-8">
+      <header
+        className={`pointer-events-none fixed inset-x-0 top-0 z-50 border-b transition duration-300 ${
+          scrolled
+            ? "border-navy/15 bg-cream/95 backdrop-blur-md"
+            : "border-navy/10 bg-cream/90 backdrop-blur-sm"
+        }`}
+      >
         <div
-          className={`pointer-events-auto mx-auto flex w-full max-w-7xl items-center justify-between rounded-full border px-4 py-3 transition duration-500 sm:px-6 ${
-            scrolled
-              ? "border-navy/10 bg-cream/88 shadow-paper backdrop-blur-md"
-              : "border-navy/10 bg-cream/70 backdrop-blur-sm"
-          }`}
+          className="pointer-events-auto mx-auto flex h-[5.25rem] w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8"
         >
           <Link href="/" className="flex items-center gap-3">
             <ProsperWordmark
@@ -81,7 +83,7 @@ export function SiteHeader() {
             </nav>
             <Link
               href={primaryEventCta.href}
-              className="inline-flex items-center justify-center rounded-full border border-navy bg-navy px-5 py-2.5 text-[11px] font-medium uppercase tracking-[0.24em] text-cream transition duration-500 hover:-translate-y-0.5 hover:bg-ink hover:shadow-card"
+              className="inline-flex items-center justify-center rounded-[2px] border border-navy bg-navy px-5 py-2.5 text-[11px] font-medium uppercase tracking-[0.24em] text-cream transition duration-300 hover:bg-ink"
             >
               {primaryEventCta.label}
             </Link>
@@ -91,7 +93,7 @@ export function SiteHeader() {
             ref={menuButtonRef}
             type="button"
             onClick={() => setOpen((value) => !value)}
-            className="group flex items-center gap-3 rounded-full border border-navy/15 bg-white/60 px-4 py-2 text-[11px] uppercase tracking-[0.24em] text-navy transition hover:bg-white/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy xl:hidden"
+            className="group flex items-center gap-3 border border-navy/25 px-4 py-2 text-[11px] uppercase tracking-[0.24em] text-navy transition hover:bg-ivory focus-visible:outline-none xl:hidden"
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "Close menu" : "Open menu"}
@@ -121,24 +123,19 @@ export function SiteHeader() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.35 }}
-            className="fixed inset-0 z-40 xl:hidden"
+            className="fixed inset-x-0 bottom-0 top-[5.25rem] z-40 xl:hidden"
           >
-            <div
-              className="absolute inset-0 bg-ink/25 backdrop-blur-sm"
-              onClick={() => setOpen(false)}
-            />
             <motion.div
-              initial={{ y: -30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -30, opacity: 0 }}
-              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute inset-x-4 top-24 max-h-[calc(100dvh-7rem)] overflow-y-auto overscroll-contain rounded-[2rem] border border-navy/10 bg-cream/95 p-6 shadow-paper"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="absolute inset-0 overflow-y-auto overscroll-contain bg-cream px-5 py-8 sm:px-8"
             >
-              <div className="section-floral opacity-80" />
-              <p className="relative text-[11px] uppercase tracking-[0.28em] text-navy/60">
-                Curated navigation
+              <p className="text-[11px] uppercase tracking-[0.28em] text-navy/60">
+                Navigation
               </p>
-              <div className="relative mt-6 space-y-4">
+              <div className="mt-7 border-t border-navy/15">
                 {navigation.map((item) => {
                   const active = pathname === item.href;
                   return (
@@ -146,10 +143,10 @@ export function SiteHeader() {
                       key={item.href}
                       href={item.href}
                       aria-current={active ? "page" : undefined}
-                      className={`flex items-center justify-between rounded-3xl border px-5 py-4 font-display text-2xl tracking-wide transition ${
+                      className={`flex items-center justify-between border-b border-navy/15 px-1 py-5 font-display text-3xl transition ${
                         active
-                          ? "border-navy/20 bg-navy text-cream"
-                          : "border-navy/10 bg-white/70 text-navy hover:bg-white"
+                          ? "text-ink"
+                          : "text-navy/72 hover:text-ink"
                       }`}
                     >
                       <span>{item.label}</span>
@@ -161,7 +158,7 @@ export function SiteHeader() {
                 })}
                 <Link
                   href={primaryEventCta.href}
-                  className="flex items-center justify-between rounded-3xl border border-navy/10 bg-navy px-5 py-4 font-display text-2xl tracking-wide text-cream transition hover:bg-ink"
+                  className="mt-8 flex items-center justify-between border border-navy bg-navy px-5 py-4 font-display text-2xl text-cream transition hover:bg-ink"
                 >
                   <span>{primaryEventCta.label}</span>
                   <span className="text-sm uppercase tracking-[0.24em]">
