@@ -60,6 +60,8 @@ export const organizationSchema = {
         "Curated events",
         "Luxury social gatherings",
         "Cocktail events",
+        "Food and beverage menu consulting",
+        "Cocktail and mocktail menu development",
         "Private bookings",
       ],
     },

@@ -20,12 +20,19 @@ export const metadata: Metadata = {
     url: `${siteUrl}/menu-consultations`,
     images: [
       {
-        url: "/assets/gallery/bar-room.jpg",
-        width: 4493,
-        height: 6740,
+        url: "/assets/menu-consultations-og.jpg",
+        width: 1200,
+        height: 630,
         alt: "Cocktail service in an intimate bar setting",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Menu Consultations | Prosper Events",
+    description:
+      "Thoughtful, operationally sound menus for restaurants, hotels, and bars.",
+    images: ["/assets/menu-consultations-og.jpg"],
   },
 };
 
@@ -63,9 +70,37 @@ const approach = [
   "A practical path from menu idea to team implementation",
 ] as const;
 
+const process = [
+  {
+    number: "01",
+    title: "Discover",
+    description:
+      "We learn your concept, audience, operational realities, goals, and timeline.",
+  },
+  {
+    number: "02",
+    title: "Develop",
+    description:
+      "We shape the menu direction, recipes, pairings, and recommendations around your venue.",
+  },
+  {
+    number: "03",
+    title: "Implement",
+    description:
+      "We help translate the work into clear, repeatable recipes and a confident service plan.",
+  },
+] as const;
+
 const consultationEmail = `mailto:${contactDetails.email}?subject=${encodeURIComponent(
   "Menu consultation inquiry",
-)}`;
+)}&body=${encodeURIComponent(`Hi Prosper Events,
+
+Venue name and type:
+Location:
+Opening or target date:
+What we would like help with:
+
+Thank you,`)}`;
 
 const serviceSchema = {
   "@context": "https://schema.org",
@@ -172,6 +207,34 @@ export default function MenuConsultationsPage() {
               </StaggerItem>
             ))}
           </Stagger>
+        </div>
+      </section>
+
+      <section className="px-4 py-8 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl rounded-[2rem] border border-navy/10 bg-white/55 px-7 py-10 shadow-paper sm:px-10 lg:px-12">
+          <Reveal className="grid gap-9 lg:grid-cols-[0.7fr_1.3fr] lg:items-start">
+            <div>
+              <p className="eyebrow">How it works</p>
+              <h2 className="mt-5 font-display text-4xl leading-tight text-ink sm:text-5xl">
+                From first conversation to service.
+              </h2>
+            </div>
+            <ol className="grid gap-5 sm:grid-cols-3">
+              {process.map((step) => (
+                <li key={step.number} className="border-t border-navy/15 pt-5">
+                  <p className="text-[11px] uppercase tracking-[0.25em] text-navy/48">
+                    {step.number}
+                  </p>
+                  <h3 className="mt-5 font-display text-2xl text-ink">
+                    {step.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-7 text-navy/68">
+                    {step.description}
+                  </p>
+                </li>
+              ))}
+            </ol>
+          </Reveal>
         </div>
       </section>
 

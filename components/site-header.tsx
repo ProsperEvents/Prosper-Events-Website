@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { ProsperWordmark } from "@/components/prosper-wordmark";
 import { navigation, primaryEventCta } from "@/lib/site";
@@ -11,6 +11,7 @@ export function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 12);
@@ -21,8 +22,21 @@ export function SiteHeader() {
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    };
+
+    if (open) {
+      window.addEventListener("keydown", handleKeyDown);
+    }
+
     return () => {
       document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, [open]);
 
@@ -55,6 +69,7 @@ export function SiteHeader() {
                   <Link
                     key={item.href}
                     href={item.href}
+                    aria-current={active ? "page" : undefined}
                     className={`nav-link text-xs uppercase tracking-[0.22em] ${
                       active ? "text-ink" : "text-navy/85"
                     }`}
@@ -73,6 +88,7 @@ export function SiteHeader() {
           </div>
 
           <button
+            ref={menuButtonRef}
             type="button"
             onClick={() => setOpen((value) => !value)}
             className="group flex items-center gap-3 rounded-full border border-navy/15 bg-white/60 px-4 py-2 text-[11px] uppercase tracking-[0.24em] text-navy transition hover:bg-white/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy lg:hidden"
@@ -116,7 +132,7 @@ export function SiteHeader() {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -30, opacity: 0 }}
               transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute inset-x-4 top-24 overflow-hidden rounded-[2rem] border border-navy/10 bg-cream/95 p-6 shadow-paper"
+              className="absolute inset-x-4 top-24 max-h-[calc(100dvh-7rem)] overflow-y-auto overscroll-contain rounded-[2rem] border border-navy/10 bg-cream/95 p-6 shadow-paper"
             >
               <div className="section-floral opacity-80" />
               <p className="relative text-[11px] uppercase tracking-[0.28em] text-navy/60">
@@ -129,6 +145,7 @@ export function SiteHeader() {
                     <Link
                       key={item.href}
                       href={item.href}
+                      aria-current={active ? "page" : undefined}
                       className={`flex items-center justify-between rounded-3xl border px-5 py-4 font-display text-2xl tracking-wide transition ${
                         active
                           ? "border-navy/20 bg-navy text-cream"

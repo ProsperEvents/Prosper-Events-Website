@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import type { ReactNode } from "react";
 
 type RevealProps = {
@@ -10,13 +10,19 @@ type RevealProps = {
 };
 
 export function Reveal({ children, className, delay = 0 }: RevealProps) {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0, y: 28 }}
+      initial={shouldReduceMotion ? false : { opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.18 }}
-      transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay }}
+      transition={
+        shouldReduceMotion
+          ? { duration: 0 }
+          : { duration: 0.9, ease: [0.22, 1, 0.36, 1], delay }
+      }
     >
       {children}
     </motion.div>
@@ -29,10 +35,12 @@ type StaggerProps = {
 };
 
 export function Stagger({ children, className }: StaggerProps) {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <motion.div
       className={className}
-      initial="hidden"
+      initial={shouldReduceMotion ? "show" : "hidden"}
       whileInView="show"
       viewport={{ once: true, amount: 0.14 }}
       variants={{
@@ -56,15 +64,21 @@ export function StaggerItem({
   children: ReactNode;
   className?: string;
 }) {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <motion.div
       className={className}
       variants={{
-        hidden: { opacity: 0, y: 24 },
+        hidden: shouldReduceMotion
+          ? { opacity: 1, y: 0 }
+          : { opacity: 0, y: 24 },
         show: {
           opacity: 1,
           y: 0,
-          transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] },
+          transition: shouldReduceMotion
+            ? { duration: 0 }
+            : { duration: 0.75, ease: [0.22, 1, 0.36, 1] },
         },
       }}
     >
