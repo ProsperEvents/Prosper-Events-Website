@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
       billing_address_collection: "required",
       phone_number_collection: { enabled: true },
       customer_creation: "always",
-      allow_promotion_codes: false,
+      allow_promotion_codes: true,
       line_items: [
         {
           price_data: {
