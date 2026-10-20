@@ -59,7 +59,7 @@ export const events: EventItem[] = [
       "/assets/events/cocktail-class-october-23-2026/menus/sign-up.webp",
     ],
     ticketing: {
-      price: 89.99,
+      price: 45.99,
       capacityPerDate: 14,
       discountTicketsTotal: 0,
     },

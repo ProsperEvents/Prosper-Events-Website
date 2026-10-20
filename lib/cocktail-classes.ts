@@ -1,7 +1,7 @@
 export const COCKTAIL_CLASSES = {
   slug: "cocktail-class-october-23-2026",
   title: "The Perfect Cocktail Class",
-  priceCents: 8999,
+  priceCents: 4599,
   capacityPerDate: 14,
   venue: "Equator Coffee Westboro",
   address: "412 Churchill Ave N, Ottawa, ON K1Z 5C6",
